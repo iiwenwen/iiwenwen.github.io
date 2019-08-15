@@ -6,7 +6,7 @@ categories: 开智正典
 ---
 ![](https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/自私的基因.jpg)
 自私的基因真的自私吗？
-<!-- more -->
+<!--more-->
 ### 第一章
 #### 作者的观点
 论点：我们及其他一切动物都是各自的基因所创造的机器。

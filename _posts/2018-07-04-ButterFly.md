@@ -5,7 +5,7 @@ tags:
 categories:
 ---
 不死蝶依在
-<!-- more -->
+<!--more-->
 
 ## 邂逅
 
