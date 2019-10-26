@@ -1,8 +1,8 @@
 ---
 layout: article
 titles:
-  en      : &EN       Ab
-  zh-Hans : &ZH_HANS  关于
+  en      : &EN       about
+  zh-Hans : &ZH_HANS  关于我
 key: page-about
 ---
 

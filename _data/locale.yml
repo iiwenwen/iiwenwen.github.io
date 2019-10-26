@@ -50,6 +50,8 @@ zh-Hans: &ZH_HANS
   EMAIL_ME                : "给我发邮件。"
   EMAIL_US                : "给我们发邮件。"
   COPYRIGHT_DATES         : "2019"
+  about                   : "关于"
+
 
 zh:
   <<: *ZH_HANS

@@ -1,5 +1,10 @@
 header:
   - titles:
+      en      : &EN       Poetry
+      zh-Hans : &ZH_HANS  让我为你读首诗
+    url: /poetry.html
+
+  - titles:
       en      : &EN       Archive
       en-GB   : *EN
       en-US   : *EN
@@ -32,3 +37,4 @@ header:
       ko      : &KO       소개
       ko-KR   : *KO
     url: /about.html
+

@@ -27,7 +27,7 @@ description: > # this means to ignore newlines until "nav_lists:" #网站描述
 
 ## => Language and Timezone 语言与时区
 ##############################
-lang: zh # the language of your site, default as "en" # 语言
+lang: zh-Hans # the language of your site, default as "en" # 语言
 timezone: # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
 
 
@@ -65,7 +65,7 @@ paths:
   root    : # title link url, "/" (default)
   home    : # home layout url, "/" (default)
   archive : # "/archive.html" (default)
-  rss     : # "/feed.xml" (default)
+  #rss     : # "/feed.xml" (default)
 
 
 ## => Post 文章配置
