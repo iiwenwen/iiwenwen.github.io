@@ -4,10 +4,34 @@ date: 2017-07-16 19:43:24
 tags:
 - 随笔
 categories:
+- 信
+mode: immersive
+header:
+  theme: dark
+article_header:
+  type: overlay
+  theme: dark
+  background_color: '#203028'
+  background_image: 
+    src: https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/sysndhy.jpg
 ---
-![](https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/sysndhy.jpg)
-<!--more-->
- 不知道你有没有为了一个人而努力过。是否像薰一样为了有马花了10年去改变自己而接近他。因为他的演出让自己提起了学小提琴只为能与他同台。十年再一次遇见但却又不敢去表达。那份难以压抑的感情只能藏在心里。明明喜欢的是他却用喜欢他的朋友为借口接近他。只为他能看到自己的存在。这便是薰的第一个谎言。有没有想到自己那些时候做的事情。像薰一样傻傻的去用谎言遮蔽自己的感情。像朋友在一起却没法去表达。想要在梦想上与他同行。却无力履行。想要用自己不多存在这个世界的时间好好陪伴在他身边。想要让他重拾自己的梦想。想让他找回自己。薰用的生命告诉了有马。没有我的四月樱花盛开。你不要忘我。
+
+
+> 不知道你有没有为了一个人而努力过。是否像薰一样为了有马花了10年去改变自己而接近他。
+>
+> <!--more-->
+>
+> 因为他的演出让自己提起了学小提琴只为能与他同台。十年再一次遇见但却又不敢去表达。那份难以压抑的感情只能藏在心里。明明喜欢的是他却用喜欢他的朋友为借口接近他。只为他能看到自己的存在。这便是薰的第一个谎言。
+>
+> 有没有想到自己那些时候做的事情。像薰一样傻傻的去用谎言遮蔽自己的感情。像朋友在一起却没法去表达。想要在梦想上与他同行。却无力履行。想要用自己不多存在这个世界的时间好好陪伴在他身边。想要让他重拾自己的梦想。想让他找回自己。
+>
+> 薰用的生命告诉了有马。没有我的四月樱花盛开。你不要忘我。
+<style>
+  .page__header .header__brand path {
+    fill: rgba(255, 255, 255, .95);
+  }
+</style>
+
 有马公生亲启：
 
 给刚才还在一起的人写信，感觉好奇怪。
@@ -77,7 +101,23 @@ categories:
 真的、真的，对不起啦。
 谢谢你——
  P.S. 我的宝物也一起放在信封里。 我不在之后就请撕了扔掉吧。
+
 宫园薰
 
+![](https://ww2.sinaimg.cn/large/deaff963jw1eqcgaosu59j20zk0k0dlg.jpg)
+
+![](https://ww4.sinaimg.cn/large/deaff963jw1eqcgb00csdj20zk0k0n2d.jpg)
+
+![](https://ww3.sinaimg.cn/large/deaff963jw1eqcgbd29zdj20zk0k07bn.jpg)
+
+![](https://ww4.sinaimg.cn/large/deaff963jw1eqcgbmd0ggj20zk0k00y7.jpg)
+
+![](https://ww2.sinaimg.cn/large/deaff963jw1eqcgnpmwgdj20zk0k0dm9.jpg)
+
+![](https://ww3.sinaimg.cn/large/deaff963jw1eqcgs83wjcj20rs0ocq4v.jpg)
+
 ### ChangeLog
-20170716 原文 http://t.cn/RA75hW9
+
+-  20191028 添加原文图片，修改文章格式，添加背景图
+
+- 20170716 本文转载至[原文]( http://t.cn/RA75hW9) 
