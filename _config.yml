@@ -209,7 +209,7 @@ defaults:
       aside: false
         #toc: true
       show_edit_on_github: false 
-      show_subscribe: true
+      show_subscribe: false
       pageview: true
 
 
