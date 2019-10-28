@@ -37,7 +37,7 @@ categories: 读书笔记
 
 基本色：藏青色、灰色、白色、浅驼色、浅蓝色、深棕色、黑色。优先选择藏青色与灰色
 
-<img src="https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/BasisStyle.jpeg" style="zoom:33%;" />
+![基本色](https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/BasisStyle.jpeg)
 
 基本色过多则会过于单调，可以加入部分点缀色，这样显得活泼得多。
 
