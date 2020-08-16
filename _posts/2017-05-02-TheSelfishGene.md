@@ -4,7 +4,7 @@ date: 2017-05-02 20:16:36
 tags:
 categories: 开智正典
 ---
-![](https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/自私的基因.jpg)
+![](https://blgo-1258469251.image.myqcloud.com/自私的基因.jpg)
 自私的基因真的自私吗？
 <!--more-->
 ### 第一章

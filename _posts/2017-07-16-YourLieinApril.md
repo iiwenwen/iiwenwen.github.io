@@ -13,7 +13,7 @@ article_header:
   theme: dark
   background_color: '#203028'
   background_image: 
-    src: https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/sysndhy.jpg
+    src: https://blgo-1258469251.image.myqcloud.com/sysndhy.jpg
 ---
 
 
