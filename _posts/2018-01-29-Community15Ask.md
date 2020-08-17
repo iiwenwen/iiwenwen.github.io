@@ -9,7 +9,7 @@ categories:
 ### 1. 你的名字、地区、职业、长时间持续做的一件事、博客/公众号/简书 是什么？
 刘文龙、福建、线路工程师、没有坚持下来的事
 <!--more-->
-[博客](http://blgo.syaoran.me/)
+[博客](http://blog.syaoran.me/)
 公众号没有用暂不公开
 [简书](https://www.jianshu.com/u/f147b6fa559d)
 ### 2. 如果你要讲一个让人记住你的小故事。你会讲什么？

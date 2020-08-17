@@ -14,7 +14,7 @@ categories:
 
 2017 年 10 月我参加阳志平老师的《认知写作学》，而在随后学习认知写作学的半年里，我共写了 3 篇千字文。虽然从头到尾参加了课程，还是不幸成为了阳老师常说的「捐学费的人」。不甘心如此， 2018 年 2 月犹豫多次后决心参加陈素封老师的《笨方法学写作》，从头开始练习写作，练习卡片创作。
 
-2018年 2 月到  6 月，使用卡片创作 8 篇千字文，使用纸质卡片 2 盒 ，从 4 月写卡片微博至今天（可见[我与卡片的故事 - 简书](https://www.jianshu.com/p/b6f90fd2e5a9) ），用以养成每日写千字习惯，现在每周至少写一篇千字文。
+2018年 2 月到  6 月，使用卡片创作 8 篇千字文，使用纸质卡片 2 盒 ，从 4 月写卡片微博至今天（可见[我与卡片的故事 - Syaoran](https://blog.syaoran.me/blog/2018/06/10/CardAadMe)），用以养成每日写千字习惯，现在每周至少写一篇千字文。
 
 ## 2
 
@@ -40,7 +40,7 @@ categories:
 
 海边、山中，一个人的周末。在我不知道该做些什么的时候，写作便成了我的乐趣。在我内心时常蹦出这样的念头，去写一篇文章，纪念过去，写下那个有你有我的故事。在写作中，享受创作的乐趣。在卡片上涂鸦，在键盘上敲下一个个字。心流诞生在笔尖、在指尖，流淌在心间。
 
-因为写作，扩展类我的阅读面。也因此让我发现这世上还有那么多有意思的人、有意思的文字。[跟王烁「老婆推」学记趣和爱 · 杂记 | ishanshan's blog](http://ishanshan.top/selfedu/TipsLiveAFascinatingLife.html)、[老婆推专门博开博_王烁_新浪博客](http://blog.sina.com.cn/s/blog_61c51bd70100k7ka.html)、[光阴的故事-笨方法学写作](https://mp.weixin.qq.com/s?__biz=MzA4MTQ0NDQxNg==&mid=2650639252&idx=1&sn=bbf78e3ed807f77a04fc9bd10a5d98c6&chksm=879dc0bbb0ea49adf31cb4bb6b3307472f08bdc6d443ee77c3b2bf23929d131315e0dd90e8c1#rd)
+因为写作，扩展类我的阅读面。也因此让我发现这世上还有那么多有意思的人、有意思的文字。[跟王烁「老婆推」学记趣和爱 · 杂记 - ishanshan's blog](http://ishanshan.top/selfedu/TipsLiveAFascinatingLife.html)、[老婆推专门博开博_王烁_新浪博客](http://blog.sina.com.cn/s/blog_61c51bd70100k7ka.html)、[光阴的故事-笨方法学写作](https://mp.weixin.qq.com/s?__biz=MzA4MTQ0NDQxNg==&mid=2650639252&idx=1&sn=bbf78e3ed807f77a04fc9bd10a5d98c6&chksm=879dc0bbb0ea49adf31cb4bb6b3307472f08bdc6d443ee77c3b2bf23929d131315e0dd90e8c1#rd)
 
 海子说我有三种幸福：诗歌、王位、太阳。对我而言写作便是我的幸福了。
 

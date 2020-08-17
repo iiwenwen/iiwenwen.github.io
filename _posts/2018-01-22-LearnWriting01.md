@@ -12,4 +12,4 @@ photos:
 
 ### 附加题：
 写下第一句，第二句自动出来，不需要思考。提笔就写，感觉到自己大脑在发热，如同高速运转的电脑。
-也能明白古人「文章乃天成」这样的说法。![图片发自简书App](//upload-images.jianshu.io/upload_images/4170419-8f456c817837b878.jpg)
+也能明白古人「文章乃天成」这样的说法。![LearnWriting01](https://blgo-1258469251.image.myqcloud.com/LearnWriting01.jpeg?imageMogr2/strip/thumbnail/!35p)
