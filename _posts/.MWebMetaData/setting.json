@@ -1,5 +1,5 @@
 {
-  "name" : "_posts",
+  "name" : "博客",
   "fileExtension" : ".md",
   "autoUploadInsertedImageKey" : "blog-ap-shanghai",
   "autoUploadInsertedImage" : false,
