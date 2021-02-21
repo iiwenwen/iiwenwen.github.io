@@ -11,8 +11,7 @@ article_header:
   theme: dark
   background_color: '#203028'
   background_image: 
-    src: https://blgo-1258469251.image.myqcloud.com/literature-3373052_1920.jpg?imageMogr2/strip/thumbnail/800x
-
+    src: https://blgo-1258469251.image.myqcloud.com/literature-3373052_1920.jpg
 ---
 
 ## 诗歌，相伴
