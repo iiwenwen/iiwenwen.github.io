@@ -11,7 +11,7 @@ article_header:
   theme: dark
   background_color: '#203028'
   background_image: 
-    src: https://cdn.pixabay.com/photo/2018/05/04/01/32/literature-3373052_1280.jpg	
+    src: https://blgo-1258469251.image.myqcloud.com/literature-3373052_1920.jpg?imageMogr2/strip/thumbnail/800x
 
 ---
 
