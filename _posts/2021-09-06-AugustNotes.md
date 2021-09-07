@@ -30,13 +30,13 @@ Beancount是什么？Beancount是开源的Python记账工具。使用复式账�
 记账并不能为你省钱，但能让你知道自己的财务状况。对你的消费有一个清晰的认知，知道自己的钱去了哪。在记账时习惯大于计划，养成每天记账的习惯也不错。
 
 ### 参考
-[复式簿记 - 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-hans/%E5%A4%8D%E5%BC%8F%E7%B0%BF%E8%AE%B0)
-[Beancount —— 命令行复式簿记 | wzyboy’s blog](https://wzyboy.im/post/1063.html)
-[Beancount复式记账：接地气的Why and How - zsx's Blog](https://blog.zsxsoft.com/post/41)
-[Beancount复式记账（一）：为什么](https://byvoid.com/zhs/blog/beancount-bookkeeping-1/)
-[浅谈复式记账与 Beancount](https://dreamanddead.github.io/post/understand-account-in-beancount/)
-[Accounting for Computer Scientists — Martin Kleppmann’s blog](https://martin.kleppmann.com/2011/03/07/accounting-for-computer-scientists.html)
-[Beancount Query Language - Beancount Documentation](https://beancount.github.io/docs/beancount_query_language.html)
+- [复式簿记 - 维基百科，自由的百科全书](https://zh.wikipedia.org/zh-hans/%E5%A4%8D%E5%BC%8F%E7%B0%BF%E8%AE%B0)
+- [Beancount —— 命令行复式簿记 | wzyboy’s blog](https://wzyboy.im/post/1063.html)
+- [Beancount复式记账：接地气的Why and How - zsx's Blog](https://blog.zsxsoft.com/post/41)
+- [Beancount复式记账（一）：为什么](https://byvoid.com/zhs/blog/beancount-bookkeeping-1/)
+- [浅谈复式记账与 Beancount](https://dreamanddead.github.io/post/understand-account-in-beancount/)
+- [Accounting for Computer Scientists — Martin Kleppmann’s blog](https://martin.kleppmann.com/2011/03/07/accounting-for-computer-scientists.html)
+- [Beancount Query Language - Beancount Documentation](https://beancount.github.io/docs/beancount_query_language.html)
 
 ## 俳句
 
@@ -54,8 +54,8 @@ Beancount是什么？Beancount是开源的Python记账工具。使用复式账�
 > 我盼着周末
 
 ### 参考
-[听说，日本社畜在流行写诗？](https://mp.weixin.qq.com/s/qR-pOLOG10LnQNZScapCfw)
-[俳句 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E4%BF%B3%E5%8F%A5)
+- [听说，日本社畜在流行写诗？](https://mp.weixin.qq.com/s/qR-pOLOG10LnQNZScapCfw)
+- [俳句 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E4%BF%B3%E5%8F%A5)
 
 ## 工作
 
