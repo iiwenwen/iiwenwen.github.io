@@ -1,2 +1,2 @@
 # README
-该 blog fork 与 xxx
+写作是场修炼。
