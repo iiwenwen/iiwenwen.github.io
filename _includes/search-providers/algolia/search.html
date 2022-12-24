@@ -1,28 +1,25 @@
 <div id="search">
-<div class="inner">
-  <div class="header">
-    <span class="icon">
-      <i class="fas fa-search"></i>
-    </span>
-    <div class="search-input-container">
-      <div id="search-searchbar"></div>
-    </div>
+  <div class="inner">
+    <div class="header">
+      <span class="icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <div class="search-input-container">
+        <div id="search-searchbar"></div>
+      </div>
       <span class="close-btn">
         <i class="fas fa-times"></i>
       </span>
+    </div>
+
+    <div class="results">
+      <div class="inner">
+        <div id="search-stats"></div>
+        <div id="search-hits"></div>
+        <div id="pagination"></div>
+      </div>
+    </div>
   </div>
-
-
-<div class="results">
-  <div class="inner">
-    <div id="search-stats"></div>
-    <div id="search-hits"></div>
-    <div id="pagination"></div>
-  </div>
-</div>
-
-</div>
 </div>
 
 {% include search-providers/algolia/algolia.html %}
-

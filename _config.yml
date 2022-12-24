@@ -16,7 +16,7 @@
 text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate", "orange" #网站主题皮肤
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright" #代码高亮主题
 url: # the base hostname & protocol for your site e.g. https://www.someone.com #域名
-baseurl: blog.syaoran.me # does not include hostname
+baseurl: # does not include hostname
 title: Syaoran #网站标题
 description: > # this means to ignore newlines until "nav_lists:" #网站描述
   诗养性，文洗心
@@ -207,3 +207,14 @@ algolia:
   application_id: F20GWQVYSU
   index_name: jekyll # You can replace that with whatever name you want
   search_only_api_key: 74e06f824e7293c554936d183307eaed
+  settings:
+    searchableAttributes:
+      - title
+      - headings
+      - unordered(content)
+      - collection,categories,tags
+      - unordered(anchor)
+      - unordered(date)
+      - unordered(html)
+    attributesToSnippet:
+      - content:15

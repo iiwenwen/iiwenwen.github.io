@@ -66,8 +66,7 @@
           return html`No results for <q>${results.query}</q>`;
         },
         item(hit, { html, components }) {
-          url = `{{ site.baseurl }}${hit.url}`;
-          console.log(url);
+          url = hit.url;
           return html`
             <a href="${url}">
               ${components.Highlight({ hit, attribute: "title" })}
