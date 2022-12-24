@@ -16,7 +16,7 @@
 text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate", "orange" #网站主题皮肤
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright" #代码高亮主题
 url: # the base hostname & protocol for your site e.g. https://www.someone.com #域名
-baseurl: # does not include hostname
+baseurl: blog.syaoran.me # does not include hostname
 title: Syaoran #网站标题
 description: > # this means to ignore newlines until "nav_lists:" #网站描述
   诗养性，文洗心
@@ -24,7 +24,7 @@ description: > # this means to ignore newlines until "nav_lists:" #网站描述
 ## => Language and Timezone 语言与时区
 ##############################
 lang: zh-Hans # the language of your site, default as "en" # 语言
-timezone: # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
+timezone: "Asia/Shanghai" # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
 
 ## => Author and Social 作者信息
 ##############################
@@ -202,7 +202,7 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jemoji
-
+  - jekyll-algolia
 algolia:
   application_id: F20GWQVYSU
   index_name: jekyll # You can replace that with whatever name you want

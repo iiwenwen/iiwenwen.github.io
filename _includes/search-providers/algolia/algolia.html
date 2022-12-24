@@ -1,105 +1,256 @@
-<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css"
-/>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css"
-/>
+<script
+  src="https://cdn.jsdelivr.net/npm/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"
+  integrity="sha256-dImjLPUsG/6p3+i7gVKBiDM8EemJAhQ0VvkRK2pVsQY="
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.49.1/dist/instantsearch.production.min.js"
+  integrity="sha256-3s8yn/IU/hV+UjoqczP+9xDS1VXIpMf3QYRUi9XoG0Y="
+  crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
 
 <script>
+  const searchClient = algoliasearch(
+    "{{ site.algolia.application_id }}",
+    "{{ site.algolia.search_only_api_key }}"
+  );
+  // {
+  //   search(requests) {
+  //     if (requests.every(({ params }) => !params.query)) {
+  //       // Here we have to do something else
+  //     }
+  //     return algoliaClient.search(requests);
+  //   },
+  // };
+  const { searchBox, hits, configure, stats } = instantsearch.widgets;
+
   const search = instantsearch({
-    appId: "{{ site.algolia.application_id }}",
-    apiKey: "{{ site.algolia.search_only_api_key }}",
     indexName: "{{ site.algolia.index_name }}",
+    // appId:
+    // apiKey:
+    searchClient,
+    routing: true,
+    searchFunction(helper) {
+      const container = document.querySelector("#search-hits");
+      container.style.display = helper.state.query === "" ? "none" : "";
+      helper.search();
+    },
   });
 
-  const hitTemplate = function (hit) {
-    let date = "";
-    if (hit.date) {
-      date = moment.unix(hit.date).format("MMM D, YYYY");
-    }
-
-    let url = `{{ site.baseurl }}${hit.url}#${hit.anchor}`;
-
-    const title = hit._highlightResult.title.value;
-
-    let breadcrumbs = "";
-    if (hit._highlightResult.headings) {
-      breadcrumbs = hit._highlightResult.headings
-        .map((match) => {
-          return `<span class="post-breadcrumb">${match.value}</span>`;
-        })
-        .join(" > ");
-    }
-
-    const content = hit._highlightResult.html.value;
-
-    return `
-    <div class="post-item">
-      <span class="post-meta">${date}</span>
-      <h2><a class="post-link" href="${url}">${title}</a></h2>
-      {{#breadcrumbs}}<a href="${url}" class="post-breadcrumbs">${breadcrumbs}</a>{{/breadcrumbs}}
-      <div class="post-snippet">${content}</div>
-    </div>
-  `;
-  };
-
-  search.addWidget(
-    instantsearch.widgets.searchBox({
+  search.addWidgets([
+    searchBox({
       container: "#search-searchbar",
-      placeholder: "Search into posts...",
-      poweredBy: true, // This is required if you're on the free Community plan
-    })
-  );
-
-  search.addWidget(
-    instantsearch.widgets.hits({
-      container: "#search-hits",
-      templates: {
-        item: hitTemplate,
+      placeholder: "搜索",
+      searchAsYouType: false,
+      autofocus: true,
+      showReset: false,
+      showSubmit: false,
+      cssClasses: {
+        input: "search-input",
       },
-    })
-  );
+      templates: {
+        reset({ cssClasses }, { html }) {
+          return html`<span class="${cssClasses.reset}">reset</span>`;
+        },
+      },
+    }),
+
+    hits({
+      container: "#search-hits",
+      cssClasses: {
+        item: "item",
+      },
+      templates: {
+        empty(results, { html }) {
+          return html`No results for <q>${results.query}</q>`;
+        },
+        item(hit, { html, components }) {
+          url = `{{ site.baseurl }}${hit.url}`;
+          console.log(url);
+          return html`
+            <a href="${url}">
+              ${components.Highlight({ hit, attribute: "title" })}
+              ${components.Snippet({ hit, attribute: "headings" })}
+              ${components.Snippet({ hit, attribute: "html" })}
+            </a>
+          `;
+        },
+      },
+    }),
+    configure({
+      attributesToSnippet: ["title", "html", "headings"],
+    }),
+    stats({
+      container: "#search-stats",
+      templates: {
+        text(data, { html }) {
+          let count = "";
+          if (data.hasManyResults) {
+            count += `${data.nbHits} `;
+          } else if (data.hasOneResult) {
+            count += `1`;
+          } else {
+            count += `0`;
+          }
+          return html`
+            ${data.processingTimeMS} ms内找到${count}条结果
+            <span class="algolia-powered"></span>
+            <hr />
+          `;
+        },
+      },
+    }),
+  ]);
 
   search.start();
 </script>
 
 <style>
-  .ais-search-box {
-    max-width: 100%;
-    margin-bottom: 15px;
+  #search > .inner {
+    border-radius: 0;
+    height: 100%;
+    margin: 0 auto;
+    width: 43.75rem;
+    text-shadow: none;
   }
-  .post-item {
-    margin-bottom: 30px;
+
+  #search .inner .header {
+    display: flex;
+    background: rgba(253, 253, 253, 0.5);
+    border-radius: 3rem;
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 1.25rem;
+    border: 0.0625rem solid #999;
+    font-size: 1.125em;
+    align-items: center;
   }
-  .post-link .ais-Highlight {
-    color: #111;
-    font-style: normal;
-    text-decoration: underline;
+
+  #search > .inner .search-input-container {
+    flex-grow: 1;
   }
-  .post-breadcrumbs {
-    color: #424242;
+
+  #search > .inner .search-input {
+    background: 0 0;
+    border: 0;
+    outline: 0;
+    width: 100%;
+  }
+
+  #search {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1.25rem;
+    z-index: 999;
+    background: linear-gradient(-225deg, #e3fdf5 0, #ffe6fa 100%);
+    line-height: 2;
+  }
+
+  #search .results {
+    height: calc(100% - 6.25rem);
+    padding: 1.875rem 1.875rem 0.3125rem;
+    border-radius: 0.3125rem;
+    width: 43.75rem;
+    background: rgba(253, 253, 253, 0.7)
+      url(http://lixianglong.cn/images/search.png) no-repeat bottom right;
+    color: #333;
+  }
+
+  #search .results .inner {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .algolia-powered {
+    float: right;
+    background: url(http://lixianglong.cn/images/algolia_logo.svg) no-repeat;
+    display: inline-block;
+    height: 1.125rem;
+    width: 4.25rem;
+    margin: 0.5rem auto;
+  }
+
+  #search > .inner .close-btn {
+    cursor: pointer;
+  }
+
+  #search > .inner .close-btn,
+  #search > .inner .icon {
+    color: #999;
+    font-size: 1.125rem;
+    padding: 0 0.625rem;
+  }
+
+  hr {
+    background: repeating-linear-gradient(
+      -45deg,
+      #eff2f3,
+      #ccc 0.25rem,
+      transparent 0.25rem,
+      transparent 0.5rem
+    );
+    border: none;
+    height: 0.125rem;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.3125rem;
+    height: 0.3125rem;
+    background: 0 0;
+  }
+
+  #search-hits {
+    overflow-y: scroll;
+    height: calc(100% - 8.125rem);
+  }
+
+  #search-hits .item {
+    margin: 0.9375rem 0;
+  }
+
+  #search-hits .item a {
+    border-bottom: 0.0625rem dashed #ccc;
     display: block;
+    transition: all 0.2s ease-in-out 0s;
   }
-  .post-breadcrumb {
-    font-size: 18px;
-    color: #424242;
+
+  #search-hits ol {
+    padding: 0;
   }
-  .post-breadcrumb .ais-Highlight {
-    font-weight: bold;
-    font-style: normal;
+
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
   }
-  .post-snippet .ais-Highlight {
-    color: #2a7ae2;
-    font-style: normal;
-    font-weight: bold;
+
+  .inner {
+    margin: 0 auto;
+    width: 100%;
   }
-  .post-snippet img {
-    display: none;
+
+  a,
+  a:link {
+    border: none;
+    color: currentColor;
+    outline: 0;
+    text-decoration: none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    transition: all 0.2s ease-in-out 0s;
+    cursor: pointer;
+  }
+
+  li {
+    display: list-item;
+    text-align: -webkit-match-parent;
   }
 </style>
