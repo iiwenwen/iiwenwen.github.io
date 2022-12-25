@@ -1,8 +1,8 @@
 ---
 layout: article
 titles:
-  en      : &EN       about
-  zh-Hans : &ZH_HANS  你好哇！
+  en: &EN about
+  zh-Hans: &ZH_HANS 你好哇！
 key: page-about
 ---
 
@@ -11,7 +11,9 @@ key: page-about
 17 年学习认知写作学，18 年学习笨方法学写作。课程参与不少，但学的不够好，成了捐学费的学生。虽写的差，爱拖延，但依旧在写作。18 年给自己的一句话口号「练习写作，试图用写作改变自己」。还未成功，还会继续努力。
 
 微信公众号：卡片写作(CardWrite)
+
 豆瓣：Syaoran（158318395）
 
 ## ChangeLog
+
 - 210109 添加微信公众号与豆瓣

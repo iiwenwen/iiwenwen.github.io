@@ -9,32 +9,87 @@
   crossorigin="anonymous"
 ></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
-
 <script>
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js([SOURCES.jquery], function () {
+    var search = window.search || (window.search = {});
+
+    // search box
+    var $result = $(".result"),
+      $resultItems;
+    var lastActiveIndex, activeIndex;
+
+    function clear() {
+      $result.html(null);
+      $resultItems = $(".ais-Hits-item item");
+      activeIndex = 0;
+    }
+    function onInputNotEmpty(val) {
+      $result.html(render(searchByQuery(val)));
+      $resultItems = $(".ais-Hits-item item");
+      activeIndex = 0;
+      $resultItems.eq(0).addClass("active");
+    }
+
+    function updateResultItems() {
+      lastActiveIndex >= 0 &&
+        $resultItems.eq(lastActiveIndex).removeClass("active");
+      activeIndex >= 0 && $resultItems.eq(activeIndex).addClass("active");
+    }
+
+    function moveActiveIndex(direction) {
+      var itemsCount = $resultItems ? $resultItems.length : 0;
+      if (itemsCount > 1) {
+        lastActiveIndex = activeIndex;
+        if (direction === "up") {
+          activeIndex = (activeIndex - 1 + itemsCount) % itemsCount;
+        } else if (direction === "down") {
+          activeIndex = (activeIndex + 1 + itemsCount) % itemsCount;
+        }
+        updateResultItems();
+      }
+    }
+
+    // Char Code: 13  Enter, 37  ⬅, 38  ⬆, 39  ➡, 40  ⬇
+    $(window).on("keyup", function (e) {
+      var modalVisible = search.getModalVisible && search.getModalVisible();
+      if (modalVisible) {
+        if (e.which === 38) {
+          modalVisible && moveActiveIndex("up");
+        } else if (e.which === 40) {
+          modalVisible && moveActiveIndex("down");
+        } else if (e.which === 13) {
+          modalVisible &&
+            $resultItems &&
+            activeIndex >= 0 &&
+            $resultItems.eq(activeIndex).children("a")[0].click();
+        }
+      }
+    });
+
+    $result.on("mouseover", ".search-result__item > a", function () {
+      var itemIndex = $(this).parent().data("index");
+      itemIndex >= 0 &&
+        ((lastActiveIndex = activeIndex),
+        (activeIndex = itemIndex),
+        updateResultItems());
+    });
+  });
+
   const searchClient = algoliasearch(
     "{{ site.algolia.application_id }}",
     "{{ site.algolia.search_only_api_key }}"
   );
-  // {
-  //   search(requests) {
-  //     if (requests.every(({ params }) => !params.query)) {
-  //       // Here we have to do something else
-  //     }
-  //     return algoliaClient.search(requests);
-  //   },
-  // };
+
   const { searchBox, hits, configure, stats } = instantsearch.widgets;
 
   const search = instantsearch({
     indexName: "{{ site.algolia.index_name }}",
-    // appId:
-    // apiKey:
     searchClient,
-    routing: true,
     searchFunction(helper) {
-      const container = document.querySelector("#search-hits");
-      container.style.display = helper.state.query === "" ? "none" : "";
-      helper.search();
+      if (helper.state.query) {
+        helper.search();
+      }
     },
   });
 
@@ -42,17 +97,12 @@
     searchBox({
       container: "#search-searchbar",
       placeholder: "搜索",
-      searchAsYouType: false,
-      autofocus: true,
+      searchAsYouType: true,
+      autofocus: false,
       showReset: false,
       showSubmit: false,
       cssClasses: {
         input: "search-input",
-      },
-      templates: {
-        reset({ cssClasses }, { html }) {
-          return html`<span class="${cssClasses.reset}">reset</span>`;
-        },
       },
     }),
 
@@ -63,7 +113,7 @@
       },
       templates: {
         empty(results, { html }) {
-          return html`No results for <q>${results.query}</q>`;
+          return html`没有找到<q>${results.query}</q>相关的文章哦！`;
         },
         item(hit, { html, components }) {
           url = hit.url;
@@ -104,152 +154,3 @@
 
   search.start();
 </script>
-
-<style>
-  #search > .inner {
-    border-radius: 0;
-    height: 100%;
-    margin: 0 auto;
-    width: 43.75rem;
-    text-shadow: none;
-  }
-
-  #search .inner .header {
-    display: flex;
-    background: rgba(253, 253, 253, 0.5);
-    border-radius: 3rem;
-    padding: 0.5rem 1.5rem;
-    margin-bottom: 1.25rem;
-    border: 0.0625rem solid #999;
-    font-size: 1.125em;
-    align-items: center;
-  }
-
-  #search > .inner .search-input-container {
-    flex-grow: 1;
-  }
-
-  #search > .inner .search-input {
-    background: 0 0;
-    border: 0;
-    outline: 0;
-    width: 100%;
-  }
-
-  #search {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    padding: 1.25rem;
-    z-index: 999;
-    background: linear-gradient(-225deg, #e3fdf5 0, #ffe6fa 100%);
-    line-height: 2;
-  }
-
-  #search .results {
-    height: calc(100% - 6.25rem);
-    padding: 1.875rem 1.875rem 0.3125rem;
-    border-radius: 0.3125rem;
-    width: 43.75rem;
-    background: rgba(253, 253, 253, 0.7)
-      url(http://lixianglong.cn/images/search.png) no-repeat bottom right;
-    color: #333;
-  }
-
-  #search .results .inner {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .algolia-powered {
-    float: right;
-    background: url(http://lixianglong.cn/images/algolia_logo.svg) no-repeat;
-    display: inline-block;
-    height: 1.125rem;
-    width: 4.25rem;
-    margin: 0.5rem auto;
-  }
-
-  #search > .inner .close-btn {
-    cursor: pointer;
-  }
-
-  #search > .inner .close-btn,
-  #search > .inner .icon {
-    color: #999;
-    font-size: 1.125rem;
-    padding: 0 0.625rem;
-  }
-
-  hr {
-    background: repeating-linear-gradient(
-      -45deg,
-      #eff2f3,
-      #ccc 0.25rem,
-      transparent 0.25rem,
-      transparent 0.5rem
-    );
-    border: none;
-    height: 0.125rem;
-  }
-
-  ::-webkit-scrollbar {
-    width: 0.3125rem;
-    height: 0.3125rem;
-    background: 0 0;
-  }
-
-  #search-hits {
-    overflow-y: scroll;
-    height: calc(100% - 8.125rem);
-  }
-
-  #search-hits .item {
-    margin: 0.9375rem 0;
-  }
-
-  #search-hits .item a {
-    border-bottom: 0.0625rem dashed #ccc;
-    display: block;
-    transition: all 0.2s ease-in-out 0s;
-  }
-
-  #search-hits ol {
-    padding: 0;
-  }
-
-  ol {
-    display: block;
-    list-style-type: decimal;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-  }
-
-  .inner {
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  a,
-  a:link {
-    border: none;
-    color: currentColor;
-    outline: 0;
-    text-decoration: none;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    transition: all 0.2s ease-in-out 0s;
-    cursor: pointer;
-  }
-
-  li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-  }
-</style>

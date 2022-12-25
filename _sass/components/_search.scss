@@ -1,6 +1,5 @@
 .search {
   @include overflow(auto);
-
 }
 .search--google-custom-search-engine {
   .main {
@@ -54,22 +53,25 @@
     border: 2px solid $border-color;
     border-radius: map-get($button, pill-radius);
     -webkit-appearance: none; /* fix iOS don't display box-shadow properly */
-    @include transition(box-shadow map-get($animation, duration) map-get($animation, timing-function));
+    @include transition(
+      box-shadow map-get($animation, duration)
+        map-get($animation, timing-function)
+    );
     @include focus {
-      box-shadow: 0 0 0 2px rgba($border-color, .4);
+      box-shadow: 0 0 0 2px rgba($border-color, 0.4);
     }
     .search--light & {
       color: $text-color-theme-light;
       border-color: $text-color-theme-light;
       @include focus {
-        box-shadow: 0 0 0 2px rgba($text-color-theme-light, .4);
+        box-shadow: 0 0 0 2px rgba($text-color-theme-light, 0.4);
       }
     }
     .search--dark & {
       color: $text-color-theme-dark;
       border-color: $text-color-theme-dark;
       @include focus {
-        box-shadow: 0 0 0 2px rgba($text-color-theme-dark, .4);
+        box-shadow: 0 0 0 2px rgba($text-color-theme-dark, 0.4);
       }
     }
   }
@@ -94,7 +96,8 @@
       cursor: pointer;
     }
   }
-  & > .search-box__icon-search, & > .search-box__icon-clear {
+  & > .search-box__icon-search,
+  & > .search-box__icon-clear {
     position: absolute;
     width: $button-height-lg;
     height: $button-height-lg;
@@ -149,10 +152,20 @@
     @include transition(none);
     @include clickable($text-color, transparent, $text-color-3, $main-color-3);
     .search--light & {
-      @include clickable($text-color-theme-light, transparent, $text-color-theme-dark, $main-color-theme-light);
+      @include clickable(
+        $text-color-theme-light,
+        transparent,
+        $text-color-theme-dark,
+        $main-color-theme-light
+      );
     }
     .search--dark & {
-      @include clickable($text-color-theme-dark, transparent, $text-color-theme-light, $main-color-theme-dark);
+      @include clickable(
+        $text-color-theme-dark,
+        transparent,
+        $text-color-theme-light,
+        $main-color-theme-dark
+      );
     }
   }
   &.active {
@@ -183,4 +196,171 @@
   ::after {
     box-sizing: initial;
   }
+}
+
+// algolia search
+
+#search > .inner {
+  border-radius: 0;
+  height: 100%;
+  margin: 0 auto;
+  width: 43.75rem;
+  text-shadow: none;
+}
+
+#search .inner .header {
+  display: flex;
+  background: rgba(253, 253, 253, 0.5);
+  border-radius: 3rem;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1.25rem;
+  border: 0.0625rem solid #999;
+  font-size: 1.125em;
+  align-items: center;
+}
+
+#search > .inner .search-input-container {
+  flex-grow: 1;
+}
+
+#search > .inner .search-input {
+  background: 0 0;
+  border: 0;
+  outline: 0;
+  width: 100%;
+}
+
+#search {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem;
+  z-index: 999;
+  background: linear-gradient(-225deg, #e3fdf5 0, #ffe6fa 100%);
+  line-height: 2;
+}
+
+@media (max-width: 767px) {
+  #search .inner {
+    width: 100%;
+  }
+}
+
+#search .results {
+  height: calc(100% - 6.25rem);
+  padding: 1.875rem 1.875rem 0.3125rem;
+  border-radius: 0.3125rem;
+  background: rgba(253, 253, 253, 0.7)
+    url(http://lixianglong.cn/images/search.png) no-repeat bottom right;
+  color: #333;
+}
+
+#search .results .inner {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.algolia-powered {
+  float: right;
+  background: url(http://lixianglong.cn/images/algolia_logo.svg) no-repeat;
+  display: inline-block;
+  height: 1.125rem;
+  width: 4.25rem;
+  margin: 0.5rem auto;
+}
+
+#search > .inner .close-btn {
+  cursor: pointer;
+}
+
+#search > .inner .close-btn,
+#search > .inner .icon {
+  color: #999;
+  font-size: 1.125rem;
+  padding: 0 0.625rem;
+}
+[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E %3Cpath d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z'%3E%3C/path%3E %3C/svg%3E")
+    center no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: 0.2s;
+}
+
+hr {
+  background: repeating-linear-gradient(
+    -45deg,
+    #eff2f3,
+    #ccc 0.25rem,
+    transparent 0.25rem,
+    transparent 0.5rem
+  );
+  border: none;
+  height: 0.125rem;
+}
+
+::-webkit-scrollbar {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  background: 0 0;
+}
+
+#search-hits {
+  overflow-y: scroll;
+  height: calc(100% - 8.125rem);
+}
+
+#search-hits .item {
+  margin: 0.9375rem 0;
+}
+
+#search-hits .item a {
+  border-bottom: 0.0625rem dashed #ccc;
+  display: block;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+#search-hits ol {
+  padding: 0;
+}
+
+ol {
+  display: block;
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.inner {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.inner a,
+a:link,
+a:visited {
+  border: none;
+  color: #333;
+  outline: 0;
+  text-decoration: none;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  transition: all 0.2s ease-in-out 0s;
+  cursor: pointer;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
 }
