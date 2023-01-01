@@ -63,7 +63,7 @@ paths:
 ## => Post 文章配置
 ##############################
 ## excerpt 摘要设置，方法1.excerpt_separator: <!--more--> 手动设置摘要,方法2.excerpt_type: text # text (default), html，选择 text 自动设置摘要截取前 350 字，过滤掉非文本元素。html 则与方法 1 相同。
-excerpt_separator: <!--more-->
+excerpt_separator:
 
 ## license 许可协议
 # license: CC-BY-NC-4.0 # "CC-BY-4.0", "CC-BY-SA-4.0", "CC-BY-NC-4.0", "CC-BY-ND-4.0"
