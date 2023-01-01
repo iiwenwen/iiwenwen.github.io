@@ -253,7 +253,8 @@
   padding: 1.875rem 1.875rem 0.3125rem;
   border-radius: 0.3125rem;
   background: rgba(253, 253, 253, 0.7)
-    url(http://lixianglong.cn/images/search.png) no-repeat bottom right;
+    url(https://blgo-1258469251.image.myqcloud.com/search.png) no-repeat bottom
+    right;
   color: #333;
 }
 
@@ -265,7 +266,8 @@
 
 .algolia-powered {
   float: right;
-  background: url(http://lixianglong.cn/images/algolia_logo.svg) no-repeat;
+  background: url(https://blgo-1258469251.image.myqcloud.com/algolia_logo.svg)
+    no-repeat;
   display: inline-block;
   height: 1.125rem;
   width: 4.25rem;
@@ -320,6 +322,7 @@ hr {
 
 #search-hits .item {
   margin: 0.9375rem 0;
+  display: block;
 }
 
 #search-hits .item a {

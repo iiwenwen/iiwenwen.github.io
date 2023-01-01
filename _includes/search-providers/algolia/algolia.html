@@ -96,7 +96,7 @@
   search.addWidgets([
     searchBox({
       container: "#search-searchbar",
-      placeholder: "搜索",
+      placeholder: "搜索看看",
       searchAsYouType: true,
       autofocus: false,
       showReset: false,
@@ -113,14 +113,12 @@
       },
       templates: {
         empty(results, { html }) {
-          return html`没有找到<q>${results.query}</q>相关的文章哦！`;
+          return html`没有找到「${results.query}」相关的文章哦！`;
         },
         item(hit, { html, components }) {
           url = hit.url;
           return html`
             <a href="${url}">
-              ${components.Highlight({ hit, attribute: "title" })}
-              ${components.Snippet({ hit, attribute: "headings" })}
               ${components.Snippet({ hit, attribute: "html" })}
             </a>
           `;

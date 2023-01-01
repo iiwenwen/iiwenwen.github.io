@@ -217,4 +217,4 @@ algolia:
       - unordered(date)
       - unordered(html)
     attributesToSnippet:
-      - content:15
+      - content:30
