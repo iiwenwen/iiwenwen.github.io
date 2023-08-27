@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="icon" href="/assets/img/logo.webp" type="image/*" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/APlayer.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="assets/css/highlight.github.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
+    <title>Memos Top</title>
+  </head>
+
+  <body>
+    <!-- <header>
+      <div class="menu">
+        <div class="title">Memos</div>
+      </div>
+      <div class="theme-toggle">🌓</div>
+    </header> -->
+      <div class="layout-cold">
+        <div class="tl-cover">
+          <a rel="home" class="cover-home" href="/">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </a>
+          <span>Syaoran</span>
+          <img
+            src="https://blgo-1258469251.image.myqcloud.com/baixiong.JPG"
+            alt="头像"
+          />
+          <div>Good good study,Day day up.</div>
+        </div>
+      </div>
+
+      <div class="total">Total <span id="total">0</span> Memos 🎉</div>
+
+      <blockquote id="tag-filter" class="filter">
+        <div id="tags"></div>
+      </blockquote>
+
+      <div id="memos" class="memos">
+        <!-- Memos Container -->
+      </div>
+    </section>
+
+    <footer class="markdown-body footer">
+      <p>
+        Copyright @
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <a
+          href="https://eallion.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden"
+          >Charles 'eallion' Chin</a
+        >
+        All Rights Reserved.
+      </p>
+    </footer>
+
+    <!-- Your Memos API -->
+    <script type="text/javascript">
+      var memos = {
+        host: "https://memos.syaoran.me/", // Your Memos instance.
+        limit: "10", // Pagination to show.
+        creatorId: "1", // The old instance is 101, and the new instance is 1.
+        domId: "#memos", // Default #memos.
+        username: "syaoran", // You can customize the display ID that is not related to memos.
+        name: "syaoran", // You can customize the displayed full name, that is not related to memos.
+      };
+    </script>
+    <script
+      type="text/javascript"
+      src="assets/js/lazyload.min.js?v=17.8.3"
+    ></script>
+    <script
+      type="text/javascript"
+      src="assets/js/marked.min.js?v=4.2.2"
+    ></script>
+    <script type="text/javascript" src="assets/js/view-image.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/pangu.min.js?v=4.0.7"></script> -->
+    <script
+      type="text/javascript"
+      src="assets/js/moment.min.js?v=2.29.4"
+    ></script>
+    <script type="text/javascript" src="assets/js/moment.twitter.js"></script>
+    <script type="text/javascript" src="assets/js/APlayer.min.js"></script>
+    <script type="text/javascript" src="assets/js/Meting.min.js"></script>
+    <script type="text/javascript" src="assets/js/highlight.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
