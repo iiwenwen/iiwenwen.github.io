@@ -12,7 +12,7 @@ article_header:
   background_color: '#203028'
   background_image: 
 
-    src: https://blgo-1258469251.image.myqcloud.com/literature-3373052_1920.jpg
+    src: https://blgo-1258469251.image.myqcloud.com/literature-3373052_1920.jpg?imageMogr2/strip/thumbnail/800x
 
 ---
 
@@ -28,9 +28,9 @@ article_header:
   }
 </style>
 
- 写一首诗的过程——《雷声与蝉鸣》也斯
+写一首诗的过程——《雷声与蝉鸣》也斯  
 
-<https://shige-1258469251.cos.ap-shanghai.myqcloud.com/20180728-test.m4a>
+https://shige-1258469251.cos.ap-shanghai.myqcloud.com/20180728-test.m4a
 
 ## 参考
 
