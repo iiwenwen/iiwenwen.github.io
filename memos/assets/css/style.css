@@ -87,10 +87,23 @@ pre {
     margin: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 1.3em 0 1em;
+    /* 上边距：1.3em，下边距：1em，左右边距：0 */
+    padding: 0;
+    /* 内边距：0 */
+    font-weight: bold;
+    /* 字体粗细：加粗 */
+}
+
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica,
-        Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei",
-        "Microsoft Yahei", "Segoe UI", sans-serif, serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: var(--color-main);
     background-color: var(--color-background);
     box-sizing: border-box;
@@ -127,6 +140,12 @@ header {
     text-decoration: underline;
 }
 
+/* a {
+    color: #4FC3F7;
+    border-bottom: 1px solid #4FC3F7;
+}
+
+*/
 h1 {
     margin-bottom: 16px;
     font-weight: 600;
@@ -155,8 +174,16 @@ blockquote {
     cursor: pointer;
 }
 
-.total {
+.layout-cold .tl-cover .total {
+    /* margin: 20px;
+    padding: 20px; */
     text-align: left;
+    position: absolute;
+    bottom: -68px
+}
+
+.layout-cold .tl-cover .total span {
+    position: static;
 }
 
 .memos {
@@ -164,10 +191,11 @@ blockquote {
     max-width: 568px !important;
     margin: 0 auto;
     padding: 0;
+    font-size: 15px;
 }
 
 .memos a {
-    color: var(--color-link);
+    color: #4FC3F7;
     text-decoration: none;
 }
 
@@ -175,22 +203,18 @@ blockquote {
     text-decoration: underline;
 }
 
-.memos ul {
+ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .memos__content {
-    /* flex-grow: 1; */
-    margin-left: 50px;
-    position: relative;
-    max-width: 100%;
-    width: 100%;
-    flex: 1 1;
+    width: 0;
+    flex: 1;
 }
 
-.memos__content:before {
+/* .memos__content:before {
     content: '';
     position: absolute;
     background: url(https://blgo-1258469251.image.myqcloud.com/baixiong.JPG) no-repeat;
@@ -199,32 +223,48 @@ blockquote {
     height: 40px;
     border-radius: 40px;
     left: -50px;
-    top: 10px;
     border: 0;
     object-fit: cover;
+} */
+
+
+.timeline .memos__avatar {
+    width: 38px;
+    height: 38px;
+    margin-right: 10px;
+    font-weight: 700;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.timeline>.memos__avatar>img {
+    display: block;
+    width: 100%;
 }
 
 .memos__text {
-    /* white-space: pre-wrap; */
     margin-top: 0;
     margin-bottom: 5px;
+    line-height: 1.5rem;
+    overflow-wrap: break-word;
 }
 
 .timeline {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    margin-bottom: 1.5rem;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
 }
 
-.timeline:hover .memos__text:before {
+/* .timeline:hover .memos__text:before {
     background: var(--color-text-hover);
     z-index: 1;
 }
+*/
 
-.timeline:hover .memos__text {
+/* .timeline:hover .memos__text {
     background: var(--color-text-hover);
-}
+} */
 
 /* .memos__text {
     width: 100%;
@@ -232,15 +272,27 @@ blockquote {
     font-size: 1rem;
     line-height: 1.75rem;
 } */
+.memos__text ul {
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
 
-.memos__text ul li {
-    list-style: none;
 }
 
-.memos__text i {
+.memos__text ul li {
+    list-style-type: disc;
+}
+
+
+/* .memos__text ul li input {
+    padding-inline-start: 0;
+} */
+
+/* .memos__text i {
     margin: 0 0.25rem;
 }
 
+*/
 /* .memos__text:before {
     content: "";
     position: absolute;
@@ -290,8 +342,6 @@ blockquote {
 }
 
 .memos__userinfo {
-    /* display: flex; */
-    /* align-items: center; */
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
@@ -367,7 +417,7 @@ blockquote {
 .timeline img,
 .resimg img {
     display: block;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     max-width: 100%;
     cursor: pointer;
     -o-object-fit: cover;
@@ -407,9 +457,10 @@ blockquote {
 }
 
 .post-preview--meta {
-    width: 75%;
+    width: 0;
     padding: 25px;
     overflow: hidden;
+    flex: 1;
 }
 
 .post-preview--middle {
@@ -639,7 +690,7 @@ footer {
     padding-top: 80%;
     background-size: cover;
     background-position: 50%;
-    background-image: url(https://blgo-1258469251.image.myqcloud.com/ZARD.png);
+    background-image: url(https://blgo-1258469251.file.myqcloud.com/ZARD.png);
 }
 
 .layout-cold .tl-cover img {
@@ -654,7 +705,7 @@ footer {
     position: absolute;
     bottom: 6px;
     right: 92px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     color: #fff;
     text-shadow: 0 1px 3px #333;
@@ -664,7 +715,7 @@ footer {
     position: absolute;
     bottom: -48px;
     right: 16px;
-    font-size: 14px;
+    font-size: 15px;
     color: #999;
 }
 
@@ -675,5 +726,10 @@ footer {
     color: #333;
 }
 
+p {
+    padding-top: 0.9em;
+    padding-bottom: 0.9em;
+    letter-spacing: 0.03em !important;
+}
 
 /*  */

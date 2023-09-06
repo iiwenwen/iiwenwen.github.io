@@ -105,6 +105,7 @@ function getFirstList () {
         page++
         offset = limit * (page - 1)
         getNextList()
+
     })
 }
 // 预加载下一页数据
@@ -189,7 +190,7 @@ function updateHTMl (data) {
     var memoResult = "", resultAll = ""
 
     // 解析 TAG 标签，添加样式
-    const TAG_REG = /#([^\s#]+?) /g
+    const TAG_REG = /#([^\s#,]+) /g
 
     // 解析 BiliBili
     const BILIBILI_REG = /<a\shref="https:\/\/www\.bilibili\.com\/video\/((av[\d]{1,10})|(BV([\w]{10})))\/?">.*<\/a>/g
@@ -205,12 +206,11 @@ function updateHTMl (data) {
     const YOUKU_REG = /<a\shref="https:\/\/v\.youku\.com\/.*\/id_([a-z|A-Z|0-9|==]+)\.html".*?>.*<\/a>/g
     //解析 Youtube
     const YOUTUBE_REG = /<a\shref="https:\/\/www\.youtube\.com\/watch\?v\=([a-z|A-Z|0-9]{11})\".*?>.*<\/a>/g
-
     // Marked Options
     marked.setOptions({
         breaks: true,
-        smartypants: true,
         langPrefix: 'language-',
+        gfm: true,
         highlight: function (code, lang) {
             const language = hljs.getLanguage(lang) ? lang : 'plaintext'
             return hljs.highlight(code, { language }).value
@@ -221,7 +221,6 @@ function updateHTMl (data) {
     for (var i = 0; i < data.length; i++) {
         var memoContREG = data[i].content
             .replace(TAG_REG, "<span class='tag-span'><a rel='noopener noreferrer' href='#$1'>#$1</a></span>")
-
         // For CJK language users
         // 用 PanguJS 自动处理中英文混合排版
         // 在 index.html 引入 JS：<script type="text/javascript" src="assets/js/pangu.min.js?v=4.0.7"></script>
@@ -268,9 +267,9 @@ function updateHTMl (data) {
                 memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>'
             }
         }
-        memoResult += '<li class="timeline"><div class="memos__content"><div class="memos__userinfo">' + memo.name + '</div><div class="memos__text"><p>' + memoContREG + '</p></div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createdTs * 1000).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].id + '" target="_blank">Memos</a>」</small></div></div></li>'
+        memoResult += '<li class="timeline"><div class="memos__avatar"><img src="https://blgo-1258469251.file.myqcloud.com/baixiong.JPG" alt="头像"></div><div class="memos__content"><div class="memos__userinfo">' + memo.name + '</div><div class="memos__text">' + memoContREG + '</div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createdTs * 1000).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].id + '" target="_blank">Memos</a>」</small></div></div></li>'
     }
-    var memoBefore = '<ul class="">'
+    var memoBefore = '<ul class="timelines">'
     var memoAfter = '</ul>'
     resultAll = memoBefore + memoResult + memoAfter
     memoDom.insertAdjacentHTML('beforeend', resultAll)
@@ -351,7 +350,7 @@ function bookShow (fetch_href, fetch_item) {
 // 解析豆瓣 End
 
 // Images lightbox
-window.ViewImage && ViewImage.init('.container img')
+window.ViewImage && ViewImage.init('.memos__content img')
 
 // Memos Total Start
 // Get Memos total count
@@ -399,5 +398,5 @@ themeToggle.addEventListener("click", () => {
             "theme",
             document.body.classList.contains("dark-theme") ? "dark-theme" : "light-theme",
         )
-});
+})
 // Darkmode End

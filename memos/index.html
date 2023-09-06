@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="referrer" content="no-referrer">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="referrer" content="no-referrer" />
+    <!-- <meta name="referrer" content="no-referrer" /> -->
     <link rel="icon" href="/assets/img/logo.webp" type="image/*" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/APlayer.min.css" rel="stylesheet" type="text/css" />
@@ -17,13 +18,15 @@
     <title>Memos Top</title>
   </head>
 
+</div>
+<section id="main" class="container">
   <body>
-    <!-- <header>
+    <header>
       <div class="menu">
         <div class="title">Memos</div>
       </div>
       <div class="theme-toggle">🌓</div>
-    </header> -->
+    </header>
       <div class="layout-cold">
         <div class="tl-cover">
           <a rel="home" class="cover-home" href="/">
@@ -44,14 +47,13 @@
           </a>
           <span>Syaoran</span>
           <img
-            src="https://blgo-1258469251.image.myqcloud.com/baixiong.JPG"
+            src="https://blgo-1258469251.file.myqcloud.com/baixiong.JPG"
             alt="头像"
           />
           <div>Good good study,Day day up.</div>
+          <div class="total">Total <span id="total">0</span> Memos 🎉</div>
         </div>
       </div>
-
-      <div class="total">Total <span id="total">0</span> Memos 🎉</div>
 
       <blockquote id="tag-filter" class="filter">
         <div id="tags"></div>
@@ -60,7 +62,7 @@
       <div id="memos" class="memos">
         <!-- Memos Container -->
       </div>
-    </section>
+</section>
 
     <footer class="markdown-body footer">
       <p>
@@ -82,7 +84,7 @@
     <!-- Your Memos API -->
     <script type="text/javascript">
       var memos = {
-        host: "https://memos.syaoran.me/", // Your Memos instance.
+        host: "https://iimemos.fly.dev/", // Your Memos instance.
         limit: "10", // Pagination to show.
         creatorId: "1", // The old instance is 101, and the new instance is 1.
         domId: "#memos", // Default #memos.
