@@ -4,7 +4,7 @@ date: 2018-07-01 22:56:28
 tags:
 - 卡片
 categories:
-- 写作
+- write
 ---
 
 ## 小卡片

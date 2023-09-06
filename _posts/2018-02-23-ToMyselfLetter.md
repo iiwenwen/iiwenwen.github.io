@@ -2,7 +2,7 @@
 title: 给过去自己的一封信
 date: 2018-02-23 22:34:07
 tags:
-categories: 写作
+categories: write
 ---
 
 你好哇！过去的我！

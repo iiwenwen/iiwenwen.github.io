@@ -3,7 +3,7 @@
 title: 基本穿搭风格
 date: 2019-10-20 19:56:25
 tags: 穿搭
-categories: 读书笔记
+categories: note
 
 ---
 

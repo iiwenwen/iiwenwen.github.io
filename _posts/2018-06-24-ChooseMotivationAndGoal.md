@@ -5,7 +5,7 @@ tags:
 - 动机
 - 目标
 categories:
-- 写作
+- write
 ---
 
 ## 动机
