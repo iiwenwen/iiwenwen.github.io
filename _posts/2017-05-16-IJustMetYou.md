@@ -5,7 +5,7 @@ tags:
 categories: 
 - 歌词
 ---
-![](https://blgo-1258469251.image.myqcloud.com/%E5%8D%83%E4%B8%8E%E5%8D%83%E5%AF%BB01.jpg)
+![](https://blgo-1258469251.file.myqcloud.com/%E5%8D%83%E4%B8%8E%E5%8D%83%E5%AF%BB01.jpg)
 能遇见你是我一生的幸运
 <!--more-->
 

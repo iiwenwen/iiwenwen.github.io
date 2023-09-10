@@ -5,7 +5,7 @@ tags:
 categories: 开智正典
 ---
 
-![自私的基于](https://blgo-1258469251.image.myqcloud.com/自私的基因.jpg)
+![自私的基于](https://blgo-1258469251.file.myqcloud.com/自私的基因.jpg)
 
 自私的基因真的自私吗？
 <!--more-->

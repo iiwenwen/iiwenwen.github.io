@@ -42,7 +42,7 @@ categories:
 
 迪特里希·多纳为了研究人们如何思考、如何解决问题，提出了组织复杂行为的步骤：
 
-![211005-Failure](https://blgo-1258469251.image.myqcloud.com/211005-Failure.png?imageMogr2/strip/thumbnail/800x)
+![211005-Failure](https://blgo-1258469251.file.myqcloud.com/211005-Failure.png?imageMogr2/strip/thumbnail/800x)
 
 提出目标阶段，清晰的目标和模糊的目标，比如我要减肥和在三个月内减肥 10 斤相比，后者更容易实现。提出一个的问题，就解决了一半的问题。
 

@@ -14,7 +14,7 @@ article_header:
   background_color: '#203028'
   background_image: 
 
-    src: https://blgo-1258469251.image.myqcloud.com/sysndhy.jpg
+    src: https://blgo-1258469251.file.myqcloud.com/sysndhy.jpg
 
 ---
 
