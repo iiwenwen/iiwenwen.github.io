@@ -117,7 +117,9 @@
         },
         item(hit, { html, components }) {
           url = hit.url;
+          title = hit.title
           return html`
+          <h6> ${title}</h6>
             <a href="${url}">
               ${components.Snippet({ hit, attribute: "html" })}
             </a>
