@@ -12,7 +12,7 @@ article_header:
   background_color: '#203028'
   background_image: 
 
-    src: https://blgo-1258469251.image.myqcloud.com/literature-3373052_1920.jpg?imageMogr2/strip/thumbnail/800x
+    src: https://blgo-1258469251.file.myqcloud.com/literature-3373052_1920.jpg
 
 ---
 
