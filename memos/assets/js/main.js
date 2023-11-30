@@ -285,6 +285,10 @@ function updateHTMl (data) {
 // 已内置样式，修改 API 即可使用
 function fetchDB () {
     var dbAPI = "https://doubanapi.syaoran.me/"  // 修改为自己的 API
+    var resdata = {
+        mode: "cors",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+    }
     var dbA = document.querySelectorAll(".timeline a[href*='douban.com/subject/']:not([rel='noreferrer'])") || ''
     if (dbA) {
         for (var i = 0; i < dbA.length; i++) {
@@ -297,7 +301,7 @@ function fetchDB () {
                 var this_item = 'movie' + db_id
                 var url = dbAPI + "movies/" + db_id
                 if (localStorage.getItem(this_item) == null || localStorage.getItem(this_item) == 'undefined') {
-                    fetch(url).then(res => res.json()).then(data => {
+                    fetch(url, resdata).then(res => res.json()).then(data => {
                         let fetch_item = 'movies' + data.sid
                         let fetch_href = "https://movie.douban.com/subject/" + data.sid + "/"
                         localStorage.setItem(fetch_item, JSON.stringify(data))
@@ -310,7 +314,7 @@ function fetchDB () {
                 var this_item = 'book' + db_id
                 var url = dbAPI + "v2/book/id/" + db_id
                 if (localStorage.getItem(this_item) == null || localStorage.getItem(this_item) == 'undefined') {
-                    fetch(url).then(res => res.json()).then(data => {
+                    fetch(url, resdata).then(res => res.json()).then(data => {
                         let fetch_item = 'book' + data.id
                         let fetch_href = "https://book.douban.com/subject/" + data.id + "/"
                         localStorage.setItem(fetch_item, JSON.stringify(data))
