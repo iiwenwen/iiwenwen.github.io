@@ -93,7 +93,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 1.3em 0 1em;
+    margin: 1.3em 0em;
     /* 上边距：1.3em，下边距：1em，左右边距：0 */
     padding: 0;
     /* 内边距：0 */
@@ -108,7 +108,7 @@ body {
     background-color: var(--color-background);
     box-sizing: border-box;
     min-width: 200px;
-    max-width: 980px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 45px;
 }
@@ -246,14 +246,14 @@ ul {
 .memos__text {
     margin-top: 0;
     margin-bottom: 5px;
-    line-height: 1.5rem;
+    line-height: 1.75rem;
     overflow-wrap: break-word;
 }
 
 .timeline {
     display: flex;
     padding: 12px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e9dbdb1f;
 }
 
 /* .timeline:hover .memos__text:before {
@@ -728,7 +728,7 @@ footer {
 
 p {
     padding-top: 0.9em;
-    padding-bottom: 0.9em;
+    padding-bottom: 0.5em;
     letter-spacing: 0.03em !important;
 }
 
