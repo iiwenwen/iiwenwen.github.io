@@ -93,7 +93,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 1.3em 0em;
+    margin: 1em 0em;
     /* 上边距：1.3em，下边距：1em，左右边距：0 */
     padding: 0;
     /* 内边距：0 */
@@ -108,9 +108,9 @@ body {
     background-color: var(--color-background);
     box-sizing: border-box;
     min-width: 200px;
-    max-width: 1000px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 45px;
+    padding: 0 45px 45px45px;
 }
 
 header {
@@ -166,9 +166,9 @@ blockquote {
     border-left: 0.25em solid var(--color-border-default);
 }
 
-#main {
+/* #main {
     padding-top: 40px;
-}
+} */
 
 .theme-toggle {
     cursor: pointer;
@@ -194,7 +194,7 @@ blockquote {
     font-size: 15px;
 }
 
-.memos a {
+a {
     color: #4FC3F7;
     text-decoration: none;
 }
@@ -207,7 +207,19 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
+    padding-left: 10px;
 }
+
+ol {
+    margin: 5px 0px;
+    padding-left: 25px;
+    /* list-style: none; */
+    list-style-position: outside;
+    list-style-type: decimal;
+    letter-spacing: 0.03em;
+    text-align: justify;
+}
+
 
 .memos__content {
     width: 0;
@@ -275,7 +287,7 @@ ul {
 .memos__text ul {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    padding-inline-start: 40px;
+    padding-inline-start: 10px;
 
 }
 
@@ -425,7 +437,14 @@ ul {
 }
 
 .tag-span {
-    color: var(--color-tag);
+    /* color: var(--color-tag); */
+    color: #4FC3F7;
+    cursor: pointer;
+    background-color: #eef3fe;
+    padding: 4px;
+    font-size: 15px;
+    border-radius: 3px;
+
 }
 
 .tag-span:hover {
@@ -673,6 +692,9 @@ footer {
 
 .filter {
     display: none;
+    max-width: 568px !important;
+    margin: 0 auto;
+    padding: 5px;
 }
 
 
@@ -730,6 +752,9 @@ p {
     padding-top: 0.9em;
     padding-bottom: 0.5em;
     letter-spacing: 0.03em !important;
+    text-align: justify;
 }
+
+
 
 /*  */
