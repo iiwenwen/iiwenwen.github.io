@@ -185,12 +185,12 @@ function getTagFirstList () {
 
 // 标签选择 end
 
-// 插入 html
+// 插入 htmlTAG_REG
 function updateHTMl (data) {
     var memoResult = "", resultAll = ""
 
     // 解析 TAG 标签，添加样式
-    const TAG_REG = /#([^\s#,]+) /g
+    const TAG_REG = /#([^\s#,]+)/
 
     // 解析 BiliBili
     const BILIBILI_REG = /<a\shref="https:\/\/www\.bilibili\.com\/video\/((av[\d]{1,10})|(BV([\w]{10})))\/?">.*<\/a>/g
