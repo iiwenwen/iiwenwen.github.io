@@ -241,8 +241,6 @@ ol {
 
 
 .timeline .memos__avatar {
-    width: 38px;
-    height: 38px;
     margin-right: 10px;
     font-weight: 700;
     border-radius: 3px;
@@ -252,7 +250,9 @@ ol {
 
 .timeline>.memos__avatar>img {
     display: block;
-    width: 100%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
 }
 
 .memos__text {
@@ -426,15 +426,6 @@ ol {
     height: 202px;
 }
 
-.timeline img,
-.resimg img {
-    display: block;
-    /* vertical-align: middle; */
-    max-width: 100%;
-    cursor: pointer;
-    -o-object-fit: cover;
-    object-fit: cover;
-}
 
 .tag-span {
     /* color: var(--color-tag); */
@@ -454,10 +445,11 @@ ol {
 .load-btn {
     color: var(--color-main);
     background-color: var(--color-text-bg);
-    margin-left: 50px;
+    /* margin-left: 50px; */
     border-radius: 8px;
     padding: 10px;
     border: none;
+    float: right;
 }
 
 .load-btn:hover {
@@ -604,7 +596,7 @@ ol {
 @media (max-width: 683px) {
 
     body {
-        padding: 45px 50px 45px 20px;
+        padding: 5px;
     }
 
     .menu,
@@ -621,7 +613,7 @@ ol {
     }
 
     .memos__userinfo {
-        margin-left: 30px;
+        /* margin-left: 30px; */
     }
 
     .memos__content:before {
@@ -662,6 +654,7 @@ ol {
     .load-btn {
         margin-left: 0;
     }
+
 }
 
 .video-wrapper {
@@ -719,8 +712,10 @@ footer {
     position: absolute;
     bottom: -20px;
     right: 16px;
-    width: 64px;
+    width: 70px;
+    height: 70px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .layout-cold .tl-cover span {
@@ -753,6 +748,7 @@ p {
     padding-bottom: 0.5em;
     letter-spacing: 0.03em !important;
     text-align: justify;
+    line-height: 1.5em;
 }
 
 
