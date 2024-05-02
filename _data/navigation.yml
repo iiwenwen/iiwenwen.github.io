@@ -2,7 +2,7 @@ header:
   - titles:
       en: &EN Poetry
       zh-Hans: &ZH_HANS 让我为你读首诗
-    url: /poetry.html
+    url:  https://blog.syaoran.me/poetry/
 
   - titles:
       en: &EN Memos
