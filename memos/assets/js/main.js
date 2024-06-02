@@ -65,9 +65,9 @@ if (typeof (memos) !== "undefined") {
 
 var limit = memo.limit
 var memos = memo.host.replace(/\/$/, '')
-var memoUrl = memos + "/api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
+var memoUrl = memos + "/api/v1/memos?filter=creator=='users/" + memo.creatorId + "'&&visibilities == ['PUBLIC','PROTECTED']"
 var page = 1,
-    offset = 0,
+    nextPageToken = "",
     nextLength = 0,
     nextDom = ''
 var tag = ''
@@ -93,33 +93,46 @@ if (memoDom) {
 }
 
 function getFirstList () {
-    var memoUrl_first = memoUrl + "&limit=" + limit
-    fetch(memoUrl_first).then(res => res.json()).then(resdata => {
-        updateHTMl(resdata)
-        var nowLength = resdata.length
-        if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
-            document.querySelector("button.button-load").remove()
-            btnRemove = 1
-            return
-        }
-        page++
-        offset = limit * (page - 1)
-        getNextList()
+    var memoUrl_first = memoUrl + "&&pageSize=" + limit
+    var myHeaders = new Headers()
+    myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)")
+    myHeaders.append("Accept", "*/*")
+    myHeaders.append("Host", "iimemos.fly.dev")
+    myHeaders.append("Connection", "keep-alive")
 
-    })
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    }
+    fetch(memoUrl_first, requestOptions).then(res => res.json()).
+        then(result => {
+            var resdata = result.memos
+            updateHTMl(resdata)
+            var nowLength = resdata.length
+            if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
+                document.querySelector("button.button-load").remove()
+                btnRemove = 1
+                return
+            }
+            page++
+            nextPageToken = result.nextPageToken
+            getNextList()
+        })
 }
 // 预加载下一页数据
 function getNextList () {
     if (tag) {
-        var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset + "&tag=" + tag
+        var memoUrl_next = memoUrl + "&pageSize=" + limit + "&pageToken=" + nextPageToken + "&tag=" + tag
     } else {
-        var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset
+        var memoUrl_next = memoUrl + "&pageSize=" + limit + "&pageToken=" + nextPageToken
     }
-    fetch(memoUrl_next).then(res => res.json()).then(resdata => {
+    fetch(memoUrl_next).then(res => res.json()).then(result => {
+        var resdata = result.memos
         nextDom = resdata
         nextLength = nextDom.length
         page++
-        offset = limit * (page - 1)
+        nextPageToken = result.nextPageToken
         if (nextLength < 1) { // 返回数据条数为 0 ，隐藏
             document.querySelector("button.button-load").remove()
             btnRemove = 1
@@ -168,8 +181,9 @@ function getTagFirstList () {
     nextLength = 0
     nextDom = ''
     memoDom.innerHTML = ""
-    var memoUrl_tag = memoUrl + "&limit=" + limit + "&tag=" + tag
-    fetch(memoUrl_tag).then(res => res.json()).then(resdata => {
+    var memoUrl_tag = memoUrl + "&pageSize=" + limit + "&tag=" + tag
+    fetch(memoUrl_tag).then(res => res.json()).then(result => {
+        resdata = result.memos
         updateHTMl(resdata)
         var nowLength = resdata.length
         if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
@@ -178,7 +192,7 @@ function getTagFirstList () {
             return
         }
         page++
-        offset = limit * (page - 1)
+        offset = result.nextPageToken
         getNextList()
     })
 }
@@ -267,7 +281,7 @@ function updateHTMl (data) {
                 memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>'
             }
         }
-        memoResult += '<li class="timeline"><div class="memos__avatar"><img src="https://blgo-1258469251.file.myqcloud.com/syaoran.webp" alt="头像"></div><div class="memos__content"><div class="memos__userinfo">' + memo.name + '</div><div class="memos__text">' + memoContREG + '</div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createdTs * 1000).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].id + '" target="_blank">Memos</a>」</small></div></div></li>'
+        memoResult += '<li class="timeline"><div class="memos__avatar"><img src="https://blgo-1258469251.file.myqcloud.com/syaoran.webp" alt="头像"></div><div class="memos__content"><div class="memos__userinfo">' + memo.name + '</div><div class="memos__text">' + memoContREG + '</div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createTime).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].uid + '" target="_blank">Memos</a>」</small></div></div></li>'
     }
     var memoBefore = '<ul class="timelines">'
     var memoAfter = '</ul>'
