@@ -7,8 +7,8 @@ header:
   - titles:
       en: &EN Memos
       zh-Hans: &ZH_HANS Memos
-    # url: /memos/index.html
-      url: https://iimemos.fly.dev/
+    url: /memos/index.html
+      # url: https://iimemos.fly.dev/
   - titles:
       en: &EN categories
       zh-Hans: &ZH_HANS 集合

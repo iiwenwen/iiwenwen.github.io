@@ -65,7 +65,12 @@ if (typeof (memos) !== "undefined") {
 
 var limit = memo.limit
 var memos = memo.host.replace(/\/$/, '')
+
 var memoUrl = memos + "/api/v1/memos?filter=creator=='users/" + memo.creatorId + "'&&visibilities == ['PUBLIC','PROTECTED']"
+// const memoUrl = memos
+
+console.log(memoUrl)
+
 var page = 1,
     nextPageToken = "",
     nextLength = 0,
@@ -93,32 +98,21 @@ if (memoDom) {
 }
 
 function getFirstList () {
-    var memoUrl_first = memoUrl + "&&pageSize=" + limit
-    var myHeaders = new Headers()
-    myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)")
-    myHeaders.append("Accept", "*/*")
-    myHeaders.append("Host", "iimemos.fly.dev")
-    myHeaders.append("Connection", "keep-alive")
-
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    }
-    fetch(memoUrl_first, requestOptions).then(res => res.json()).
-        then(result => {
-            var resdata = result.memos
-            updateHTMl(resdata)
-            var nowLength = resdata.length
-            if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
-                document.querySelector("button.button-load").remove()
-                btnRemove = 1
-                return
-            }
-            page++
-            nextPageToken = result.nextPageToken
-            getNextList()
-        })
+    // var memoUrl_first = memoUrl + "&&pageSize=" + limit
+    var memoUrl_first = memoUrl
+    fetch(memoUrl_first).then(res => res.json()).then(result => {
+        var resdata = result.memos
+        updateHTMl(resdata)
+        var nowLength = resdata.length
+        if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
+            document.querySelector("button.button-load").remove()
+            btnRemove = 1
+            return
+        }
+        page++
+        nextPageToken = result.nextPageToken
+        getNextList()
+    })
 }
 // 预加载下一页数据
 function getNextList () {

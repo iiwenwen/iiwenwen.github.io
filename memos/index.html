@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- <meta name="referrer" content="no-referrer" /> -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
   <link rel="icon" href="/assets/img/logo.webp" type="image/*" />
   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/APlayer.min.css" rel="stylesheet" type="text/css" />
@@ -71,7 +73,8 @@
 <!-- Your Memos API -->
 <script type="text/javascript">
   var memos = {
-    host: "https://iimemos.fly.dev/", // Your Memos instance.
+    host: "https://cors.iicatlolier.workers.dev/?https://iimemos.fly.dev", // Your Memos instance.
+    // host: "https://demo.usememos.com/", // Your Memos instance.
     limit: "10", // Pagination to show.
     creatorId: "1", // The old instance is 101, and the new instance is 1.
     domId: "#memos", // Default #memos.
