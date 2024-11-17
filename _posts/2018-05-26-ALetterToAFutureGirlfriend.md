@@ -3,8 +3,7 @@ title: 写给未来女朋友的一封信
 date: 2018-05-26 22:13:03
 tags:
 - 情感
-categories:
-- write
+categories: [随笔]
 ---
 
 我爱你呀！

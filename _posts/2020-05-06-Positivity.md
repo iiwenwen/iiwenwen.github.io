@@ -3,8 +3,7 @@
 title: 打开积极心理学之门——如何积极面对这个世界
 date: 2020-05-06 21:03:49
 tags: 笔记
-categories: 
-- 读书笔记
+categories: [读书笔记]
 
 ---
 

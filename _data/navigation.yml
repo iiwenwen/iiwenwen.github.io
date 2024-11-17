@@ -11,8 +11,8 @@ header:
       # url: https://iimemos.fly.dev/
   - titles:
       en: &EN categories
-      zh-Hans: &ZH_HANS 集合
-    url: /assets/categories.html
+      zh-Hans: &ZH_HANS 专栏
+    url: /assets/category.html
 
   - titles:
       en: &EN Archive

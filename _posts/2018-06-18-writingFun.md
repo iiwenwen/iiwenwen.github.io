@@ -4,8 +4,7 @@ date: 2018-06-18 09:29:49
 tags: 
 - 故事
 - write
-categories:
-- write
+categories: [随笔]
 ---
 写作呀！让我快乐！
 <!--more-->

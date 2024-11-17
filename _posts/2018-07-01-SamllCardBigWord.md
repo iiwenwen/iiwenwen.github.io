@@ -3,8 +3,7 @@ title: 小卡片，大世界
 date: 2018-07-01 22:56:28
 tags:
 - 卡片
-categories:
-- write
+categories: [随笔]
 ---
 
 ## 小卡片

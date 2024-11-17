@@ -191,3 +191,5 @@ _site/
 _drafts/
 *.pem
 .vscode/settings.json
+
+.lsp

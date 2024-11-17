@@ -2,8 +2,7 @@
 title: 二十三岁，勇者无畏
 date: 2017-12-31
 tags:
-categories:
-photos:
+categories: [随笔]
 ---
 
 ## 引子

@@ -1,0 +1,22 @@
+---
+layout: articles
+show_title: false
+---
+<h2>
+  <i class="far fa-folder-open"></i>&nbsp;{{ page.title }}&nbsp;&nbsp;
+  <span class="badge">{{ site.categories[page.category] | size }}</span>
+</h2>
+{% for post in site.categories[page.category] %}
+<div class="article-list items">
+    <ul class="items">
+            <li class="item">
+              <div class="item__content">
+              <span class="item__meta">{{ post.date | date: "%Y年%m月%d日" }}</span>
+              <a item prop="headline" class="item__header" href="{{ post.url }}">{{ post.title }}</a>
+              </div>
+            </li>
+</ul>
+</div>
+{% endfor %}
+
+

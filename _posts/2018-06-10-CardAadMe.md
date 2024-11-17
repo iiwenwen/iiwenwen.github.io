@@ -3,8 +3,7 @@ title: 我与卡片的故事
 date: 2018-06-10 21:50:34
 tags:
 - 卡片
-categories:
-- write
+categories: [写作]
 ---
 
 卡片创作

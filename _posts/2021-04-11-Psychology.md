@@ -5,8 +5,7 @@ date:  2021-04-11 23:13:59
 tags: 
 - 心理学
 - 科学
-categories: 
-- 读书笔记
+categories: [读书笔记]
 
 ---
 

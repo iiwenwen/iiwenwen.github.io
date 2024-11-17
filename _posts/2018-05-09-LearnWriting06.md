@@ -3,8 +3,7 @@ title: 体验卡片线的魅力
 date: 2018-05-09 22:18:12
 tags:
 - 诗歌
-categories:
-- write
+categories: [写作]
 ---
 诗歌，是我和这个世界的情感。
 <!--more-->

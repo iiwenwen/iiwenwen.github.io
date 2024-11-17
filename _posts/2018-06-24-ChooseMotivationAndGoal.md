@@ -4,8 +4,7 @@ date: 2018-06-24 22:13:35
 tags:
 - 动机
 - 目标
-categories:
-- write
+categories: [读书笔记]
 ---
 
 ## 动机

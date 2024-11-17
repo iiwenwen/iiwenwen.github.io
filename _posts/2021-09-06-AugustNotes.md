@@ -3,7 +3,7 @@
 title: 八月小结
 date:  2021-09-06 22:26:21
 tags: 
-categories: 
+categories: [随笔] 
 
 ---
 

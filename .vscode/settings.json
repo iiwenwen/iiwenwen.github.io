@@ -1,5 +1,11 @@
 {
-  "editor.tabSize": 2,
-  "markdown.validate.ignoredLinks": ["abc"]
-  // "eslint.validate": ["markdown"]
+    "editor.tabSize": 2,
+    "markdown.validate.ignoredLinks": ["abc"],
+    "references.preferredLocation": "peek",
+    "auto-rename-tag.activationOnLanguage": ["*"],
+    "cSpell.words": ["Beancount", "Flomo", "Logseq", "Momes"],
+    "cSpell.enableFiletypes": ["!asciidoc"],
+    "GitCommitPlugin.ShowEmoji": false,
+    "search.followSymlinks": false
+    // "eslint.validate": ["markdown"]
 }

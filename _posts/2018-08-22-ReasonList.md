@@ -3,8 +3,7 @@ title: 理性清单
 date: 2018-08-22 20:49:12
 tags:
 - 理性
-categories:
-- 读书笔记
+categories: [读书笔记]
 ---
 理性
 

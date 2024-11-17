@@ -3,7 +3,7 @@ title: 写作工作后的一年里
 date: 2018-04-02 21:59:34
 tags: 
 - 工作
-categories:
+categories: [随笔] 
 ---
 
 ## 1

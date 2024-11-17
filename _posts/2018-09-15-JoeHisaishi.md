@@ -5,7 +5,7 @@ tags:
 - 随记
 - 音乐会
 - 久石让
-categories:
+categories: [随笔]
 ---
 Joe Hisaishi & Word Dream Orchestra 2018
 

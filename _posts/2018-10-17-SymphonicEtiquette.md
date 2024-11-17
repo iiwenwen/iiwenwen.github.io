@@ -3,7 +3,7 @@ title: 如何听一场交响乐
 date: 2018-10-14 20:42:42
 tags:
 - 音乐
-categories:
+categories: [随笔] 
 ---
 
 作者：陕西大剧院和西安音乐厅

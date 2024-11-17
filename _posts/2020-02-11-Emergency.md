@@ -3,7 +3,7 @@
 title: 家庭应急建议
 date: 2020-02-11 17:29:29
 舔ags: 应急
-categories:
+categories: [小技巧]
 
 ---
 

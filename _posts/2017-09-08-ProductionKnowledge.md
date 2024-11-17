@@ -3,7 +3,7 @@ title: 智识的生产技术——梅棹忠夫如何使用卡片
 date: 2017-09-08 20:40:58
 tags:
 - 随笔
-categories: 阅读
+categories: [读书笔记]
 ---
 卡片承载世界
 <!--more-->

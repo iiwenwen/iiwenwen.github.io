@@ -2,7 +2,7 @@
 title: 来看看光阴的故事
 date: 2018-08-21 22:54:48
 tags:
-categories:
+categories: [随笔] 
 ---
 光阴的故事
 <!--more-->

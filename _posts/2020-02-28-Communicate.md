@@ -3,7 +3,7 @@
 title: 情侣间的同步沟通与异步沟通
 date: 2020-02-28 20:23:55
 tags: 沟通
-categories: 
+categories: [小技巧]
 
 ---
 

@@ -1,9 +1,8 @@
 ---
-layout: article
+layout: articles
 titles:
   en: &EN about
   zh-Hans: &ZH_HANS 你好哇！
-key: page-about
 ---
 
 这是我的个人博客，存放个人文章  
@@ -22,10 +21,10 @@ key: page-about
 18 年给自己的一句话口号「练习写作，试图用写作改变自己」  
 还未成功，还会继续努力  
 
-微信公众号：卡片写作(CardWrite)  
+微信公众号：卡片写作 (CardWrite)  
 豆瓣：Syaoran（158318395）
 
 ## ChangeLog
 
-- 231216 修改文本格式为[柳线](https://site.douban.com/231595/widget/notes/15933294/note/329745845/#comments)
+- 231216 修改文本格式为 [柳线](https://site.douban.com/231595/widget/notes/15933294/note/329745845/#comments)
 - 210109 添加微信公众号与豆瓣

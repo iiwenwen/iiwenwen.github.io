@@ -2,7 +2,7 @@
 title: 自私的基因
 date: 2017-05-02 20:16:36
 tags:
-categories: 开智正典
+categories: [读书笔记]
 ---
 
 ![自私的基于](https://blgo-1258469251.file.myqcloud.com/自私的基因.jpg)

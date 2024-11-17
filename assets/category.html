@@ -1,0 +1,44 @@
+---
+layout: articles
+title: 专栏
+---
+{% assign sort_categories = site.categories | sort %}
+
+
+
+{% for category in sort_categories %}
+  {% assign category_name = category | first %}
+  {% assign posts_of_category = category | last %}
+  {% assign first_post = posts_of_category[0] %}
+
+  {% if category_name == first_post.categories[0] %}
+    {% assign sub_categories = "" %}
+    {% for post in posts_of_category %}
+      {% if post.categories.size > 1 %}
+        {% assign sub_categories = sub_categories | append: post.categories[1] | append: "|" %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign sub_categories = sub_categories | split: "|" | uniq %}
+    {% assign sub_categories_size = sub_categories | size %}
+
+
+  {%  assign categories_data=site.data.categories[category_name]  %}
+  {% if categories_data %}
+    {% assign category_name_link = categories_data %}
+  {% else %}
+  {% assign category_name_link = category_name %}
+{% endif %}
+{% assign top_posts_size = site.categories[category_name] | size %}
+<div class="article-list items">
+<h3>
+    <i class="far fa-folder"></i>&nbsp;
+    <a class="panel-title" href="/category/{{ category_name_link }}.html">{{ category_name }}</a>&nbsp;
+    <i class="iconfont icon-articles"></i>{{ top_posts_size }}&nbsp;
+    posts
+</h3>
+</div>
+{% endif %}
+{% endfor %}
+
+

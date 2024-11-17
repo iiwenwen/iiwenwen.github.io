@@ -32,7 +32,7 @@ author:
   type: # "person" (default), "organization" #类型
   name: Syaoran #作者名
   url: blog.syaoran.me #链接
-  avatar: # path or url of avatar image (square) #作者的头像或 Logo
+  avatar: ./assets/avatar.png
   bio: 练习写作，试图用写作改变自己 #作者的一个简单介绍
   #email     : iicatloli@gmial.com
   facebook: # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
@@ -62,7 +62,7 @@ paths:
 
 ## => Post 文章配置
 ##############################
-## excerpt 摘要设置，方法1.excerpt_separator: <!--more--> 手动设置摘要,方法2.excerpt_type: text # text (default), html，选择 text 自动设置摘要截取前 350 字，过滤掉非文本元素。html 则与方法 1 相同。
+## excerpt 摘要设置，方法1.excerpt_separator: <!--more--> 手动设置摘要，方法 2.excerpt_type: text # text (default), html，选择 text 自动设置摘要截取前 350 字，过滤掉非文本元素。html 则与方法 1 相同。
 excerpt_separator:
 
 ## license 许可协议
@@ -194,7 +194,12 @@ defaults:
       show_edit_on_github: false
       show_subscribe: false
       pageview: true
-
+  - scope:
+      path: ""
+      type: public
+    values:
+      layout: page
+      show_date: false
 ## => Plugins
 ##############################
 plugins:
@@ -217,4 +222,9 @@ algolia:
       - unordered(date)
       - unordered(html)
     attributesToSnippet:
-      - content:30
+      - content:30s
+collections:
+  public:
+    output: true
+    permalink: /:path
+    show_date: false

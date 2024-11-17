@@ -3,8 +3,7 @@ title: 感动，如此创造——创造你的创造
 date: 2018-06-03 22:43:01
 tags:
 - 笔记
-categories:
-- write
+categories: [读书笔记] 
 ---
 
 感动，如此创造——创造你的创造

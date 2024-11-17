@@ -3,7 +3,7 @@ title: 小游——厦门
 date: 2018-10-14 20:42:42
 tags:
 - 旅行
-categories:
+categories: [随笔]
 ---
 
 十一期间去了趟厦门。一座建在岛上的城市。
