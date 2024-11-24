@@ -19,7 +19,7 @@ url: # the base hostname & protocol for your site e.g. https://www.someone.com #
 baseurl: # does not include hostname
 title: Syaoran #网站标题
 description: > # this means to ignore newlines until "nav_lists:" #网站描述
-  诗养性，文洗心
+  诗养性，文洗心。feedId:83383651953546243+userId:66826070437771264
 
 ## => Language and Timezone 语言与时区
 ##############################
@@ -58,7 +58,7 @@ paths:
   root: # title link url, "/" (default)
   home: # home layout url, "/" (default)
   archive: # "/archive.html" (default)
-  #rss     : # "/feed.xml" (default)
+  rss: "/feed.xml"
 
 ## => Post 文章配置
 ##############################
