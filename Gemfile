@@ -5,8 +5,10 @@ gemspec
 
 gem 'jekyll'
 
+
 group :jekyll_plugins do
   gem 'jekyll-algolia'
+  gem 'jekyll-feed'
 end
 
 gem "kramdown-parser-gfm"

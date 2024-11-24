@@ -59,6 +59,7 @@ paths:
   home: # home layout url, "/" (default)
   archive: # "/archive.html" (default)
   rss: "/feed.xml"
+feed:
 
 ## => Post 文章配置
 ##############################
