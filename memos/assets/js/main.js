@@ -66,7 +66,7 @@ if (typeof (memos) !== "undefined") {
 var limit = memo.limit
 var memos = memo.host.replace(/\/$/, '')
 
-var memoUrl = memos + "/api/v1/memos?filter=creator=='users/" + memo.creatorId + "'&&visibilities == ['PUBLIC','PROTECTED']"
+var memoUrl = memos + "/api/v1/memos"
 // const memoUrl = memos
 
 console.log(memoUrl)
@@ -117,7 +117,7 @@ function getFirstList () {
 // 预加载下一页数据
 function getNextList () {
     if (tag) {
-        var memoUrl_next = memoUrl + "&pageSize=" + limit + "&pageToken=" + nextPageToken + "&tag=" + tag
+        var memoUrl_next = memoUrl + `?filter=tag in ["${tag}"]`+"&pageSize=" + limit + "&pageToken=" + nextPageToken 
     } else {
         var memoUrl_next = memoUrl + "&pageSize=" + limit + "&pageToken=" + nextPageToken
     }
@@ -175,7 +175,7 @@ function getTagFirstList () {
     nextLength = 0
     nextDom = ''
     memoDom.innerHTML = ""
-    var memoUrl_tag = memoUrl + "&pageSize=" + limit + "&tag=" + tag
+    var memoUrl_tag = memoUrl + `?filter=tag in ["${tag}"]` + "&pageSize=" + limit 
     fetch(memoUrl_tag).then(res => res.json()).then(result => {
         resdata = result.memos
         updateHTMl(resdata)
@@ -275,7 +275,7 @@ function updateHTMl (data) {
                 memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>'
             }
         }
-        memoResult += '<li class="timeline"><div class="memos__avatar"><img src="https://blgo-1258469251.file.myqcloud.com/syaoran.webp" alt="头像"></div><div class="memos__content"><div class="memos__userinfo">' + memo.name + '</div><div class="memos__text">' + memoContREG + '</div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createTime).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].uid + '" target="_blank">Memos</a>」</small></div></div></li>'
+        memoResult += '<li class="timeline"><div class="memos__avatar"><img src="https://blgo-1258469251.file.myqcloud.com/syaoran.webp" alt="头像"></div><div class="memos__content"><div class="memos__userinfo">' + memo.name + '</div><div class="memos__text">' + memoContREG + '</div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createTime).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].name.match(/memos\/(.*)/)?.[1] + '" target="_blank">Memos</a>」</small></div></div></li>'
     }
     var memoBefore = '<ul class="timelines">'
     var memoAfter = '</ul>'
@@ -289,7 +289,7 @@ function updateHTMl (data) {
 
 // 解析豆瓣 Start
 // 文章内显示豆瓣条目 https://immmmm.com/post-show-douban-item/
-// 解析豆瓣必须要API，请找朋友要权限，或自己按 https://github.com/eallion/douban-api-rs 这个架设 API，非常简单，资源消耗很少
+// 解析豆瓣必须要 API，请找朋友要权限，或自己按 https://github.com/eallion/douban-api-rs 这个架设 API，非常简单，资源消耗很少
 // 已内置样式，修改 API 即可使用
 function fetchDB () {
     var dbAPI = "https://doubanapi.fly.dev/"  // 修改为自己的 API
@@ -363,7 +363,7 @@ window.ViewImage && ViewImage.init('.memos__content img')
 // Memos Total Start
 // Get Memos total count
 function getTotal () {
-    var totalUrl = memos + "/api/v1/memo/stats?creatorId=" + memo.creatorId
+    var totalUrl = memos + "/api/v1/memos"
     fetch(totalUrl).then(res => res.json()).then(resdata => {
         if (resdata) {
             var allnums = resdata.length
