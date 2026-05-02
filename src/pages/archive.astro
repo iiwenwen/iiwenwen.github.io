@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => import.meta.env.DEV || !post.data.draft)
+  .sort((a, b) => {
+    const aDate = a.data.pubDate ?? a.data.date ?? new Date(0);
+    const bDate = b.data.pubDate ?? b.data.date ?? new Date(0);
+    return bDate.valueOf() - aDate.valueOf();
+  });
+
+const postsByYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const date = post.data.pubDate ?? post.data.date;
+  if (!date) continue;
+  const year = date.getFullYear();
+  if (!postsByYear.has(year)) postsByYear.set(year, []);
+  postsByYear.get(year)!.push(post);
+}
+
+const sortedYears = [...postsByYear.keys()].sort((a, b) => b - a);
+const totalCount = posts.length;
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="归档" description={`共 ${totalCount} 篇文章`}>
+  <article class="post">
+    <a class="back-link" href={baseUrl}>返回首页</a>
+    <header class="post-header">
+      <h1>归档</h1>
+      <p class="description">共 {totalCount} 篇文章</p>
+    </header>
+    <div class="archive-list">
+      {sortedYears.map((year) => (
+        <section>
+          <h2 class="archive-year">{year}</h2>
+          <ul>
+            {postsByYear.get(year)!.map((post) => (
+              <li>
+                <a href={`${baseUrl}blog/${post.slug}/`}>
+                  <time datetime={(post.data.pubDate ?? post.data.date)?.toISOString()}>
+                    {(post.data.pubDate ?? post.data.date)?.toLocaleDateString("zh-CN", {
+                      month: "short",
+                      day: "numeric"
+                    })}
+                  </time>
+                  <span>{post.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </article>
+</BaseLayout>

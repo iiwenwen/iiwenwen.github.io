@@ -1,0 +1,47 @@
+---
+import "lxgw-wenkai-webfont/lxgwwenkai-regular.css";
+import "lxgw-wenkai-webfont/lxgwwenkai-bold.css";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "New Blog",
+  description = "A personal Markdown blog."
+} = Astro.props;
+
+const pageTitle = title === "New Blog" ? title : `${title} | New Blog`;
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={baseUrl}>New Blog</a>
+      <nav aria-label="主导航">
+        <a href={baseUrl}>首页</a>
+        <a href={`${baseUrl}archive/`}>归档</a>
+        <a href={`${baseUrl}tags/`}>标签</a>
+        <a href={`${baseUrl}columns/`}>专栏</a>
+        <a href={`${baseUrl}about/`}>关于</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Built with Astro and Markdown.</p>
+    </footer>
+  </body>
+</html>

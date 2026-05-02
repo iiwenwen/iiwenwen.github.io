@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BookWall from "../../components/BookWall.astro";
+import MovieWall from "../../components/MovieWall.astro";
+import booksData from "../../data/books.json";
+import moviesData from "../../data/movies.json";
+
+const categoryLabels: Record<string, string> = {
+  article: "文章",
+  daily: "日常",
+  book: "图书",
+  movie: "电影"
+};
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter((post) => import.meta.env.DEV || !post.data.draft);
+
+  const categories = new Set<string>();
+  for (const post of posts) {
+    categories.add(post.data.category);
+  }
+
+  // Always include book/movie from JSON data
+  if (booksData.length > 0) categories.add("book");
+  if (moviesData.length > 0) categories.add("movie");
+
+  return [...categories].map((cat) => ({
+    params: { category: cat }
+  }));
+}
+
+const { category } = Astro.params;
+const label = categoryLabels[category!] ?? category!;
+const baseUrl = import.meta.env.BASE_URL;
+
+const posts = (await getCollection("blog"))
+  .filter((post) => import.meta.env.DEV || !post.data.draft)
+  .filter((post) => post.data.category === category)
+  .sort((a, b) => {
+    const aDate = a.data.pubDate ?? a.data.date ?? new Date(0);
+    const bDate = b.data.pubDate ?? b.data.date ?? new Date(0);
+    return bDate.valueOf() - aDate.valueOf();
+  });
+
+const isBook = category === "book" && booksData.length > 0;
+const isMovie = category === "movie" && moviesData.length > 0;
+const isWall = isBook || isMovie;
+
+if (isBook) {
+  booksData.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+}
+if (isMovie) {
+  moviesData.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+}
+---
+
+<BaseLayout title={label} description={isWall ? `${isBook ? booksData.length : moviesData.length} 部` : `共 ${posts.length} 篇${label}`}>
+  <article class="post">
+    <a class="back-link" href={baseUrl}>返回首页</a>
+    <header class="post-header">
+      <h1>{label}</h1>
+      <p class="description">{isBook ? `${booksData.length} 本` : isMovie ? `${moviesData.length} 部` : `共 ${posts.length} 篇`}</p>
+    </header>
+    {isBook ? (
+      <BookWall items={booksData} baseUrl={baseUrl} />
+    ) : isMovie ? (
+      <MovieWall items={moviesData} baseUrl={baseUrl} />
+    ) : (
+      <ul class="archive-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`${baseUrl}blog/${post.slug}/`}>
+              <time datetime={(post.data.pubDate ?? post.data.date)?.toISOString()}>
+                {(post.data.pubDate ?? post.data.date)?.toLocaleDateString("zh-CN")}
+              </time>
+              <span>{post.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </article>
+</BaseLayout>

@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  prevPost?: CollectionEntry<"blog"> | null;
+  nextPost?: CollectionEntry<"blog"> | null;
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await post.render();
+const baseUrl = import.meta.env.BASE_URL;
+const postDate = post.data.pubDate ?? post.data.date;
+const description = post.data.description;
+const tags = post.data.tags ?? [];
+const categoryLabels = {
+  article: "文章",
+  daily: "日常",
+  book: "图书",
+  movie: "电影"
+} as const;
+
+// Show old hexo-style categories if present
+const oldCategories = (() => {
+  const cats = post.data.categories;
+  if (!cats) return [];
+  if (typeof cats === "string") return [cats];
+  return cats;
+})();
+---
+
+<BaseLayout title={post.data.title} description={description ?? post.data.title}>
+  <article class="post">
+    <a class="back-link" href={baseUrl}>返回首页</a>
+    <header class="post-header">
+      <p class="eyebrow">{categoryLabels[post.data.category]}</p>
+      <h1>{post.data.title}</h1>
+      {description && <p class="description">{description}</p>}
+      <div class="meta">
+        {postDate && (
+          <time datetime={postDate.toISOString()}>
+            {postDate.toLocaleDateString("zh-CN", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })}
+          </time>
+        )}
+        {oldCategories.length > 0 && (
+          <span>{oldCategories.map((c) => `#${c}`).join(" ")}</span>
+        )}
+        {post.data.column && <span>专栏：<a href={`${baseUrl}columns/${post.data.column}/`}>{post.data.column}</a></span>}
+        {tags.length > 0 && (
+          <span>{tags.map((tag) => `#${tag}`).join(" ")}</span>
+        )}
+      </div>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <nav class="post-nav" aria-label="上下篇导航">
+      {
+        prevPost && (
+          <a class="post-nav-link prev" href={`${baseUrl}blog/${prevPost.slug}/`}>
+            <span class="post-nav-label">上一篇</span>
+            <span class="post-nav-title">{prevPost.data.title}</span>
+          </a>
+        )
+      }
+      {
+        nextPost && (
+          <a class="post-nav-link next" href={`${baseUrl}blog/${nextPost.slug}/`}>
+            <span class="post-nav-label">下一篇</span>
+            <span class="post-nav-title">{nextPost.data.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</BaseLayout>

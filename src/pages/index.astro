@@ -1,0 +1,149 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import booksData from "../data/books.json";
+import moviesData from "../data/movies.json";
+
+const categories = {
+  article: "文章",
+  daily: "日常",
+  book: "图书",
+  movie: "电影"
+} as const;
+
+const posts = (await getCollection("blog"))
+  .filter((post) => import.meta.env.DEV || !post.data.draft)
+  .sort((a, b) => {
+    const aDate = a.data.pubDate ?? a.data.date ?? new Date(0);
+    const bDate = b.data.pubDate ?? b.data.date ?? new Date(0);
+
+    return bDate.valueOf() - aDate.valueOf();
+  });
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const recentBooks = booksData
+  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+  .slice(0, 3);
+
+const recentMovies = moviesData
+  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+  .slice(0, 3);
+
+function categoryCount(key: string) {
+  if (key === "book") return booksData.length;
+  if (key === "movie") return moviesData.length;
+  return posts.filter((p) => p.data.category === key).length;
+}
+---
+
+<BaseLayout title="New Blog" description="个人 Markdown 静态博客">
+  <section class="hero">
+    <p class="eyebrow">Markdown Static Blog</p>
+    <h1 class="hero-brand">syaoran</h1>
+    <blockquote class="hero-quote">
+      也许多少年后在某个地方，我将轻声叹息把往事回顾，一片树林里分出两条路，而我选了人迹更少的一条，因此走出了这迥异的旅途。
+    </blockquote>
+  </section>
+
+  <section class="category-grid" aria-label="内容分类">
+    {Object.entries(categories).map(([key, label]) => (
+      <a href={`${baseUrl}categories/${key}/`}>
+        <span>{label}</span>
+        <strong>{categoryCount(key)}</strong>
+      </a>
+    ))}
+  </section>
+
+  {Object.entries(categories).map(([key, label]) => {
+    const categoryPosts = posts.filter((post) => post.data.category === key);
+    const recentPosts = categoryPosts.slice(0, 3);
+
+    if (key === "book") {
+      return (
+        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
+          <h2 id={`${key}-posts`}>{label}</h2>
+          {recentBooks.length === 0 ? (
+            <p>还没有发布内容。</p>
+          ) : (
+            <>
+              <ul>
+                {recentBooks.map((book) => (
+                  <li>
+                    <a href={`${baseUrl}categories/book/`}>
+                      <span>{book.title}</span>
+                      <time>{book.author}</time>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {booksData.length > 3 && (
+                <a class="more-link" href={`${baseUrl}categories/book/`}>
+                  更多{label} →
+                </a>
+              )}
+            </>
+          )}
+        </section>
+      );
+    }
+
+    if (key === "movie") {
+      return (
+        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
+          <h2 id={`${key}-posts`}>{label}</h2>
+          {recentMovies.length === 0 ? (
+            <p>还没有发布内容。</p>
+          ) : (
+            <>
+              <ul>
+                {recentMovies.map((movie) => (
+                  <li>
+                    <a href={`${baseUrl}categories/movie/`}>
+                      <span>{movie.title}</span>
+                      <time>{movie.director}</time>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {moviesData.length > 3 && (
+                <a class="more-link" href={`${baseUrl}categories/movie/`}>
+                  更多{label} →
+                </a>
+              )}
+            </>
+          )}
+        </section>
+      );
+    }
+
+    return (
+      <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
+        <h2 id={`${key}-posts`}>{label}</h2>
+        {recentPosts.length === 0 ? (
+          <p>还没有发布内容。</p>
+        ) : (
+          <>
+            <ul>
+              {recentPosts.map((post) => (
+                <li>
+                  <a href={`${baseUrl}blog/${post.slug}/`}>
+                    <span>{post.data.title}</span>
+                    <time datetime={(post.data.pubDate ?? post.data.date)?.toISOString()}>
+                      {(post.data.pubDate ?? post.data.date)?.toLocaleDateString("zh-CN")}
+                    </time>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {categoryPosts.length > 3 && (
+              <a class="more-link" href={`${baseUrl}categories/${key}/`}>
+                更多{label} →
+              </a>
+            )}
+          </>
+        )}
+      </section>
+    );
+  })}
+</BaseLayout>
