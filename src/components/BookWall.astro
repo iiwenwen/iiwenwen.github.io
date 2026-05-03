@@ -1,12 +1,14 @@
 ---
 interface BookItem {
   title: string;
-  author: string;
-  cover: string;
-  date: string;
-  rating: number;
-  summary: string;
-  slug: string;
+  author?: string;
+  cover?: string;
+  date?: string;
+  rating?: number;
+  summary?: string;
+  remark?: string;
+  url?: string;
+  slug?: string;
 }
 
 const { items, baseUrl } = Astro.props as { items: BookItem[]; baseUrl: string };
@@ -26,22 +28,28 @@ const { items, baseUrl } = Astro.props as { items: BookItem[]; baseUrl: string }
       </div>
       <div class="media-info">
         <h3>
-          {item.slug ? (
+          {item.url ? (
+            <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+          ) : item.slug ? (
             <a href={`${baseUrl}blog/${item.slug}/`}>{item.title}</a>
           ) : (
-            item.title
+            <span>{item.title}</span>
           )}
         </h3>
-        <p class="media-meta">{item.author}</p>
-        {item.date && !isNaN(new Date(item.date).valueOf()) && (
-          <time datetime={item.date}>
-            {new Date(item.date).toLocaleDateString("zh-CN")}
-          </time>
-        )}
-        <div class="media-rating">
-          {"★".repeat(item.rating)}{"☆".repeat(5 - item.rating)}
+        {item.author && <p class="media-meta">{item.author}</p>}
+        <div class="media-footer">
+          {item.date && !isNaN(new Date(item.date).valueOf()) && (
+            <time datetime={item.date}>
+              {new Date(item.date).toLocaleDateString("zh-CN")}
+            </time>
+          )}
+          {item.rating != null && item.rating > 0 && (
+            <div class="media-rating">
+              {"★".repeat(Math.round(item.rating))}{"☆".repeat(5 - Math.round(item.rating))}
+            </div>
+          )}
         </div>
-              </div>
+      </div>
     </div>
   ))}
 </div>

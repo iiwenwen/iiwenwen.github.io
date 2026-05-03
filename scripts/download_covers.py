@@ -4,6 +4,7 @@ Usage: uv run --with httpx,Pillow scripts/download_covers.py
 """
 
 import json
+import os
 import re
 import time
 import sys
@@ -24,7 +25,7 @@ HEADERS = {
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     "Content-Type": "application/json",
 }
-APIKEY = "0ab215a8b1977939201640fa14c66bab"
+APIKEY = os.environ.get("DOUBAN_APIKEY", "0ab215a8b1977939201640fa14c66bab")
 
 client = httpx.Client(headers=HEADERS, timeout=30)
 

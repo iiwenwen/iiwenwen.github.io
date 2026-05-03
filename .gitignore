@@ -6,4 +6,5 @@ dist/
 npm-debug.log*
 public/pagefind/
 src/content/drafts/
-src/data/_zotero.json
+src/data/Zotero_books.json
+src/data/Zotero_movies.json

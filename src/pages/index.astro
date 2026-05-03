@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BookWall from "../components/BookWall.astro";
+import MovieWall from "../components/MovieWall.astro";
 import booksData from "../data/books.json";
 import moviesData from "../data/movies.json";
 
@@ -21,14 +23,6 @@ const posts = (await getCollection("blog"))
   });
 
 const baseUrl = import.meta.env.BASE_URL;
-
-const recentBooks = booksData
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-  .slice(0, 3);
-
-const recentMovies = moviesData
-  .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-  .slice(0, 3);
 
 function categoryCount(key: string) {
   if (key === "book") return booksData.length;
@@ -60,24 +54,18 @@ function categoryCount(key: string) {
     const recentPosts = categoryPosts.slice(0, 3);
 
     if (key === "book") {
+      const books = booksData
+        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+        .slice(0, 4);
       return (
         <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
           <h2 id={`${key}-posts`}>{label}</h2>
-          {recentBooks.length === 0 ? (
+          {books.length === 0 ? (
             <p>还没有发布内容。</p>
           ) : (
             <>
-              <ul>
-                {recentBooks.map((book) => (
-                  <li>
-                    <a href={`${baseUrl}categories/book/`}>
-                      <span>{book.title}</span>
-                      <time>{book.author}</time>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              {booksData.length > 3 && (
+              <BookWall items={books} baseUrl={baseUrl} />
+              {booksData.length > 4 && (
                 <a class="more-link" href={`${baseUrl}categories/book/`}>
                   更多{label} →
                 </a>
@@ -89,24 +77,18 @@ function categoryCount(key: string) {
     }
 
     if (key === "movie") {
+      const movies = moviesData
+        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+        .slice(0, 4);
       return (
         <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
           <h2 id={`${key}-posts`}>{label}</h2>
-          {recentMovies.length === 0 ? (
+          {movies.length === 0 ? (
             <p>还没有发布内容。</p>
           ) : (
             <>
-              <ul>
-                {recentMovies.map((movie) => (
-                  <li>
-                    <a href={`${baseUrl}categories/movie/`}>
-                      <span>{movie.title}</span>
-                      <time>{movie.director}</time>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              {moviesData.length > 3 && (
+              <MovieWall items={movies} baseUrl={baseUrl} />
+              {moviesData.length > 4 && (
                 <a class="more-link" href={`${baseUrl}categories/movie/`}>
                   更多{label} →
                 </a>

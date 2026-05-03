@@ -8,7 +8,9 @@
     "build": "npm run zotero:sync && ASTRO_TELEMETRY_DISABLED=1 astro build && npx pagefind --site dist && cp -r dist/pagefind public/pagefind",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
-    "zotero:sync": "python3 scripts/convert_zotero.py src/data/_zotero.json --merge 2>/dev/null || true"
+    "zotero:sync": "python3 scripts/convert_zotero.py --fetch",
+    "douban:sync": "python3 scripts/sync_douban.py",
+    "sync": "npm run douban:sync && npm run zotero:sync"
   },
   "dependencies": {
     "astro": "^5.0.0",

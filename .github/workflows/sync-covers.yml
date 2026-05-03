@@ -1,0 +1,39 @@
+name: Sync Covers
+
+on:
+  schedule:
+    - cron: "37 3 * * 0"  # 每周日凌晨
+  workflow_dispatch:
+  repository_dispatch:
+    types: [sync-covers]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install httpx Pillow
+
+      - name: Download covers
+        run: python scripts/download_covers.py
+        env:
+          DOUBAN_APIKEY: ${{ secrets.DOUBAN_APIKEY }}
+
+      - name: Commit updated covers
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore: sync new covers"
+          add: |
+            public/covers/
+            src/data/books.json
+            src/data/movies.json
