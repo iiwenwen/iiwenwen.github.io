@@ -23,25 +23,59 @@ const baseUrl = import.meta.env.BASE_URL;
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="base-url" content={baseUrl} />
     <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <link rel="preload" href={`${baseUrl}pagefind/pagefind-ui.js`} as="script" />
+    <link rel="preload" href={`${baseUrl}pagefind/pagefind-ui.css`} as="style" />
+    <link rel="stylesheet" href={`${baseUrl}pagefind/pagefind-ui.css`} />
     <title>{pageTitle}</title>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href={baseUrl}>New Blog</a>
-      <nav aria-label="主导航">
-        <a href={baseUrl}>首页</a>
-        <a href={`${baseUrl}archive/`}>归档</a>
-        <a href={`${baseUrl}tags/`}>标签</a>
-        <a href={`${baseUrl}columns/`}>专栏</a>
-        <a href={`${baseUrl}about/`}>关于</a>
-      </nav>
+    <header class="site-header" id="site-header">
+      <div class="header-inner">
+        <a class="brand" href={baseUrl}>New Blog</a>
+        <nav aria-label="主导航">
+          <a href={baseUrl}>首页</a>
+          <a href={`${baseUrl}archive/`}>归档</a>
+          <a href={`${baseUrl}tags/`}>标签</a>
+          <a href={`${baseUrl}columns/`}>专栏</a>
+          <a href={`${baseUrl}about/`}>关于</a>
+          <a href={`${baseUrl}search/`} class="search-trigger">搜索</a>
+        </nav>
+      </div>
     </header>
+
+    <dialog id="search-modal" aria-label="搜索对话框">
+      <div class="search-modal-inner">
+        <header class="search-modal-header">
+          <span>搜索文章</span>
+          <button class="search-modal-close" autofocus>&times;</button>
+        </header>
+        <div id="search"></div>
+        <footer class="search-modal-footer">
+          <kbd>Esc</kbd> 关闭 &middot; <kbd>Cmd+K</kbd> 打开
+        </footer>
+      </div>
+    </dialog>
+
     <main>
       <slot />
     </main>
     <footer class="site-footer">
       <p>Built with Astro and Markdown.</p>
     </footer>
+    <script>
+      const header = document.getElementById("site-header");
+      if (header) {
+        addEventListener("scroll", () => {
+          header.classList.toggle("scrolled", scrollY > 0);
+        });
+      }
+      const baseEl = document.querySelector('meta[name="base-url"]');
+      const base = baseEl?.getAttribute("content") || "/";
+      const s = document.createElement("script");
+      s.src = base + "js/search.js";
+      document.body.appendChild(s);
+    </script>
   </body>
 </html>

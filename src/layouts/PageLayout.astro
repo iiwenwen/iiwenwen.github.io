@@ -1,0 +1,19 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <article class="post">
+    <a class="back-link" href={baseUrl}>返回首页</a>
+    <header class="post-header">
+      <h1>{frontmatter.title}</h1>
+      {frontmatter.description && <p class="description">{frontmatter.description}</p>}
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

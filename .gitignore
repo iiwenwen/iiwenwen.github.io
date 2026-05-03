@@ -4,3 +4,6 @@ dist/
 .env
 .DS_Store
 npm-debug.log*
+public/pagefind/
+src/content/drafts/
+src/data/_zotero.json

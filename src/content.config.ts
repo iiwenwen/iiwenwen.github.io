@@ -17,20 +17,27 @@ const tags = z.preprocess((value) => {
   return value;
 }, z.array(z.string()));
 
-const blog = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    date: z.coerce.date().optional(),
-    pubDate: z.coerce.date().optional(),
-    updatedDate: z.coerce.date().optional(),
-    category: category.default("article"),
-    column: z.string().optional(),
-    tags: tags.default([]),
-    categories: z.union([z.array(z.string()), z.string()]).nullable().optional(),
-    draft: z.boolean().default(false)
-  })
+const postSchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  date: z.coerce.date().optional(),
+  pubDate: z.coerce.date().optional(),
+  updatedDate: z.coerce.date().optional(),
+  category: category.default("article"),
+  column: z.string().optional(),
+  tags: tags.default([]),
+  categories: z.union([z.array(z.string()), z.string()]).nullable().optional(),
+  draft: z.boolean().default(false)
 });
 
-export const collections = { blog };
+const blog = defineCollection({
+  type: "content",
+  schema: postSchema
+});
+
+const drafts = defineCollection({
+  type: "content",
+  schema: postSchema
+});
+
+export const collections = { blog, drafts };

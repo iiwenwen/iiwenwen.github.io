@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build": "npm run zotero:sync && ASTRO_TELEMETRY_DISABLED=1 astro build && npx pagefind --site dist && cp -r dist/pagefind public/pagefind",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check"
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "zotero:sync": "python3 scripts/convert_zotero.py src/data/_zotero.json --merge 2>/dev/null || true"
   },
   "dependencies": {
     "astro": "^5.0.0",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
+    "pagefind": "^1.5.2",
     "typescript": "^5.8.0"
   }
 }
