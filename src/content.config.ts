@@ -24,9 +24,11 @@ const postSchema = z.object({
   pubDate: z.coerce.date().optional(),
   updatedDate: z.coerce.date().optional(),
   category: category.default("article"),
-  column: z.string().optional(),
   tags: tags.default([]),
-  categories: z.union([z.array(z.string()), z.string()]).nullable().optional(),
+  categories: z.preprocess(
+    (v) => (typeof v === "string" ? [v] : v ?? []),
+    z.array(z.string()).default([])
+  ),
   draft: z.boolean().default(false)
 });
 

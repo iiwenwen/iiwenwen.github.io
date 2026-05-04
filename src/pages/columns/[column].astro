@@ -5,41 +5,40 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
     .filter((post) => import.meta.env.DEV || !post.data.draft);
-
   const columns = new Set<string>();
   for (const post of posts) {
-    if (post.data.column) columns.add(post.data.column);
+    for (const col of post.data.categories) columns.add(col);
   }
-
-  return [...columns].map((col) => ({
-    params: { column: col }
-  }));
+  return [...columns].map((col) => ({ params: { column: col } }));
 }
 
 const { column } = Astro.params;
+const baseUrl = import.meta.env.BASE_URL;
 
-const posts = (await getCollection("blog"))
+const columnPosts = (await getCollection("blog"))
   .filter((post) => import.meta.env.DEV || !post.data.draft)
-  .filter((post) => post.data.column === column)
+  .filter((post) => post.data.categories.includes(column))
   .sort((a, b) => {
     const aDate = a.data.pubDate ?? a.data.date ?? new Date(0);
     const bDate = b.data.pubDate ?? b.data.date ?? new Date(0);
     return bDate.valueOf() - aDate.valueOf();
   });
-
-const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={`专栏：${column}`} description={`${column} 专栏，共 ${posts.length} 篇文章`}>
+<BaseLayout title={`${column}`} description={`${column} 专栏`}>
   <article class="post">
-    <a class="back-link" href={`${baseUrl}columns/`}>返回专栏列表</a>
+    <nav class="breadcrumb">
+      <a href={baseUrl}>首页</a>
+      <span>/</span>
+      <a href={`${baseUrl}columns/`}>专栏</a>
+      <span>/</span>
+      <span>{column}</span>
+    </nav>
     <header class="post-header">
-      <p class="eyebrow">专栏</p>
       <h1>{column}</h1>
-      <p class="description">共 {posts.length} 篇文章</p>
     </header>
     <ul class="archive-list">
-      {posts.map((post) => (
+      {columnPosts.map((post) => (
         <li>
           <a href={`${baseUrl}blog/${post.slug}/`}>
             <time datetime={(post.data.pubDate ?? post.data.date)?.toISOString()}>

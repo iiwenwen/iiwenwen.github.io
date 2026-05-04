@@ -7,10 +7,10 @@ const posts = (await getCollection("blog"))
 
 const columnMap = new Map<string, typeof posts>();
 for (const post of posts) {
-  const col = post.data.column;
-  if (!col) continue;
-  if (!columnMap.has(col)) columnMap.set(col, []);
-  columnMap.get(col)!.push(post);
+  for (const col of post.data.categories) {
+    if (!columnMap.has(col)) columnMap.set(col, []);
+    columnMap.get(col)!.push(post);
+  }
 }
 
 const columns = [...columnMap.entries()].sort((a, b) => b[1].length - a[1].length);
@@ -19,10 +19,8 @@ const baseUrl = import.meta.env.BASE_URL;
 
 <BaseLayout title="专栏" description={`共 ${columns.length} 个专栏`}>
   <article class="post">
-    <a class="back-link" href={baseUrl}>返回首页</a>
     <header class="post-header">
       <h1>专栏</h1>
-      <p class="description">共 {columns.length} 个专栏</p>
     </header>
     {columns.length === 0 ? (
       <p>暂无专栏。</p>

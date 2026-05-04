@@ -5,6 +5,7 @@ import BookWall from "../components/BookWall.astro";
 import MovieWall from "../components/MovieWall.astro";
 import booksData from "../data/books.json";
 import moviesData from "../data/movies.json";
+import siteConfig from "../data/site.json";
 
 const categories = {
   article: "文章",
@@ -24,27 +25,38 @@ const posts = (await getCollection("blog"))
 
 const baseUrl = import.meta.env.BASE_URL;
 
+let recentMemos: { content: string; createTime: string; name: string }[] = [];
+try {
+  const res = await fetch("https://memos.syaoran.me/api/v1/memos?creatorId=1&pageSize=3");
+  const data = await res.json();
+  const arr = Array.isArray(data) ? data : (data.memos ?? []);
+  recentMemos = arr.slice(0, 3);
+} catch {
+  // keep empty if unreachable
+}
+
 function categoryCount(key: string) {
+  if (key === "daily") return -1; // updated client-side with real total
   if (key === "book") return booksData.length;
   if (key === "movie") return moviesData.length;
   return posts.filter((p) => p.data.category === key).length;
 }
 ---
 
-<BaseLayout title="New Blog" description="个人 Markdown 静态博客">
+<BaseLayout title={siteConfig.author} description="个人博客">
   <section class="hero">
-    <p class="eyebrow">Markdown Static Blog</p>
-    <h1 class="hero-brand">syaoran</h1>
-    <blockquote class="hero-quote">
-      也许多少年后在某个地方，我将轻声叹息把往事回顾，一片树林里分出两条路，而我选了人迹更少的一条，因此走出了这迥异的旅途。
-    </blockquote>
+    <h1 class="hero-brand">{siteConfig.author}</h1>
+    <p class="hero-tagline">{siteConfig.tagline}</p>
+    {siteConfig.quote && (
+      <blockquote class="hero-quote">{siteConfig.quote}</blockquote>
+    )}
   </section>
 
   <section class="category-grid" aria-label="内容分类">
     {Object.entries(categories).map(([key, label]) => (
-      <a href={`${baseUrl}categories/${key}/`}>
+      <a href={key === "daily" ? `${baseUrl}memos/` : `${baseUrl}categories/${key}/`}>
         <span>{label}</span>
-        <strong>{categoryCount(key)}</strong>
+        <strong id={key === "daily" ? "memos-count" : undefined}>{key === "daily" ? "..." : categoryCount(key)}</strong>
       </a>
     ))}
   </section>
@@ -52,6 +64,36 @@ function categoryCount(key: string) {
   {Object.entries(categories).map(([key, label]) => {
     const categoryPosts = posts.filter((post) => post.data.category === key);
     const recentPosts = categoryPosts.slice(0, 3);
+
+    if (key === "daily") {
+      return (
+        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
+          <h2 id={`${key}-posts`}>{label}</h2>
+          {recentMemos.length === 0 ? (
+            <p>暂无内容。</p>
+          ) : (
+            <>
+              <ul class="memos-list">
+                {recentMemos.map((m) => {
+                  const text = m.content.replace(/#\S+/g, "").replace(/\n/g, " ").trim();
+                  const display = text.length > 100 ? text.slice(0, 100) + "..." : text;
+                  const time = new Date(m.createTime).toLocaleDateString("zh-CN");
+                  return (
+                    <li>
+                      <a href={`${baseUrl}memos/`}>
+                        <span>{display}</span>
+                        <time>{time}</time>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+              <a class="more-link" href={`${baseUrl}memos/`}>更多{label} →</a>
+            </>
+          )}
+        </section>
+      );
+    }
 
     if (key === "book") {
       const books = booksData
@@ -128,4 +170,14 @@ function categoryCount(key: string) {
       </section>
     );
   })}
+  <script>
+    fetch("https://memos.syaoran.me/api/v1/memos?creatorId=1&pageSize=1000")
+      .then((r) => r.json())
+      .then((data) => {
+        const count = Array.isArray(data) ? data.length : (data.memos?.length ?? 0);
+        const el = document.getElementById("memos-count");
+        if (el) el.textContent = count;
+      })
+      .catch(() => {});
+  </script>
 </BaseLayout>

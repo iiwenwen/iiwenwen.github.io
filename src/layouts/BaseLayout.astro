@@ -3,17 +3,19 @@ import "lxgw-wenkai-webfont/lxgwwenkai-regular.css";
 import "lxgw-wenkai-webfont/lxgwwenkai-bold.css";
 import "../styles/global.css";
 
+import siteConfig from "../data/site.json";
+
 interface Props {
   title?: string;
   description?: string;
 }
 
 const {
-  title = "New Blog",
-  description = "A personal Markdown blog."
+  title = siteConfig.author,
+  description = "个人博客"
 } = Astro.props;
 
-const pageTitle = title === "New Blog" ? title : `${title} | New Blog`;
+const pageTitle = title === siteConfig.author ? title : `${title} | ${siteConfig.author}`;
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -25,22 +27,25 @@ const baseUrl = import.meta.env.BASE_URL;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="base-url" content={baseUrl} />
     <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
-    <link rel="preload" href={`${baseUrl}pagefind/pagefind-ui.js`} as="script" />
-    <link rel="preload" href={`${baseUrl}pagefind/pagefind-ui.css`} as="style" />
     <link rel="stylesheet" href={`${baseUrl}pagefind/pagefind-ui.css`} />
     <title>{pageTitle}</title>
   </head>
   <body>
     <header class="site-header" id="site-header">
       <div class="header-inner">
-        <a class="brand" href={baseUrl}>New Blog</a>
+        <a class="brand" href={baseUrl}>{siteConfig.author}</a>
         <nav aria-label="主导航">
           <a href={baseUrl}>首页</a>
+          <a href={`${baseUrl}columns/`}>专栏</a>
+          <a href={`${baseUrl}memos/`}>日常</a>
+          <a href={`${baseUrl}poetry/`}>诗歌</a>
           <a href={`${baseUrl}archive/`}>归档</a>
           <a href={`${baseUrl}tags/`}>标签</a>
-          <a href={`${baseUrl}columns/`}>专栏</a>
           <a href={`${baseUrl}about/`}>关于</a>
-          <a href={`${baseUrl}search/`} class="search-trigger">搜索</a>
+          <button class="search-trigger" title="搜索 (Cmd+K)" aria-label="打开搜索">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <span>搜索</span>
+          </button>
         </nav>
       </div>
     </header>
@@ -62,7 +67,7 @@ const baseUrl = import.meta.env.BASE_URL;
       <slot />
     </main>
     <footer class="site-footer">
-      <p>Built with Astro and Markdown.</p>
+      <p>© {new Date().getFullYear()} syaoran</p>
     </footer>
     <script>
       const header = document.getElementById("site-header");

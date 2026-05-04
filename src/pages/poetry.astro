@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="诗歌" description="俳句与诗歌">
+  <article class="post">
+    <header class="post-header">
+      <h1>诗歌</h1>
+      <p class="description">让我为你读首诗</p>
+    </header>
+
+    <div class="poetry-tabs">
+      <button class="poetry-tab active" data-tag="来写首俳句吧">俳句</button>
+      <button class="poetry-tab" data-tag="来写首诗吧">诗歌</button>
+    </div>
+
+    <div id="poetry-list" class="poetry-list">
+      <p class="poetry-loading">加载中...</p>
+    </div>
+
+    <button id="poetry-load-more" class="ticket-btn-more" style="display:none">加载更多</button>
+  </article>
+</BaseLayout>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  (function () {
+    const MEMOS = "https://memos.syaoran.me";
+    const PAGE_SIZE = 12;
+    let activeTag = "来写首俳句吧";
+    let pageToken = "";
+    let isLoading = false;
+
+    const list = document.getElementById("poetry-list");
+    const loadBtn = document.getElementById("poetry-load-more");
+    const tabs = document.querySelectorAll(".poetry-tab");
+    const baseUrl = document.querySelector('meta[name="base-url"]')?.getAttribute("content") || "/";
+
+    function formatDate(t) {
+      return new Date(t).toLocaleDateString("zh-CN", {
+        year: "numeric", month: "2-digit", day: "2-digit"
+      });
+    }
+
+    function removeTags(text) {
+      return text
+        .replace(/#来写首俳句吧(\s*\d+\/\d+)?/g, "")
+        .replace(/#来写首诗吧(\s*\d+\/\d+)?/g, "")
+        .replace(/Day \d+年\d+月\d+ \d+:\d+:\d+/g, "")
+        .trim();
+    }
+
+    function renderMarkdown(text) {
+      const cleaned = removeTags(text);
+      if (typeof marked === "undefined") {
+        return cleaned.replace(/\n/g, "<br>");
+      }
+      return marked.parse(cleaned, { breaks: true });
+    }
+
+    let cardIndex = 0;
+    function buildCard(item) {
+      const dateStr = formatDate(item.createTime);
+      const html = renderMarkdown(item.content);
+      const idx = cardIndex++;
+      const bgImg = (idx % 8) + 1;
+
+      return `<div class="poetry-card" style="--bg: url('${baseUrl}poetry/${bgImg}.webp')">
+        <div class="pcard-main">
+          <div class="pcard-body">${html}</div>
+          <div class="pcard-foot"><time>${dateStr}</time></div>
+        </div>
+      </div>`;
+    }
+
+    function renderCards(items) {
+      items.forEach((item) => { list.insertAdjacentHTML("beforeend", buildCard(item)); });
+    }
+
+    function fetchData(tag, token = "") {
+      const filter = encodeURIComponent(`tag in ["${tag}"]`);
+      let url = `${MEMOS}/api/v1/memos?creatorId=1&pageSize=${PAGE_SIZE}&filter=${filter}`;
+      if (token) url += `&pageToken=${token}`;
+      return fetch(url).then((r) => r.json());
+    }
+
+    function loadFirstPage(tag) {
+      activeTag = tag;
+      list.innerHTML = '<p class="poetry-loading">加载中...</p>';
+      loadBtn.style.display = "none";
+      pageToken = "";
+      cardIndex = 0;
+
+      fetchData(tag).then((data) => {
+        const items = data.memos ?? (Array.isArray(data) ? data : []);
+        list.innerHTML = "";
+        if (items.length === 0) { list.innerHTML = '<p class="poetry-loading">暂无内容</p>'; return; }
+        renderCards(items);
+        pageToken = data.nextPageToken || "";
+        if (pageToken) loadBtn.style.display = "block";
+      }).catch(() => { list.innerHTML = '<p class="poetry-loading">加载失败</p>'; });
+    }
+
+    function loadMore() {
+      if (isLoading || !pageToken) return;
+      isLoading = true;
+      loadBtn.textContent = "加载中...";
+      fetchData(activeTag, pageToken).then((data) => {
+        const items = data.memos ?? (Array.isArray(data) ? data : []);
+        renderCards(items);
+        pageToken = data.nextPageToken || "";
+        loadBtn.textContent = pageToken ? "加载更多" : "没有更多了";
+        if (!pageToken) loadBtn.style.display = "none";
+        isLoading = false;
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        loadFirstPage(tab.dataset.tag);
+      });
+    });
+
+    loadBtn.addEventListener("click", loadMore);
+    loadFirstPage(activeTag);
+  })();
+</script>
+
+<style is:global>
+  .poetry-tabs { display: flex; gap: 12px; justify-content: center; margin-bottom: 28px; }
+  .poetry-tab {
+    padding: 8px 28px; border: 1px solid var(--line); border-radius: 999px;
+    background: var(--card); color: var(--muted); font-size: 0.95rem;
+    font-family: inherit; cursor: pointer; transition: all 0.2s;
+  }
+  .poetry-tab:hover { border-color: var(--accent); color: var(--accent); }
+  .poetry-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .poetry-list { display: flex; flex-direction: column; gap: 14px; }
+  .poetry-loading { text-align: center; color: var(--muted); }
+
+  .poetry-card {
+    display: flex; flex-direction: column; min-height: 100px; max-width: 540px; margin: 0 auto; width: 100%;
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 2px 16px rgb(49 36 18 / 6%);
+    position: relative; isolation: isolate;
+  }
+  .poetry-card::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      linear-gradient(135deg, rgb(255 250 240 / 78%) 0%, rgb(255 248 234 / 72%) 100%),
+      var(--bg, none) center / cover no-repeat;
+  }
+    flex-shrink: 0; width: 56px;
+    background: rgb(245 240 225 / 70%);
+    display: flex; align-items: center; justify-content: center;
+    border-right: 1.5px dashed var(--line);
+  }
+    width: 30px; height: 30px;
+    border: 2px solid var(--accent); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(-12deg); opacity: 0.55;
+    font-size: 13px; color: var(--accent); font-weight: 700;
+    line-height: 1; flex-shrink: 0;
+  }
+  .pcard-main {
+    flex: 1; display: flex; flex-direction: column; min-width: 0;
+  }
+  .pcard-body {
+    flex: 1; padding: 18px 20px 0;
+    font-size: 1.1rem; line-height: 2; color: var(--ink);
+    overflow-wrap: break-word; word-break: break-word;
+  }
+  .pcard-body p { margin: 0.3em 0; }
+  .pcard-foot {
+    padding: 12px 20px 14px;
+    font-size: 0.78rem; color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+  @media (max-width: 640px) {
+    .poetry-card { flex-direction: column; }
+      width: 100%; height: 40px; flex-direction: column; gap: 12px;
+      border-right: 0; border-bottom: 1.5px dashed var(--line);
+    }
+    .pcard-body { font-size: 1rem; padding: 16px 18px 0; }
+  }
+</style>

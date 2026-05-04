@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "npm run zotero:sync && ASTRO_TELEMETRY_DISABLED=1 astro build && npx pagefind --site dist && cp -r dist/pagefind public/pagefind",
+    "build": "npm run zotero:sync && rm -rf public/pagefind && ASTRO_TELEMETRY_DISABLED=1 astro build && npx pagefind --site dist && cp -r dist/pagefind public/pagefind",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "zotero:sync": "python3 scripts/convert_zotero.py --fetch",

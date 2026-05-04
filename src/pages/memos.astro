@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="日常" description="日常随想 · Memos">
+  <article class="post">
+    <header class="post-header">
+      <h1>日常</h1>
+      <p class="description">随手记录，碎片思考</p>
+    </header>
+
+    <div id="memos-tag-filter" class="memos-filter" style="display:none">
+      <span class="filter-label">筛选：</span>
+      <span id="memos-tag-active" class="filter-active" style="display:none">
+        <a href="#" id="memos-tag-clear">✕ 清除</a>
+      </span>
+      <div id="memos-tag-cloud" class="memos-tag-cloud"></div>
+    </div>
+
+    <div id="memos" class="memos"></div>
+    <button id="memos-load-more" class="ticket-btn-more" style="display:none">加载更多</button>
+  </article>
+</BaseLayout>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  (function () {
+    const MEMOS_HOST = "https://memos.syaoran.me";
+    const LIMIT = 10;
+    const USERNAME = "Syaoran";
+
+    let pageToken = "";
+    let activeTag = "";
+    let allTags = new Map();
+
+    const container = document.getElementById("memos");
+    const loadBtn = document.getElementById("memos-load-more");
+    const filterBar = document.getElementById("memos-tag-filter");
+    const tagCloud = document.getElementById("memos-tag-cloud");
+    const tagActive = document.getElementById("memos-tag-active");
+    const tagClear = document.getElementById("memos-tag-clear");
+
+    function parseTags(text) {
+      return (text.match(/#([^\s#,，。\n]+)/g) || []).map((t) => t.slice(1));
+    }
+
+    function formatTime(t) {
+      const d = new Date(t);
+      const now = new Date();
+      const diff = now - d;
+      if (diff < 60000) return "刚刚";
+      if (diff < 3600000) return Math.floor(diff / 60000) + "分钟前";
+      if (diff < 86400000) return Math.floor(diff / 3600000) + "小时前";
+      if (diff < 604800000) return Math.floor(diff / 86400000) + "天前";
+      return d.toLocaleDateString("zh-CN");
+    }
+
+    function renderMarkdown(text) {
+      // Remove tags from markdown rendering, we display them separately
+      const clean = text.replace(/#([^\s#,，。\n]+)/g, "");
+      if (typeof marked !== "undefined") {
+        return marked.parse(clean);
+      }
+      return clean.replace(/\n/g, "<br>");
+    }
+
+    function updateTagCloud() {
+      if (allTags.size === 0) {
+        filterBar.style.display = "none";
+        return;
+      }
+      filterBar.style.display = "block";
+      const sorted = [...allTags.entries()].sort((a, b) => b[1] - a[1]);
+      tagCloud.innerHTML = sorted
+        .map(
+          ([tag, count]) =>
+            `<a href="#" class="memo-tag-chip${tag === activeTag ? " active" : ""}" data-tag="${tag}">#${tag}<small>${count}</small></a>`
+        )
+        .join("");
+
+      if (activeTag) {
+        tagActive.style.display = "inline";
+        tagActive.querySelector("a").textContent = "✕ #" + activeTag;
+      } else {
+        tagActive.style.display = "none";
+      }
+    }
+
+    function renderMemos(data) {
+      for (const m of data) {
+        const content = m.content || "";
+        const tags = parseTags(content);
+        const time = formatTime(m.createTime);
+        const memoId = m.name ? m.name.replace("memos/", "") : "";
+
+        // Collect tags
+        tags.forEach((t) => {
+          allTags.set(t, (allTags.get(t) || 0) + 1);
+        });
+
+        const li = document.createElement("li");
+        li.className = "memo-item";
+
+        let tagHtml = "";
+        tags.forEach((t) => {
+          tagHtml += `<span class="memo-tag"><a href="#" data-tag="${t}">#${t}</a></span>`;
+        });
+
+        const bodyHtml = renderMarkdown(content);
+
+        li.innerHTML = `
+          <div class="memo-content">${bodyHtml}</div>
+          ${tagHtml ? `<div class="memo-tags">${tagHtml}</div>` : ""}
+          <div class="memo-meta">
+            <time>${time}</time>
+            ${memoId ? `<a href="${MEMOS_HOST}/m/${memoId}" target="_blank" class="memo-link">Memos</a>` : ""}
+          </div>
+        `;
+        container.appendChild(li);
+      }
+    }
+
+    function fetchMemos(token = "") {
+      let url = `${MEMOS_HOST}/api/v1/memos?creatorId=1&pageSize=${LIMIT}`;
+      if (token) url += `&pageToken=${token}`;
+      if (activeTag) url += `&filter=${encodeURIComponent(`tag in ["${activeTag}"]`)}`;
+      return fetch(url).then((r) => r.json());
+    }
+
+    function clearAndReload() {
+      container.innerHTML = "";
+      pageToken = "";
+      allTags.clear();
+      fetchMemos().then(({ memos }) => {
+        renderMemos(memos);
+        updateTagCloud();
+        pageToken = memos.length >= LIMIT ? (memos[memos.length - 1]?.id || "") : "";
+        loadBtn.style.display = pageToken ? "block" : "none";
+      });
+    }
+
+    // Init
+    fetchMemos().then(({ memos }) => {
+      renderMemos(memos);
+      updateTagCloud();
+      // Use last memo's name as page token for next page
+      if (memos.length >= LIMIT && memos.length > 0) {
+        pageToken = memos[memos.length - 1]?.name || "";
+        loadBtn.style.display = "block";
+      }
+    });
+
+    loadBtn.addEventListener("click", () => {
+      loadBtn.textContent = "加载中...";
+      fetchMemos(pageToken).then(({ memos }) => {
+        renderMemos(memos);
+        updateTagCloud();
+        pageToken = memos.length >= LIMIT && memos.length > 0
+          ? memos[memos.length - 1]?.name || ""
+          : "";
+        loadBtn.textContent = pageToken ? "加载更多" : "没有更多了";
+        if (!pageToken) loadBtn.style.display = "none";
+      });
+    });
+
+    // Tag click
+    document.addEventListener("click", (e) => {
+      const tagLink = e.target.closest("[data-tag]");
+      if (tagLink) {
+        e.preventDefault();
+        activeTag = tagLink.dataset.tag;
+        clearAndReload();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    // Clear filter
+    tagClear.addEventListener("click", (e) => {
+      e.preventDefault();
+      activeTag = "";
+      clearAndReload();
+    });
+  })();
+</script>

@@ -32,7 +32,6 @@ const oldCategories = (() => {
 
 <BaseLayout title={post.data.title} description={description ?? post.data.title}>
   <article class="post">
-    <a class="back-link" href={baseUrl}>返回首页</a>
     <header class="post-header">
       <p class="eyebrow">{categoryLabels[post.data.category]}</p>
       <h1>{post.data.title}</h1>

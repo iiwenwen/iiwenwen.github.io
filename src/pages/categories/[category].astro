@@ -58,15 +58,14 @@ if (isMovie) {
 
 <BaseLayout title={label} description={isWall ? `${isBook ? booksData.length : moviesData.length} 部` : `共 ${posts.length} 篇${label}`}>
   <article class="post">
-    <a class="back-link" href={baseUrl}>返回首页</a>
     <header class="post-header">
       <h1>{label}</h1>
       <p class="description">{isBook ? `${booksData.length} 本` : isMovie ? `${moviesData.length} 部` : `共 ${posts.length} 篇`}</p>
     </header>
     {isBook ? (
-      <BookWall items={booksData} baseUrl={baseUrl} />
+      <BookWall items={booksData} baseUrl={baseUrl} maxInitial={24} />
     ) : isMovie ? (
-      <MovieWall items={moviesData} baseUrl={baseUrl} />
+      <MovieWall items={moviesData} baseUrl={baseUrl} maxInitial={24} />
     ) : (
       <ul class="archive-list">
         {posts.map((post) => (

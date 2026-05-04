@@ -11,15 +11,22 @@ interface BookItem {
   slug?: string;
 }
 
-const { items, baseUrl } = Astro.props as { items: BookItem[]; baseUrl: string };
+const { items, baseUrl, maxInitial = 24 } = Astro.props as {
+  items: BookItem[];
+  baseUrl: string;
+  maxInitial?: number;
+};
+
+const visible = items.slice(0, maxInitial);
+const hidden = items.slice(maxInitial);
 ---
 
-<div class="media-wall">
-  {items.map((item) => (
+<div class="media-wall" id="media-wall">
+  {visible.map((item) => (
     <div class="media-card">
       <div class="media-cover">
         {item.cover ? (
-          <img src={item.cover} alt={item.title} loading="lazy" />
+          <img src={item.cover} alt={item.title} loading="lazy" decoding="async" />
         ) : (
           <div class="media-cover-placeholder">
             <span>{item.title.slice(0, 2)}</span>
@@ -53,3 +60,66 @@ const { items, baseUrl } = Astro.props as { items: BookItem[]; baseUrl: string }
     </div>
   ))}
 </div>
+
+{hidden.length > 0 && (
+  <button id="btn-load-more-books" class="ticket-btn-more">看更多...</button>
+)}
+
+<script type="application/json" id="book-data" data-bast={baseUrl}>
+  {JSON.stringify(hidden)}
+</script>
+
+<script>
+  (function () {
+    const btn = document.getElementById("btn-load-more-books");
+    const wall = document.getElementById("media-wall");
+    const dataScript = document.getElementById("book-data");
+    if (!btn || !wall || !dataScript) return;
+
+    const baseUrl = dataScript.dataset.bast || "/";
+    let remaining = JSON.parse(dataScript.textContent || "[]");
+    const BATCH = 12;
+
+    function buildCard(item) {
+      const date = item.date ? new Date(item.date) : null;
+      const dateStr = date && !isNaN(date.valueOf())
+        ? date.toLocaleDateString("zh-CN")
+        : "";
+      const stars = item.rating > 0
+        ? `<div class="media-rating">${"★".repeat(Math.round(item.rating))}${"☆".repeat(5 - Math.round(item.rating))}</div>`
+        : "";
+
+      const coverHtml = item.cover
+        ? `<img src="${item.cover}" alt="${item.title}" loading="lazy" decoding="async" />`
+        : `<div class="media-cover-placeholder"><span>${item.title.slice(0, 2)}</span></div>`;
+
+      const titleHtml = item.url
+        ? `<a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>`
+        : item.slug
+          ? `<a href="${baseUrl}blog/${item.slug}/">${item.title}</a>`
+          : `<span>${item.title}</span>`;
+
+      const div = document.createElement("div");
+      div.className = "media-card";
+      div.innerHTML = `<div class="media-cover">${coverHtml}</div>
+        <div class="media-info">
+          <h3>${titleHtml}</h3>
+          ${item.author ? `<p class="media-meta">${item.author}</p>` : ""}
+          <div class="media-footer">
+            ${dateStr ? `<time datetime="${item.date}">${dateStr}</time>` : ""}
+            ${stars}
+          </div>
+        </div>`;
+      return div;
+    }
+
+    btn.addEventListener("click", () => {
+      const batch = remaining.slice(0, BATCH);
+      remaining = remaining.slice(BATCH);
+      const fragment = document.createDocumentFragment();
+      batch.forEach((item) => fragment.appendChild(buildCard(item)));
+      wall.appendChild(fragment);
+      if (remaining.length === 0) btn.remove();
+    });
+  })();
+</script>

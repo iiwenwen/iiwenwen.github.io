@@ -8,3 +8,6 @@ public/pagefind/
 src/content/drafts/
 src/data/Zotero_books.json
 src/data/Zotero_movies.json
+.42cog/
+.claude/
+/log

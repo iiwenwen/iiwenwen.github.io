@@ -42,7 +42,7 @@ main {
   padding: 20px 0;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background 0.3s, box-shadow 0.3s;
+  transition: box-shadow 0.25s;
 }
 
 .site-header.scrolled {
@@ -70,64 +70,94 @@ nav {
   gap: 22px;
 }
 
-nav a,
-.back-link {
+nav a {
   color: var(--muted);
   text-decoration: none;
 }
 
-nav a:hover,
-.back-link:hover {
+nav a:hover {
   color: var(--accent);
+}
+
+.search-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.search-trigger:hover {
+  color: var(--accent);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.breadcrumb a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent-dark);
+}
+
+.breadcrumb span {
+  color: var(--muted);
 }
 
 .hero {
-  padding: 32px 0 40px;
-}
-
-.eyebrow {
-  margin: 0 0 16px;
-  color: var(--accent);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.hero h1 {
-  max-width: 780px;
-  margin: 0;
-  font-size: clamp(3.3rem, 10vw, 7.5rem);
-  line-height: 0.9;
-  letter-spacing: -0.08em;
+  padding: 60px 0 48px;
+  text-align: center;
 }
 
 .hero-brand {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: clamp(1.6rem, 4vw, 2.4rem) !important;
+  font-size: clamp(1.3rem, 3vw, 1.8rem) !important;
   letter-spacing: 0.02em !important;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.hero p:not(.eyebrow) {
-  max-width: 650px;
-  margin: 28px 0 0;
+.hero-tagline {
+  margin: 6px 0 0;
   color: var(--muted);
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-  line-height: 1.7;
+  font-size: 0.88rem;
 }
 
 .hero-quote {
-  max-width: 650px;
-  margin: 32px 0 0;
-  padding: 0 0 0 20px;
+  max-width: 560px;
+  margin: 64px auto 0;
+  padding: 0 0 0 24px;
   border-left: 3px solid var(--accent);
-  color: var(--muted);
+  color: var(--ink);
   font-family: "LXGW WenKai", "LXGW WenKai Screen", "霞鹜文楷", "Kaiti SC", serif;
-  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-  line-height: 1.85;
-  font-style: italic;
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
+
+.hero-quote::before {
+  content: "\201C";
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.5;
+  margin-bottom: 8px;
 }
 
 .category-grid {
@@ -146,6 +176,12 @@ nav a:hover,
   background: rgb(255 250 240 / 64%);
   text-decoration: none;
   box-shadow: 0 4px 16px rgb(49 36 18 / 6%);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.category-grid a:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 24px rgb(184 66 31 / 12%);
 }
 
 .category-grid span {
@@ -155,8 +191,9 @@ nav a:hover,
 .category-grid strong {
   align-self: end;
   color: var(--accent-dark);
-  font-size: 2.3rem;
+  font-size: 1.6rem;
   line-height: 1;
+  opacity: 0.7;
 }
 
 .post-list {
@@ -451,6 +488,8 @@ nav a:hover,
   background: rgb(255 250 240 / 78%);
   overflow: hidden;
   box-shadow: 0 4px 16px rgb(49 36 18 / 6%);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
 }
 
 .media-cover {
@@ -533,6 +572,198 @@ nav a:hover,
   font-size: 0.82rem;
 }
 
+/* Memos timeline */
+.memos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.memo-item {
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgb(255 250 240 / 78%);
+  box-shadow: 0 4px 16px rgb(49 36 18 / 4%);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100px;
+}
+
+.memo-content {
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.memo-content a {
+  color: var(--accent-dark);
+  word-break: break-all;
+}
+
+.memo-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.memo-tag a {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.memo-tag a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.memo-meta {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.memo-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.78rem;
+}
+
+.memos-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgb(255 250 240 / 64%);
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.filter-active {
+  font-size: 0.85rem;
+}
+
+.filter-active a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.memos-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.memo-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.memo-tag-chip:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.memo-tag-chip.active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.memo-tag-chip small {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.memo-tag-chip.active small {
+  opacity: 1;
+}
+
+/* Markdown within memos */
+/* Homepage memos list */
+.memos-list a {
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  color: var(--muted) !important;
+}
+
+.memos-list a span {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.memos-list a time {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.memo-content p {
+  margin: 0.5em 0;
+}
+
+.memo-content p:first-child {
+  margin-top: 0;
+}
+
+.memo-content p:last-child {
+  margin-bottom: 0;
+}
+
+.memo-content code {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  background: rgb(184 66 31 / 8%);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.memo-content blockquote {
+  margin: 0.5em 0;
+  padding: 6px 14px;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.memo-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 6px 0;
+}
+
 /* Ticket-style movie wall */
 .ticket-layout {
   display: grid;
@@ -555,6 +786,8 @@ nav a:hover,
   border-radius: 16px;
   position: relative;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
 }
 
 .ticket-item.is-hidden {
