@@ -7,7 +7,7 @@ const base = process.env.GITHUB_ACTIONS && repository && !isUserOrOrgPage
   : "/";
 
 export default defineConfig({
-  site: process.env.SITE_URL ?? "https://example.com",
+  site: process.env.SITE_URL || "https://iiwenwen.github.io",
   base,
   trailingSlash: "always",
   vite: {
