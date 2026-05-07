@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#faf6ed">
+<title>写日常</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #faf6ed; color: #3e3e3e; min-height: 100dvh;
+    display: flex; flex-direction: column;
+  }
+  .header { padding: 16px 20px 8px; display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 1.1rem; font-weight: 600; }
+  .header a { font-size: 0.85rem; color: #888; text-decoration: none; }
+  .main { flex: 1; padding: 0 16px 16px; display: flex; flex-direction: column; gap: 12px; }
+  textarea {
+    flex: 1; min-height: 160px; width: 100%; padding: 16px;
+    font-size: 16px; line-height: 1.8; font-family: inherit;
+    border: 1.5px solid #e0d8c8; border-radius: 12px;
+    background: #fff; color: #3e3e3e; resize: none; outline: none;
+    transition: border-color .2s;
+  }
+  textarea:focus { border-color: #4FC3F7; }
+  .token-row { display: flex; gap: 8px; align-items: center; }
+  .token-row input {
+    flex: 1; padding: 10px 12px; font-size: 14px; border: 1.5px solid #e0d8c8;
+    border-radius: 10px; background: #fff; outline: none;
+  }
+  .token-row input:focus { border-color: #4FC3F7; }
+  .token-row input::placeholder { color: #c0b8a4; }
+  button {
+    width: 100%; padding: 14px; font-size: 17px; font-weight: 600;
+    border: none; border-radius: 12px; cursor: pointer;
+    background: #4FC3F7; color: #fff; letter-spacing: 0.05em;
+    transition: opacity .2s;
+  }
+  button:active { opacity: 0.8; }
+  button:disabled { background: #c0d8e0; }
+  .toast {
+    position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+    padding: 10px 24px; border-radius: 20px; font-size: 14px; color: #fff;
+    background: #3e3e3e; opacity: 0; transition: opacity .3s; pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 0.9; }
+  .toast.ok { background: #4caf50; }
+  .toast.err { background: #e53935; }
+  .hint { font-size: 12px; color: #b0a898; text-align: center; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>✏️ 写日常</h1>
+  <a href="#" onclick="toggleToken()" id="token-link">🔑</a>
+</div>
+<div class="main">
+  <div class="token-row" id="token-row" style="display:none">
+    <input type="password" id="token" placeholder="GitHub Token" autocomplete="off">
+  </div>
+  <textarea id="text" placeholder="今天发生了什么…" autofocus></textarea>
+  <button onclick="submit()" id="btn">发送</button>
+  <div class="hint">内容将写入 blog.syaoran.me 的日常模块</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const REPO = "iiwenwen/iiwenwen.github.io";
+const PATH = "src/content/daily";
+const BRANCH = "main";
+
+const tokenInput = document.getElementById("token");
+const tokenRow = document.getElementById("token-row");
+const textEl = document.getElementById("text");
+const btn = document.getElementById("btn");
+const toast = document.getElementById("toast");
+const tokenLink = document.getElementById("token-link");
+
+let token = localStorage.getItem("gh_token") || "";
+if (token) {
+  tokenInput.value = token;
+  tokenLink.textContent = "✅";
+}
+
+function toggleToken() {
+  const show = tokenRow.style.display === "none";
+  tokenRow.style.display = show ? "flex" : "none";
+  if (show) tokenInput.focus();
+}
+
+function showToast(msg, type) {
+  toast.textContent = msg;
+  toast.className = "toast " + type + " show";
+  setTimeout(() => { toast.className = "toast"; }, 2500);
+}
+
+async function submit() {
+  const text = textEl.value.trim();
+  if (!text) { showToast("写点什么吧", "err"); return; }
+
+  token = tokenInput.value.trim() || token;
+  if (!token) { showToast("请先设置 GitHub Token", "err"); tokenRow.style.display = "flex"; return; }
+  localStorage.setItem("gh_token", token);
+  tokenLink.textContent = "✅";
+
+  btn.disabled = true;
+  btn.textContent = "发送中…";
+
+  try {
+    const now = new Date();
+    const filename = now.toISOString().replace(/[:.]/g, "-").slice(0,19) + ".md";
+    // ISO format: 2026-05-07T14-30-00.md
+    const dateStr = now.toISOString().replace("T", " ").slice(0,16);
+    const content = `---\ndate: ${dateStr}\n---\n\n${text}\n`;
+    const base64 = btoa(unescape(encodeURIComponent(content)));
+
+    const resp = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${PATH}/${filename}`,
+      {
+        method: "PUT",
+        headers: {
+          "Authorization": `token ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: `daily: ${text.slice(0,40)}`,
+          content: base64,
+          branch: BRANCH
+        })
+      }
+    );
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      throw new Error(err.message || resp.statusText);
+    }
+
+    textEl.value = "";
+    showToast("✓ 已发送", "ok");
+  } catch (e) {
+    showToast("✗ " + e.message, "err");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "发送";
+  }
+}
+
+// Submit on Enter (Cmd+Enter for newline)
+textEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.metaKey) {
+    e.preventDefault();
+    submit();
+  }
+});
+</script>
+</body>
+</html>
