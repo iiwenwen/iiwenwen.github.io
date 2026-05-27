@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BookWall from "../components/BookWall.astro";
 import MovieWall from "../components/MovieWall.astro";
@@ -7,7 +6,7 @@ import booksData from "../data/books.json";
 import moviesData from "../data/movies.json";
 import siteConfig from "../data/site.json";
 import { formatDate } from "../lib/date";
-import { getPublishedPosts } from "../lib/posts";
+import { getPublishedPosts, getPostsByCategory } from "../lib/posts";
 
 const categories = {
   article: "文章",
@@ -20,148 +19,16 @@ const posts = await getPublishedPosts();
 
 const baseUrl = import.meta.env.BASE_URL;
 
-const dailyEntries = (await getCollection("daily"))
-  .filter((entry) => !entry.data.private)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const recentMemos = dailyEntries.slice(0, 3).map((entry) => ({
-  content: entry.body.trim(),
-  createTime: entry.data.date
+const dailyPosts = await getPostsByCategory("daily");
+const recentMemos = dailyPosts.slice(0, 3).map((post) => ({
+  content: post.body.trim(),
+  createTime: post.data.pubDate ?? post.data.date ?? new Date(0)
 }));
 
 function categoryCount(key: string) {
-  if (key === "daily") return dailyEntries.length;
+  if (key === "daily") return dailyPosts.length;
   if (key === "book") return booksData.length;
   if (key === "movie") return moviesData.length;
   return posts.filter((p) => p.data.category === key).length;
 }
 ---
-
-<BaseLayout title={siteConfig.author} description="个人博客">
-  <section class="hero">
-    <h1 class="hero-brand">{siteConfig.author}</h1>
-    <p class="hero-tagline">{siteConfig.tagline}</p>
-    {siteConfig.quote && (
-      <blockquote class="hero-quote">{siteConfig.quote}</blockquote>
-    )}
-  </section>
-
-  <section class="category-grid" aria-label="内容分类">
-    {Object.entries(categories).map(([key, label]) => (
-      <a href={key === "daily" ? `${baseUrl}memos/` : `${baseUrl}categories/${key}/`}>
-        <span>{label}</span>
-        <strong>{categoryCount(key)}</strong>
-      </a>
-    ))}
-  </section>
-
-  {Object.entries(categories).map(([key, label]) => {
-    const categoryPosts = posts.filter((post) => post.data.category === key);
-    const recentPosts = categoryPosts.slice(0, 3);
-
-    if (key === "daily") {
-      return (
-        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-          <h2 id={`${key}-posts`}>{label}</h2>
-          {recentMemos.length === 0 ? (
-            <p>暂无内容。</p>
-          ) : (
-            <>
-              <ul class="memos-list">
-                {recentMemos.map((m) => {
-                  const text = m.content.replace(/#\S+/g, "").replace(/\n/g, " ").trim();
-                  const display = text.length > 100 ? text.slice(0, 100) + "..." : text;
-                  const time = formatDate(m.createTime);
-                  return (
-                    <li>
-                      <a href={`${baseUrl}memos/`}>
-                        <span>{display}</span>
-                        <time>{time}</time>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-              <a class="more-link" href={`${baseUrl}memos/`}>更多{label} →</a>
-            </>
-          )}
-        </section>
-      );
-    }
-
-    if (key === "book") {
-      const books = [...booksData]
-        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-        .slice(0, 4);
-      return (
-        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-          <h2 id={`${key}-posts`}>{label}</h2>
-          {books.length === 0 ? (
-            <p>还没有发布内容。</p>
-          ) : (
-            <>
-              <BookWall items={books} baseUrl={baseUrl} />
-              {booksData.length > 4 && (
-                <a class="more-link" href={`${baseUrl}categories/book/`}>
-                  更多{label} →
-                </a>
-              )}
-            </>
-          )}
-        </section>
-      );
-    }
-
-    if (key === "movie") {
-      const movies = [...moviesData]
-        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-        .slice(0, 4);
-      return (
-        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-          <h2 id={`${key}-posts`}>{label}</h2>
-          {movies.length === 0 ? (
-            <p>还没有发布内容。</p>
-          ) : (
-            <>
-              <MovieWall items={movies} baseUrl={baseUrl} />
-              {moviesData.length > 4 && (
-                <a class="more-link" href={`${baseUrl}categories/movie/`}>
-                  更多{label} →
-                </a>
-              )}
-            </>
-          )}
-        </section>
-      );
-    }
-
-    return (
-      <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-        <h2 id={`${key}-posts`}>{label}</h2>
-        {recentPosts.length === 0 ? (
-          <p>还没有发布内容。</p>
-        ) : (
-          <>
-            <ul>
-              {recentPosts.map((post) => (
-                <li>
-                  <a href={`${baseUrl}blog/${post.slug}/`}>
-                    <span>{post.data.title}</span>
-                    <time datetime={(post.data.pubDate ?? post.data.date)?.toISOString()}>
-                      {formatDate(post.data.pubDate ?? post.data.date)}
-                    </time>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            {categoryPosts.length > 3 && (
-              <a class="more-link" href={`${baseUrl}categories/${key}/`}>
-                更多{label} →
-              </a>
-            )}
-          </>
-        )}
-      </section>
-    );
-  })}
-</BaseLayout>

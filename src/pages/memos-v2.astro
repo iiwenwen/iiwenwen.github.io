@@ -1,9 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPostsByCategory } from "../lib/posts";
 
-const entries = (await getCollection("daily"))
-  .filter((e) => !e.data.private)
+const entries = (await getPostsByCategory("daily"))
+  .filter((e) => !e.data.draft)
   .sort(
     (a, b) => new Date(b.data.date ?? 0).valueOf() - new Date(a.data.date ?? 0).valueOf()
   );

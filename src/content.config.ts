@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const category = z.enum(["book", "movie", "daily", "article"]);
+const category = z.enum(["article", "daily"]);
 const tags = z.preprocess((value) => {
   if (value == null) {
     return [];
@@ -33,7 +33,7 @@ const postSchema = z.object({
   draft: z.boolean().default(false)
 });
 
-const blog = defineCollection({
+const posts = defineCollection({
   type: "content",
   schema: postSchema
 });
@@ -41,15 +41,6 @@ const blog = defineCollection({
 const drafts = defineCollection({
   type: "content",
   schema: postSchema
-});
-
-const daily = defineCollection({
-  type: "content",
-  schema: z.object({
-    date: z.coerce.date(),
-    private: z.boolean().default(false),
-    tags: tags.default([])
-  })
 });
 
 const poems = defineCollection({
@@ -70,7 +61,7 @@ const poems = defineCollection({
   })
 });
 
-const poetryNotes = defineCollection({
+const notes = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
@@ -86,4 +77,4 @@ const poetryNotes = defineCollection({
   })
 });
 
-export const collections = { blog, drafts, daily, poems, poetryNotes };
+export const collections = { posts, drafts, poems, notes };

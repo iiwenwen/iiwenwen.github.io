@@ -2,7 +2,7 @@
 
 <meta>
   <document-id>newblog-real</document-id>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <project>NewBlog</project>
   <type>Reality Constraints</type>
   <created>2026-05-03</created>
@@ -54,6 +54,13 @@
 <violation-consequence>订阅者无法在 RSS 阅读器中完整阅读，降低订阅价值。</violation-consequence>
 </constraint>
 
+<constraint required="false" id="C6">
+<title>内容目录固定为4个子文件夹，每个对应一个collection</title>
+<description>src/content/ 下只保留4个子目录：posts/（手写文章）、drafts/（草稿，物理隔离 + gitignore）、poems/（诗歌+音频）、notes/（Memos同步的诗词笔记）。不得新增额外子目录或collection。</description>
+<rationale>4个子目录对应4种内容创作方式：手动写长文、手动写草稿、手动录诗歌、自动同步笔记。层级清晰，不多不少。</rationale>
+<violation-consequence>新增collection会增加维护复杂度，混淆内容来源。</violation-consequence>
+</constraint>
+
 </constraints>
 
 ## 技术环境
@@ -77,3 +84,4 @@
 - [ ] 豆瓣 apikey 未泄露到其他文件
 - [ ] 未引入 SSR/API 路由
 - [ ] RSS feed 包含全文内容，草稿已过滤，link 标签可自动发现
+- [ ] 内容目录仅4个：posts/ drafts/ poems/ notes/，无额外collection

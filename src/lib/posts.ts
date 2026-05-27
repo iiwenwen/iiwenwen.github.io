@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-export type BlogPost = CollectionEntry<"blog">;
+export type BlogPost = CollectionEntry<"posts">;
 
 export function getPostDate(post: BlogPost) {
   return post.data.pubDate ?? post.data.date ?? new Date(0);
@@ -15,8 +15,8 @@ export function sortPostsByDateDesc<T extends BlogPost>(posts: T[]) {
 }
 
 export async function getPublishedPosts() {
-  const posts = await getCollection("blog");
-  return sortPostsByDateDesc(posts.filter(isPublishedPost));
+  const allPosts = await getCollection("posts");
+  return sortPostsByDateDesc(allPosts.filter(isPublishedPost));
 }
 
 export async function getPostsByCategory(category: string) {
@@ -28,5 +28,7 @@ export async function getPostsByTag(tag: string) {
 }
 
 export async function getPostsByColumn(column: string) {
-  return (await getPublishedPosts()).filter((post) => post.data.categories.includes(column));
+  return (await getPublishedPosts()).filter((post) =>
+    post.data.categories?.includes(column)
+  );
 }

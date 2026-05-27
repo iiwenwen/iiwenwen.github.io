@@ -2,7 +2,7 @@
 
 <meta>
   <document-id>newblog-cog</document-id>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <project>NewBlog</project>
   <type>Cognitive Model</type>
   <created>2026-05-03</created>
@@ -54,9 +54,9 @@
 
 <entity id="E1">
 <name>Post（文章）</name>
-<unique-code>按文件名 slug 唯一识别，格式 YYYY-MM-DD-slug，路由 /blog/{slug}/</unique-code>
+<unique-code>存放于 src/content/posts/，按文件名 slug 唯一识别，格式 YYYY-MM-DD-slug，路由 /blog/{slug}/</unique-code>
 <classification>
-  <by-category>article（文章）| daily（日常）| book（图书）| movie（电影）</by-category>
+  <by-category>article（文章）| daily（日常）</by-category>
   <by-tag>用户自定义标签，支持字符串或数组</by-tag>
   <by-column>可选，归入某个专栏</by-column>
   <by-status>草稿（draft: true）| 已发布</by-status>
@@ -97,12 +97,32 @@
 
 <entity id="E5">
 <name>Draft（草稿）</name>
-<unique-code>同 Post，但存放在 src/content/drafts/ 目录，不纳入生产构建</unique-code>
+<unique-code>存放于 src/content/drafts/，物理隔离 + gitignore，不纳入生产构建</unique-code>
 <classification>
   <by-status>草稿（始终，不受 draft frontmatter 控制）</by-status>
 </classification>
 <attributes>与 Post 相同 schema</attributes>
-<relations>草稿可随时移入 src/content/blog/ 发布</relations>
+<relations>草稿可随时移入 src/content/posts/ 发布</relations>
+</entity>
+
+<entity id="E6">
+<name>Poem（诗歌）</name>
+<unique-code>存放于 src/content/poems/，按文件名 slug 识别，路由 /poems/{slug}/</unique-code>
+<classification>
+  <by-draft>草稿（draft: true）| 已发布</by-draft>
+</classification>
+<attributes>title, author, translator, audioUrl, audioType, duration, source, tags, draft</attributes>
+<relations>每首诗关联一个音频文件，由 Cloudflare Worker 代理 R2 存储</relations>
+</entity>
+
+<entity id="E7">
+<name>Note（诗词笔记）</name>
+<unique-code>存放于 src/content/notes/，从 Memos 自动同步，按文件名识别</unique-code>
+<classification>
+  <by-kind>haiku（俳句）| poem（诗歌）</by-kind>
+</classification>
+<attributes>title, kind, date, source, sourceId, sourceUrl, tags, draft</attributes>
+<relations>数据通过 sync-poetry-memos.mjs 从 Memos API 同步到本地</relations>
 </entity>
 
 </information>
@@ -111,7 +131,7 @@
 
 <information-flow>
 <flow id="F1" name="文章发布流程">
-  作者 → 写 .md 文件 → 放入 src/content/blog/ → Astro 构建 → 生成 /blog/{slug}/ → 读者访问
+  作者 → 写 .md 文件 → 放入 src/content/posts/ → Astro 构建 → 生成 /blog/{slug}/ → 读者访问
 </flow>
 
 <flow id="F2" name="Zotero 同步流程">
@@ -127,7 +147,11 @@
 </flow>
 
 <flow id="F5" name="RSS 订阅流程">
-  Astro 构建 → 读取 blog collection（过滤草稿） → 生成 rss.xml（全文 RSS 2.0） → 部署到 /rss.xml → RSS 阅读器定时抓取
+  Astro 构建 → 读取 posts collection（过滤草稿） → 生成 rss.xml（全文 RSS 2.0） → 部署到 /rss.xml → RSS 阅读器定时抓取
+</flow>
+
+<flow id="F6" name="笔记同步流程">
+  Memos API → sync-poetry-memos.mjs → src/content/notes/*.md → Astro 构建 → /poetry/
 </flow>
 
 </information-flow>
@@ -158,6 +182,8 @@ Astro 5 静态模式 → 构建时渲染所有页面。内容集合通过 Zod �
 <weights>
 - Post：核心实体，全站围绕文章构建（权重 10）
 - Book/Movie：内容辅助实体，通过 JSON 数据渲染独立页面（权重 6）
+- Note：Memos 同步诗词笔记，自动生成内容（权重 4）
+- Poem：诗歌朗诵 + 音频（权重 4）
 - Cover：视觉增强，加载失败有占位符兜底（权重 3）
 - Draft：开发辅助，不影响生产（权重 2）
 </weights>
@@ -166,8 +192,9 @@ Astro 5 静态模式 → 构建时渲染所有页面。内容集合通过 Zod �
 
 ## 5. 验证检查清单
 
-- [ ] 所有 Post 实体有明确的 slug 和 category
+- [ ] 所有 Post 实体有明确的 slug 和 category（存放于 posts/）
 - [ ] Book 实体有 ISBN 用于封面下载
 - [ ] Movie 实体有标题用于搜索匹配
 - [ ] Cover 文件格式为 .webp，路径为 /covers/
-- [ ] Draft 未被生产构建包含
+- [ ] Draft 未被生产构建包含（物理隔离在 drafts/）
+- [ ] Note 实体通过 Memos 同步保持最新（存放于 notes/）

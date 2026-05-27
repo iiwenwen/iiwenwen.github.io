@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { formatDate } from "../lib/date";
 import { getPoemDate, getPublishedPoems } from "../lib/poems";
-import { getPublishedPoetryNotes } from "../lib/poetryNotes";
+import { getPublishedNotes } from "../lib/notes";
 
 const baseUrl = import.meta.env.BASE_URL;
 const recordedPoems = await getPublishedPoems();
@@ -13,16 +13,16 @@ const recordedPoemCards = await Promise.all(
     bgImg: (index % 8) + 1
   }))
 );
-const poetryNotes = await getPublishedPoetryNotes();
-const renderedPoetryNotes = await Promise.all(
-  poetryNotes.map(async (note, index) => ({
+const notes = await getPublishedNotes();
+const renderedNotes = await Promise.all(
+  notes.map(async (note, index) => ({
     note,
     Content: (await note.render()).Content,
     bgImg: (index % 8) + 1
   }))
 );
-const haikuNotes = renderedPoetryNotes.filter(({ note }) => note.data.kind === "haiku");
-const poemNotes = renderedPoetryNotes.filter(({ note }) => note.data.kind === "poem");
+const haikuNotes = renderedNotes.filter(({ note }) => note.data.kind === "haiku");
+const poemNotes = renderedNotes.filter(({ note }) => note.data.kind === "poem");
 ---
 
 <BaseLayout title="诗歌" description="俳句与诗歌">

@@ -3,9 +3,9 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
-  post: CollectionEntry<"blog">;
-  prevPost?: CollectionEntry<"blog"> | null;
-  nextPost?: CollectionEntry<"blog"> | null;
+  post: CollectionEntry<"posts">;
+  prevPost?: CollectionEntry<"posts"> | null;
+  nextPost?: CollectionEntry<"posts"> | null;
 }
 
 const { post, prevPost, nextPost } = Astro.props;
