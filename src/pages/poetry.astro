@@ -1,5 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatDate } from "../lib/date";
+import { getPoemDate, getPublishedPoems } from "../lib/poems";
+import { getPublishedPoetryNotes } from "../lib/poetryNotes";
+
+const baseUrl = import.meta.env.BASE_URL;
+const recordedPoems = await getPublishedPoems();
+const recordedPoemCards = await Promise.all(
+  recordedPoems.map(async (poem, index) => ({
+    poem,
+    Content: (await poem.render()).Content,
+    bgImg: (index % 8) + 1
+  }))
+);
+const poetryNotes = await getPublishedPoetryNotes();
+const renderedPoetryNotes = await Promise.all(
+  poetryNotes.map(async (note, index) => ({
+    note,
+    Content: (await note.render()).Content,
+    bgImg: (index % 8) + 1
+  }))
+);
+const haikuNotes = renderedPoetryNotes.filter(({ note }) => note.data.kind === "haiku");
+const poemNotes = renderedPoetryNotes.filter(({ note }) => note.data.kind === "poem");
 ---
 
 <BaseLayout title="诗歌" description="俳句与诗歌">
@@ -9,122 +32,257 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <p class="description">让我为你读首诗</p>
     </header>
 
-    <div class="poetry-tabs">
-      <button class="poetry-tab active" data-tag="来写首俳句吧">俳句</button>
-      <button class="poetry-tab" data-tag="来写首诗吧">诗歌</button>
+    <div class="poetry-tabs" aria-label="诗歌分类">
+      <button class="poetry-tab active" data-panel="recorded">读诗</button>
+      <button class="poetry-tab" data-panel="haiku">俳句</button>
+      <button class="poetry-tab" data-panel="poem">诗歌</button>
     </div>
 
-    <div id="poetry-list" class="poetry-list">
-      <p class="poetry-loading">加载中...</p>
-    </div>
+    <section id="recorded-poems-panel" class="recorded-poems poetry-panel" aria-label="读诗录">
+      {recordedPoems.length === 0 ? (
+        <p class="poetry-loading">还没有发布读诗录。</p>
+      ) : (
+        <div class="poetry-list">
+          {recordedPoemCards.map(({ poem, Content, bgImg }) => {
+            const poemDate = getPoemDate(poem);
+            const hasDate = poemDate.valueOf() > 0;
+            return (
+              <article class="poetry-card voice-card" style={`--bg: url('${baseUrl}poetry/${bgImg}.webp')`}>
+                <div class="pcard-main">
+                  <div class="pcard-body">
+                    <div class="pcard-audio" aria-label={`${poem.data.title}朗读音频`}>
+                      <div class="poem-player" data-audio-player>
+                        <audio
+                          controls
+                          preload="none"
+                          data-audio-src={poem.data.audioUrl}
+                          data-audio-type={poem.data.audioType}
+                          data-fallback-duration={poem.data.duration ?? ""}
+                        >
+                          你的浏览器不支持音频播放。
+                        </audio>
+                        <noscript>
+                          <audio controls preload="none">
+                            <source src={poem.data.audioUrl} type={poem.data.audioType} />
+                            你的浏览器不支持音频播放。
+                          </audio>
+                        </noscript>
+                        <div class="poem-player-controls" aria-hidden="true">
+                          <button
+                            class="poem-player-toggle"
+                            type="button"
+                            aria-label={`播放${poem.data.title}`}
+                            data-play-toggle
+                          >
+                            <span class="poem-player-icon" aria-hidden="true"></span>
+                          </button>
+                          <input
+                            class="poem-player-progress"
+                            type="range"
+                            min="0"
+                            max="1000"
+                            value="0"
+                            step="1"
+                            aria-label="朗读进度"
+                            data-progress
+                          />
+                          <span class="poem-player-time" aria-live="off">
+                            <time data-current>0:00</time>
+                            <span aria-hidden="true">/</span>
+                            <time data-duration>{poem.data.duration ?? "--:--"}</time>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pcard-poem">
+                      <Content />
+                    </div>
+                  </div>
+                  <div class="pcard-foot">
+                    <time datetime={hasDate ? poemDate.toISOString() : undefined}>
+                      {hasDate ? formatDate(poemDate) : "未注明日期"}
+                    </time>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
 
-    <button id="poetry-load-more" class="ticket-btn-more" style="display:none">加载更多</button>
+    <section id="haiku-poetry-panel" class="poetry-panel" hidden aria-label="俳句">
+      {haikuNotes.length === 0 ? (
+        <p class="poetry-loading">暂无俳句。</p>
+      ) : (
+        <div class="poetry-list">
+          {haikuNotes.map(({ note, Content, bgImg }) => (
+            <article class="poetry-card" style={`--bg: url('${baseUrl}poetry/${bgImg}.webp')`}>
+              <div class="pcard-main">
+                <div class="pcard-body">
+                  <Content />
+                </div>
+                <div class="pcard-foot">
+                  <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
+
+    <section id="poem-poetry-panel" class="poetry-panel" hidden aria-label="诗歌">
+      {poemNotes.length === 0 ? (
+        <p class="poetry-loading">暂无诗歌。</p>
+      ) : (
+        <div class="poetry-list">
+          {poemNotes.map(({ note, Content, bgImg }) => (
+            <article class="poetry-card" style={`--bg: url('${baseUrl}poetry/${bgImg}.webp')`}>
+              <div class="pcard-main">
+                <div class="pcard-body">
+                  <Content />
+                </div>
+                <div class="pcard-foot">
+                  <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
   </article>
 </BaseLayout>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
+<script is:inline>
   (function () {
-    const MEMOS = "https://memos.syaoran.me";
-    const PAGE_SIZE = 12;
-    let activeTag = "来写首俳句吧";
-    let pageToken = "";
-    let isLoading = false;
-
-    const list = document.getElementById("poetry-list");
-    const loadBtn = document.getElementById("poetry-load-more");
     const tabs = document.querySelectorAll(".poetry-tab");
-    const baseUrl = document.querySelector('meta[name="base-url"]')?.getAttribute("content") || "/";
-
-    function formatDate(t) {
-      return new Date(t).toLocaleDateString("zh-CN", {
-        year: "numeric", month: "2-digit", day: "2-digit"
-      });
-    }
-
-    function removeTags(text) {
-      return text
-        .replace(/#来写首俳句吧(\s*\d+\/\d+)?/g, "")
-        .replace(/#来写首诗吧(\s*\d+\/\d+)?/g, "")
-        .replace(/Day \d+年\d+月\d+ \d+:\d+:\d+/g, "")
-        .trim();
-    }
-
-    function renderMarkdown(text) {
-      const cleaned = removeTags(text);
-      if (typeof marked === "undefined") {
-        return cleaned.replace(/\n/g, "<br>");
-      }
-      return marked.parse(cleaned, { breaks: true });
-    }
-
-    let cardIndex = 0;
-    function buildCard(item) {
-      const dateStr = formatDate(item.createTime);
-      const html = renderMarkdown(item.content);
-      const idx = cardIndex++;
-      const bgImg = (idx % 8) + 1;
-
-      return `<div class="poetry-card" style="--bg: url('${baseUrl}poetry/${bgImg}.webp')">
-        <div class="pcard-main">
-          <div class="pcard-body">${html}</div>
-          <div class="pcard-foot"><time>${dateStr}</time></div>
-        </div>
-      </div>`;
-    }
-
-    function renderCards(items) {
-      items.forEach((item) => { list.insertAdjacentHTML("beforeend", buildCard(item)); });
-    }
-
-    function fetchData(tag, token = "") {
-      const filter = encodeURIComponent(`tag in ["${tag}"]`);
-      let url = `${MEMOS}/api/v1/memos?creatorId=1&pageSize=${PAGE_SIZE}&filter=${filter}`;
-      if (token) url += `&pageToken=${token}`;
-      return fetch(url).then((r) => r.json());
-    }
-
-    function loadFirstPage(tag) {
-      activeTag = tag;
-      list.innerHTML = '<p class="poetry-loading">加载中...</p>';
-      loadBtn.style.display = "none";
-      pageToken = "";
-      cardIndex = 0;
-
-      fetchData(tag).then((data) => {
-        const items = data.memos ?? (Array.isArray(data) ? data : []);
-        list.innerHTML = "";
-        if (items.length === 0) { list.innerHTML = '<p class="poetry-loading">暂无内容</p>'; return; }
-        renderCards(items);
-        pageToken = data.nextPageToken || "";
-        if (pageToken) loadBtn.style.display = "block";
-      }).catch(() => { list.innerHTML = '<p class="poetry-loading">加载失败</p>'; });
-    }
-
-    function loadMore() {
-      if (isLoading || !pageToken) return;
-      isLoading = true;
-      loadBtn.textContent = "加载中...";
-      fetchData(activeTag, pageToken).then((data) => {
-        const items = data.memos ?? (Array.isArray(data) ? data : []);
-        renderCards(items);
-        pageToken = data.nextPageToken || "";
-        loadBtn.textContent = pageToken ? "加载更多" : "没有更多了";
-        if (!pageToken) loadBtn.style.display = "none";
-        isLoading = false;
-      });
-    }
+    const panels = {
+      recorded: document.getElementById("recorded-poems-panel"),
+      haiku: document.getElementById("haiku-poetry-panel"),
+      poem: document.getElementById("poem-poetry-panel")
+    };
 
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         tabs.forEach((t) => t.classList.remove("active"));
         tab.classList.add("active");
-        loadFirstPage(tab.dataset.tag);
+
+        const activePanel = tab.dataset.panel || "recorded";
+        Object.entries(panels).forEach(([name, panel]) => {
+          if (panel) panel.hidden = name !== activePanel;
+        });
       });
     });
 
-    loadBtn.addEventListener("click", loadMore);
-    loadFirstPage(activeTag);
+    function formatAudioTime(seconds) {
+      if (!Number.isFinite(seconds) || seconds < 0) return "--:--";
+      const whole = Math.floor(seconds);
+      const minutes = Math.floor(whole / 60);
+      const rest = String(whole % 60).padStart(2, "0");
+      return `${minutes}:${rest}`;
+    }
+
+    document.querySelectorAll("[data-audio-player]").forEach((player) => {
+      const audio = player.querySelector("audio");
+      const controls = player.querySelector(".poem-player-controls");
+      const toggle = player.querySelector("[data-play-toggle]");
+      const progress = player.querySelector("[data-progress]");
+      const current = player.querySelector("[data-current]");
+      const duration = player.querySelector("[data-duration]");
+
+      if (!audio || !controls || !toggle || !progress || !current || !duration) return;
+
+      player.classList.add("is-enhanced");
+      controls.removeAttribute("aria-hidden");
+      audio.removeAttribute("controls");
+      progress.disabled = true;
+
+      const ensureAudioSource = () => {
+        if (audio.dataset.loaded === "true") return true;
+        if (!audio.dataset.audioSrc) return false;
+
+        const source = document.createElement("source");
+        source.src = audio.dataset.audioSrc;
+        source.type = audio.dataset.audioType || "audio/mpeg";
+        audio.append(source);
+        audio.load();
+        audio.dataset.loaded = "true";
+        return true;
+      };
+
+      const setProgressFill = () => {
+        progress.style.setProperty("--progress", `${Number(progress.value) / 10}%`);
+      };
+
+      const updateTime = () => {
+        current.textContent = formatAudioTime(audio.currentTime);
+        progress.disabled = !(Number.isFinite(audio.duration) && audio.duration > 0);
+        if (Number.isFinite(audio.duration)) {
+          duration.textContent = formatAudioTime(audio.duration);
+        } else if (audio.dataset.fallbackDuration) {
+          duration.textContent = audio.dataset.fallbackDuration;
+        }
+        progress.value = Number.isFinite(audio.duration) && audio.duration > 0
+          ? String(Math.round((audio.currentTime / audio.duration) * 1000))
+          : "0";
+        setProgressFill();
+      };
+
+      const setPlayingState = () => {
+        const isPlaying = !audio.paused && !audio.ended;
+        player.classList.toggle("is-playing", isPlaying);
+        toggle.setAttribute("aria-label", isPlaying ? "暂停朗读" : "播放朗读");
+      };
+
+      toggle.addEventListener("click", () => {
+        if (audio.paused || audio.ended) {
+          document.querySelectorAll("[data-audio-player] audio").forEach((otherAudio) => {
+            if (otherAudio !== audio) otherAudio.pause();
+          });
+          if (!ensureAudioSource()) return;
+          player.classList.add("is-loading");
+          audio.play()
+            .then(() => {
+              player.classList.remove("is-loading");
+            })
+            .catch(() => {
+              audio.setAttribute("controls", "");
+              player.classList.remove("is-enhanced");
+              player.classList.remove("is-loading");
+            });
+        } else {
+          audio.pause();
+        }
+      });
+
+      progress.addEventListener("input", () => {
+        if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
+        audio.currentTime = (Number(progress.value) / 1000) * audio.duration;
+        setProgressFill();
+      });
+
+      audio.addEventListener("loadedmetadata", updateTime);
+      audio.addEventListener("canplay", () => {
+        player.classList.remove("is-loading");
+        updateTime();
+      });
+      audio.addEventListener("error", () => {
+        player.classList.remove("is-loading");
+        setPlayingState();
+      });
+      audio.addEventListener("timeupdate", updateTime);
+      audio.addEventListener("play", setPlayingState);
+      audio.addEventListener("pause", setPlayingState);
+      audio.addEventListener("ended", () => {
+        updateTime();
+        setPlayingState();
+      });
+
+      updateTime();
+      setPlayingState();
+    });
   })();
 </script>
 
@@ -137,11 +295,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
   .poetry-tab:hover { border-color: var(--accent); color: var(--accent); }
   .poetry-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .poetry-list { display: flex; flex-direction: column; gap: 14px; }
+  .poetry-panel[hidden] { display: none !important; }
+  .poetry-list { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .poetry-loading { text-align: center; color: var(--muted); }
 
   .poetry-card {
-    display: flex; flex-direction: column; min-height: 100px; max-width: 540px; margin: 0 auto; width: 100%;
+    display: flex; flex-direction: column; min-height: 100px; width: min(100%, 540px);
     border-radius: 14px; overflow: hidden;
     box-shadow: 0 2px 16px rgb(49 36 18 / 6%);
     position: relative; isolation: isolate;
@@ -153,7 +312,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       var(--bg, none) center / cover no-repeat;
   }
   .pcard-main {
-    flex: 1; display: flex; flex-direction: column; min-width: 0;
+    flex: 1; display: flex; flex-direction: column; min-width: 0; width: 100%;
   }
   .pcard-body {
     flex: 1; padding: 18px 20px 0;

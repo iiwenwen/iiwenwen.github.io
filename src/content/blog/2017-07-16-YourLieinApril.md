@@ -41,7 +41,7 @@ category: article
 一天夜里，听到我父母在医院接待室的哭泣声，我明白自己时日已不长。
 于是就是在那时，我决定行动起来。
 
-![四月是你的谎言](https://blgo-1258469251.cos.ap-shanghai.myqcloud.com/sysndhy.jpg)
+![四月是你的谎言](https://img.syaoran.me/blog/sysndhy.jpg)
 
 为了能在天堂不感到后悔，我任性地做了很多事情。
 戴上一直害怕的隐形眼镜、不顾体重增长地吃东西、装作了不起似的去发号施令，

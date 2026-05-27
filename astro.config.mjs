@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import remarkBreaks from "remark-breaks";
 
 const repository = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
 const isUserOrOrgPage = repository.endsWith(".github.io");
@@ -10,18 +11,7 @@ export default defineConfig({
   site: process.env.SITE_URL || "https://iiwenwen.github.io",
   base,
   trailingSlash: "always",
-  vite: {
-    plugins: [
-      {
-        name: "lxgw-wenkai-font-display",
-        transform(code, id) {
-          if (!id.includes("lxgw-wenkai-webfont") || !id.endsWith(".css")) {
-            return null;
-          }
-
-          return code.replaceAll("font-display: swap", "font-display: optional");
-        }
-      }
-    ]
+  markdown: {
+    remarkPlugins: [remarkBreaks]
   }
 });

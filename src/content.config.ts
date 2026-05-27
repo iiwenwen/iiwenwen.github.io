@@ -23,6 +23,7 @@ const postSchema = z.object({
   date: z.coerce.date().optional(),
   pubDate: z.coerce.date().optional(),
   updatedDate: z.coerce.date().optional(),
+  column: z.string().optional(),
   category: category.default("article"),
   tags: tags.default([]),
   categories: z.preprocess(
@@ -42,4 +43,47 @@ const drafts = defineCollection({
   schema: postSchema
 });
 
-export const collections = { blog, drafts };
+const daily = defineCollection({
+  type: "content",
+  schema: z.object({
+    date: z.coerce.date(),
+    private: z.boolean().default(false),
+    tags: tags.default([])
+  })
+});
+
+const poems = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    author: z.string().optional(),
+    translator: z.string().optional(),
+    description: z.string().optional(),
+    pubDate: z.coerce.date().optional(),
+    recordedDate: z.coerce.date().optional(),
+    audioUrl: z.string().min(1),
+    audioType: z.string().default("audio/mpeg"),
+    duration: z.string().optional(),
+    source: z.string().optional(),
+    tags: tags.default([]),
+    draft: z.boolean().default(false)
+  })
+});
+
+const poetryNotes = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    kind: z.enum(["haiku", "poem"]),
+    date: z.coerce.date(),
+    source: z.string().default("memos"),
+    sourceId: z.string().optional(),
+    sourceUrl: z.string().optional(),
+    createdAt: z.coerce.date().optional(),
+    updatedAt: z.coerce.date().optional(),
+    tags: tags.default([]),
+    draft: z.boolean().default(false)
+  })
+});
+
+export const collections = { blog, drafts, daily, poems, poetryNotes };

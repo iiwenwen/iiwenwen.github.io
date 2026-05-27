@@ -11,3 +11,5 @@ src/data/Zotero_movies.json
 .42cog/
 .claude/
 /log
+/chats
+.codex

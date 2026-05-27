@@ -1,4 +1,6 @@
 ---
+import { formatDate } from "../lib/date";
+
 interface BookItem {
   title: string;
   author?: string;
@@ -47,7 +49,7 @@ const hidden = items.slice(maxInitial);
         <div class="media-footer">
           {item.date && !isNaN(new Date(item.date).valueOf()) && (
             <time datetime={item.date}>
-              {new Date(item.date).toLocaleDateString("zh-CN")}
+              {formatDate(item.date)}
             </time>
           )}
           {item.rating != null && item.rating > 0 && (
@@ -65,51 +67,109 @@ const hidden = items.slice(maxInitial);
   <button id="btn-load-more-books" class="ticket-btn-more">看更多...</button>
 )}
 
-<script type="application/json" id="book-data" data-bast={baseUrl}>
+<script is:inline type="application/json" id="book-data" data-base={baseUrl}>
   {JSON.stringify(hidden)}
 </script>
 
-<script>
+<script is:inline>
   (function () {
     const btn = document.getElementById("btn-load-more-books");
     const wall = document.getElementById("media-wall");
     const dataScript = document.getElementById("book-data");
     if (!btn || !wall || !dataScript) return;
 
-    const baseUrl = dataScript.dataset.bast || "/";
+    const baseUrl = dataScript.dataset.base || "/";
     let remaining = JSON.parse(dataScript.textContent || "[]");
     const BATCH = 12;
+
+    function formatDateValue(value) {
+      if (typeof value === "string") {
+        const match = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+        if (match) {
+          const [, year, month, day] = match;
+          return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+        }
+      }
+
+      const date = value ? new Date(value) : null;
+      if (!date || Number.isNaN(date.valueOf())) return "";
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
 
     function buildCard(item) {
       const date = item.date ? new Date(item.date) : null;
       const dateStr = date && !isNaN(date.valueOf())
-        ? date.toLocaleDateString("zh-CN")
+        ? formatDateValue(item.date)
         : "";
-      const stars = item.rating > 0
-        ? `<div class="media-rating">${"★".repeat(Math.round(item.rating))}${"☆".repeat(5 - Math.round(item.rating))}</div>`
-        : "";
-
-      const coverHtml = item.cover
-        ? `<img src="${item.cover}" alt="${item.title}" loading="lazy" decoding="async" />`
-        : `<div class="media-cover-placeholder"><span>${item.title.slice(0, 2)}</span></div>`;
-
-      const titleHtml = item.url
-        ? `<a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>`
-        : item.slug
-          ? `<a href="${baseUrl}blog/${item.slug}/">${item.title}</a>`
-          : `<span>${item.title}</span>`;
 
       const div = document.createElement("div");
       div.className = "media-card";
-      div.innerHTML = `<div class="media-cover">${coverHtml}</div>
-        <div class="media-info">
-          <h3>${titleHtml}</h3>
-          ${item.author ? `<p class="media-meta">${item.author}</p>` : ""}
-          <div class="media-footer">
-            ${dateStr ? `<time datetime="${item.date}">${dateStr}</time>` : ""}
-            ${stars}
-          </div>
-        </div>`;
+
+      const cover = document.createElement("div");
+      cover.className = "media-cover";
+      if (item.cover) {
+        const img = document.createElement("img");
+        img.src = item.cover;
+        img.alt = item.title || "";
+        img.loading = "lazy";
+        img.decoding = "async";
+        cover.appendChild(img);
+      } else {
+        const placeholder = document.createElement("div");
+        placeholder.className = "media-cover-placeholder";
+        const shortTitle = document.createElement("span");
+        shortTitle.textContent = (item.title || "").slice(0, 2);
+        placeholder.appendChild(shortTitle);
+        cover.appendChild(placeholder);
+      }
+
+      const info = document.createElement("div");
+      info.className = "media-info";
+      const title = document.createElement("h3");
+      const titleTarget = item.url || (item.slug ? `${baseUrl}blog/${item.slug}/` : "");
+      if (titleTarget) {
+        const link = document.createElement("a");
+        link.href = titleTarget;
+        if (item.url) {
+          link.target = "_blank";
+          link.rel = "noopener";
+        }
+        link.textContent = item.title || "";
+        title.appendChild(link);
+      } else {
+        const span = document.createElement("span");
+        span.textContent = item.title || "";
+        title.appendChild(span);
+      }
+      info.appendChild(title);
+
+      if (item.author) {
+        const author = document.createElement("p");
+        author.className = "media-meta";
+        author.textContent = item.author;
+        info.appendChild(author);
+      }
+
+      const footer = document.createElement("div");
+      footer.className = "media-footer";
+      if (dateStr) {
+        const time = document.createElement("time");
+        time.dateTime = item.date;
+        time.textContent = dateStr;
+        footer.appendChild(time);
+      }
+      if (item.rating > 0) {
+        const rating = Math.min(5, Math.max(0, Math.round(item.rating)));
+        const stars = document.createElement("div");
+        stars.className = "media-rating";
+        stars.textContent = "★".repeat(rating) + "☆".repeat(5 - rating);
+        footer.appendChild(stars);
+      }
+      info.appendChild(footer);
+      div.append(cover, info);
       return div;
     }
 

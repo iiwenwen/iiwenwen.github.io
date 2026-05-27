@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate } from "../../lib/date";
+import { getPoemDate, getPublishedPoems } from "../../lib/poems";
+
+export async function getStaticPaths() {
+  const poems = await getPublishedPoems();
+
+  return poems.map((poem) => ({
+    params: { slug: poem.slug },
+    props: { poem }
+  }));
+}
+
+const { poem } = Astro.props;
+const { Content } = await poem.render();
+const baseUrl = import.meta.env.BASE_URL;
+const allPoems = await getPublishedPoems();
+const currentIndex = allPoems.findIndex((p) => p.slug === poem.slug);
+const prevPoem = currentIndex < allPoems.length - 1 ? allPoems[currentIndex + 1] : null;
+const nextPoem = currentIndex > 0 ? allPoems[currentIndex - 1] : null;
+const poemDate = getPoemDate(poem);
+const hasDate = poemDate.valueOf() > 0;
+const meta = [
+  poem.data.author ? `原作：${poem.data.author}` : "",
+  poem.data.translator ? `译者：${poem.data.translator}` : "",
+  hasDate ? `朗读：${formatDate(poemDate)}` : "",
+  poem.data.duration ? `时长：${poem.data.duration}` : ""
+].filter(Boolean);
+---
+
+<BaseLayout title={poem.data.title} description={poem.data.description ?? `读诗：${poem.data.title}`}>
+  <article class="voice-poem">
+    <header class="voice-poem-header">
+      <a class="back-link" href={`${baseUrl}poetry/`}>← 回到诗歌</a>
+      <p class="eyebrow">读诗录</p>
+      <h1>{poem.data.title}</h1>
+      {poem.data.description && <p class="description">{poem.data.description}</p>}
+      {meta.length > 0 && <div class="meta">{meta.map((item) => <span>{item}</span>)}</div>}
+    </header>
+
+    <section class="poem-paper listening-sheet" aria-label="诗歌朗读和正文">
+      <div class="listening-audio">
+        <div>
+          <p class="poem-audio-kicker">Voice</p>
+          <h2>先听，再读</h2>
+        </div>
+        <audio controls preload="metadata">
+          <source src={poem.data.audioUrl} type={poem.data.audioType} />
+          你的浏览器不支持音频播放。
+        </audio>
+        <a class="poem-audio-fallback" href={poem.data.audioUrl}>打开音频源</a>
+      </div>
+
+      <div class="poem-text">
+        <Content />
+      </div>
+    </section>
+
+    <nav class="post-nav" aria-label="上下首导航">
+      {
+        prevPoem && (
+          <a class="post-nav-link prev" href={`${baseUrl}poems/${prevPoem.slug}/`}>
+            <span class="post-nav-label">上一首</span>
+            <span class="post-nav-title">{prevPoem.data.title}</span>
+          </a>
+        )
+      }
+      {
+        nextPoem && (
+          <a class="post-nav-link next" href={`${baseUrl}poems/${nextPoem.slug}/`}>
+            <span class="post-nav-label">下一首</span>
+            <span class="post-nav-title">{nextPoem.data.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</BaseLayout>

@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "syaoran-poetry-audio",
+  "main": "workers/audio-proxy.js",
+  "compatibility_date": "2026-05-21",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "blog.syaoran.me/audio/*",
+      "zone_name": "syaoran.me"
+    },
+    {
+      "pattern": "videos.syaoran.me",
+      "custom_domain": true
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "POETRY_AUDIO",
+      "bucket_name": "syaoran-poetry-audio"
+    }
+  ],
+  "vars": {
+    "AUDIO_PREFIX": "poetry/",
+    "ALLOWED_ORIGINS": "https://blog.syaoran.me,https://videos.syaoran.me,https://iiwenwen.github.io",
+    "CACHE_TTL_SECONDS": "86400"
+  }
+}

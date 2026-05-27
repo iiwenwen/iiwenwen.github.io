@@ -1,10 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import { getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog"))
-    .filter((post) => import.meta.env.DEV || !post.data.draft);
+  const posts = await getPublishedPosts();
 
   return posts.map((post) => ({
     params: { slug: post.slug },
@@ -14,13 +13,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const allPosts = (await getCollection("blog"))
-  .filter((p) => import.meta.env.DEV || !p.data.draft)
-  .sort((a, b) => {
-    const aDate = a.data.pubDate ?? a.data.date ?? new Date(0);
-    const bDate = b.data.pubDate ?? b.data.date ?? new Date(0);
-    return bDate.valueOf() - aDate.valueOf();
-  });
+const allPosts = await getPublishedPosts();
 
 const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
 const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;

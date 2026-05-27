@@ -7,7 +7,7 @@ categories:
 pubDate: 2017-05-02
 category: article
 ---
-![自私的基于](https://blgo-1258469251.file.myqcloud.com/自私的基因.jpg)
+![自私的基于](https://img.syaoran.me/blog/%E8%87%AA%E7%A7%81%E7%9A%84%E5%9F%BA%E5%9B%A0.jpg)
 
 自私的基因真的自私吗？
 <!--more-->

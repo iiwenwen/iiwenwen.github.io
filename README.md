@@ -38,26 +38,26 @@ newblog/
 ## 快速开始
 
 ```bash
-npm install
-npm run dev       # 开发服务器
-npm run build     # 生产构建
-npm run preview   # 预览生产构建
+bun install
+bun run dev       # 开发服务器
+bun run build     # 生产构建
+bun run preview   # 预览生产构建
 ```
 
 ## 数据同步
 
 ```bash
 # Zotero 同步（需 Zotero + Better BibTeX 运行中）
-npm run zotero:sync
+bun run zotero:sync
 
 # 豆瓣同步（需设置 DOUBAN_ID 环境变量）
-DOUBAN_ID=你的豆瓣ID npm run douban:sync
+DOUBAN_ID=你的豆瓣ID bun run douban:sync
 
 # 下载封面
 python3 scripts/download_covers.py
 
 # 一键同步
-npm run sync
+bun run sync
 ```
 
 ## 站点配置
