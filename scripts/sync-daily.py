@@ -7,7 +7,7 @@
 逻辑:
   - 扫描 Obsidian Vault 下所有 .md 文件
   - 跳过有 private: true 的笔记
-  - 复制其余文件到 src/content/daily/
+  - 复制其余文件到 src/content/posts/
   - 提交并推送
 """
 
@@ -63,7 +63,7 @@ def sync(vault_path: str):
 
     # Git 操作
     os.chdir(REPO_DIR)
-    os.system("git add src/content/daily/")
+    os.system("git add src/content/posts/")
     os.system(f'git commit -m "sync: {synced} 条日常" 2>/dev/null')
     os.system("git push origin main 2>/dev/null")
     print(f"\n✓ 已同步 {synced} 条日常并推送")

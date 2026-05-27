@@ -2,7 +2,7 @@
 
 <meta>
   <document-id>newblog-real</document-id>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
   <project>NewBlog</project>
   <type>Reality Constraints</type>
   <created>2026-05-03</created>
@@ -85,3 +85,12 @@
 - [ ] 未引入 SSR/API 路由
 - [ ] RSS feed 包含全文内容，草稿已过滤，link 标签可自动发现
 - [ ] 内容目录仅4个：posts/ drafts/ poems/ notes/，无额外collection
+- [ ] /write/ 工具零外部服务依赖，纯 GitHub API 认证，无需 VPN
+
+<constraint required="false" id="C7">
+<title>跨平台随记工具零外部依赖，通过 GitHub API 直接写入仓库</title>
+<description>博客内置 /write/ 页面作为跨平台随记工具。通过 GitHub Personal Access Token 认证，直接写入 src/content/posts/。不依赖任何第三方 API（Memos、Obsidian 等）。手机浏览器可用，无需 VPN。</description>
+<rationale>第三方 API 变更和网络限制是写作意愿的最大杀手。GitHub API 在国内可访问，Token 存储在浏览器 localStorage，零服务端依赖。</rationale>
+<violation-consequence>引入外部 API 依赖会导致服务不可用、需要 VPN、破坏写作流畅感。</violation-consequence>
+</constraint>
+

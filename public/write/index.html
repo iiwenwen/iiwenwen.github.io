@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#faf6ed">
-<title>写日常</title>
+<title>写随记</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -45,33 +45,44 @@
     position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
     padding: 10px 24px; border-radius: 20px; font-size: 14px; color: #fff;
     background: #3e3e3e; opacity: 0; transition: opacity .3s; pointer-events: none;
-    white-space: nowrap;
+    white-space: nowrap; z-index: 10;
   }
   .toast.show { opacity: 0.9; }
   .toast.ok { background: #4caf50; }
   .toast.err { background: #e53935; }
   .hint { font-size: 12px; color: #b0a898; text-align: center; }
+  .history { margin-top: 4px; }
+  .history summary { font-size: 13px; color: #b0a898; cursor: pointer; padding: 4px 0; }
+  .history ul { list-style: none; padding: 0; margin-top: 8px; }
+  .history li { font-size: 13px; color: #888; padding: 4px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+  .history li span { color: #aaa; font-size: 11px; }
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>✏️ 写日常</h1>
-  <a href="#" onclick="toggleToken()" id="token-link">🔑</a>
+  <h1>写随记</h1>
+  <a href="#" onclick="toggleToken()" id="token-link">设置</a>
 </div>
 <div class="main">
   <div class="token-row" id="token-row" style="display:none">
-    <input type="password" id="token" placeholder="GitHub Token" autocomplete="off">
+    <input type="password" id="token" placeholder="GitHub Personal Access Token" autocomplete="off">
   </div>
-  <textarea id="text" placeholder="今天发生了什么…" autofocus></textarea>
+  <textarea id="text" placeholder="写点什么…" autofocus></textarea>
   <button onclick="submit()" id="btn">发送</button>
-  <div class="hint">内容将写入 blog.syaoran.me 的日常模块</div>
+  <div class="hint">通过 GitHub API 直接写入博客仓库，无需 VPN</div>
+
+  <details class="history">
+    <summary>最近发送</summary>
+    <ul id="history-list"></ul>
+  </details>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
 const REPO = "iiwenwen/iiwenwen.github.io";
-const PATH = "src/content/daily";
+const PATH = "src/content/posts";
 const BRANCH = "main";
+const HISTORY_KEY = "write_history";
 
 const tokenInput = document.getElementById("token");
 const tokenRow = document.getElementById("token-row");
@@ -79,12 +90,15 @@ const textEl = document.getElementById("text");
 const btn = document.getElementById("btn");
 const toast = document.getElementById("toast");
 const tokenLink = document.getElementById("token-link");
+const historyList = document.getElementById("history-list");
 
-let token = localStorage.getItem("gh_token") || "";
+let token = localStorage.getItem("gh_token_write") || "";
 if (token) {
   tokenInput.value = token;
-  tokenLink.textContent = "✅";
+  tokenLink.textContent = "已设";
 }
+
+renderHistory();
 
 function toggleToken() {
   const show = tokenRow.style.display === "none";
@@ -95,7 +109,29 @@ function toggleToken() {
 function showToast(msg, type) {
   toast.textContent = msg;
   toast.className = "toast " + type + " show";
-  setTimeout(() => { toast.className = "toast"; }, 2500);
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { toast.className = "toast"; }, 2500);
+}
+
+function addHistory(text) {
+  const items = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+  items.unshift({ text: text.slice(0, 60), time: Date.now() });
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(items.slice(0, 20)));
+  renderHistory();
+}
+
+function renderHistory() {
+  const items = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+  historyList.innerHTML = items.map(i =>
+    `<li>${esc(i.text)}<span>${fmtTime(i.time)}</span></li>`
+  ).join("");
+}
+
+function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+function fmtTime(ts) {
+  const d = new Date(ts);
+  return d.toLocaleString("zh-CN", { month:"numeric", day:"numeric", hour:"2-digit", minute:"2-digit" });
 }
 
 async function submit() {
@@ -104,18 +140,29 @@ async function submit() {
 
   token = tokenInput.value.trim() || token;
   if (!token) { showToast("请先设置 GitHub Token", "err"); tokenRow.style.display = "flex"; return; }
-  localStorage.setItem("gh_token", token);
-  tokenLink.textContent = "✅";
+  localStorage.setItem("gh_token_write", token);
+  tokenLink.textContent = "已设";
 
   btn.disabled = true;
   btn.textContent = "发送中…";
 
   try {
     const now = new Date();
-    const filename = now.toISOString().replace(/[:.]/g, "-").slice(0,19) + ".md";
-    // ISO format: 2026-05-07T14-30-00.md
-    const dateStr = now.toISOString().replace("T", " ").slice(0,16);
-    const content = `---\ndate: ${dateStr}\n---\n\n${text}\n`;
+    const ts = now.toISOString().replace(/[:.]/g, "-").slice(0, 19);
+    const filename = ts + ".md";
+    const dateStr = now.toISOString().replace("T", " ").slice(0, 16);
+
+    const title = text.split(/[\n。！？,，]/)[0].slice(0, 30).trim() || "随记";
+    const content = [
+      "---",
+      `title: "${title}"`,
+      `date: ${dateStr}`,
+      "category: daily",
+      "---",
+      "",
+      text
+    ].join("\n");
+
     const base64 = btoa(unescape(encodeURIComponent(content)));
 
     const resp = await fetch(
@@ -127,7 +174,7 @@ async function submit() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          message: `daily: ${text.slice(0,40)}`,
+          message: `daily: ${title}`,
           content: base64,
           branch: BRANCH
         })
@@ -140,18 +187,18 @@ async function submit() {
     }
 
     textEl.value = "";
-    showToast("✓ 已发送", "ok");
+    addHistory(text);
+    showToast("已发送", "ok");
   } catch (e) {
-    showToast("✗ " + e.message, "err");
+    showToast("失败: " + e.message, "err");
   } finally {
     btn.disabled = false;
     btn.textContent = "发送";
   }
 }
 
-// Submit on Enter (Cmd+Enter for newline)
 textEl.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !e.metaKey) {
+  if (e.key === "Enter" && !e.metaKey && !e.ctrlKey) {
     e.preventDefault();
     submit();
   }

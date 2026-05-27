@@ -14,21 +14,25 @@ from pathlib import Path
 
 
 REPO_DIR = Path(__file__).resolve().parent.parent
-DAILY_DIR = REPO_DIR / "src" / "content" / "daily"
+POSTS_DIR = REPO_DIR / "src" / "content" / "posts"
 
 
 def create_daily(text: str) -> Path:
     now = datetime.now()
-    filename = f"{now.strftime('%Y-%m-%d-%H%M%S')}.md"
-    filepath = DAILY_DIR / filename
+    ts = now.strftime('%Y-%m-%dT%H-%M-%S')
+    filename = f"{ts}.md"
+    filepath = POSTS_DIR / filename
 
+    title = text.split("\n")[0][:30].strip() or "随记"
     frontmatter = f"""---
+title: "{title}"
 date: {now.strftime('%Y-%m-%d %H:%M')}
+category: daily
 ---
 
 {text.strip()}
 """
-    DAILY_DIR.mkdir(parents=True, exist_ok=True)
+    POSTS_DIR.mkdir(parents=True, exist_ok=True)
     filepath.write_text(frontmatter, encoding="utf-8")
     return filepath
 

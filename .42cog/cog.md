@@ -154,6 +154,10 @@
   Memos API → sync-poetry-memos.mjs → src/content/notes/*.md → Astro 构建 → /poetry/
 </flow>
 
+<flow id="F7" name="跨平台随记发布流程">
+  手机/电脑浏览器 → /write/ 页面 → 输入内容 + GitHub Token → GitHub API (PUT) → src/content/posts/{timestamp}.md → GitHub Actions 构建部署 → 博客 /memos/ 可见
+</flow>
+
 </information-flow>
 
 </information>
