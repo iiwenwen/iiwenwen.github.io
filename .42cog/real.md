@@ -2,7 +2,7 @@
 
 <meta>
   <document-id>newblog-real</document-id>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <project>NewBlog</project>
   <type>Reality Constraints</type>
   <created>2026-05-03</created>
@@ -44,6 +44,16 @@
 <violation-consequence>添加服务端功能会导致生产环境 404 或构建失败。</violation-consequence>
 </constraint>
 
+
+## 可选约束
+
+<constraint required="false" id="C5">
+<title>RSS 订阅必须提供全文内容，遵循 RSS 2.0 标准</title>
+<description>RSS/Atom feed 必须包含文章全文（非摘要），遵循 RSS 2.0 或 Atom 1.0 标准格式。feed 需通过页面 <link> 标签自动发现，草稿不得出现在 feed 中。</description>
+<rationale>摘要式 RSS 迫使读者跳转到网站，降低订阅体验。全文输出是独立博客的基本礼仪。</rationale>
+<violation-consequence>订阅者无法在 RSS 阅读器中完整阅读，降低订阅价值。</violation-consequence>
+</constraint>
+
 </constraints>
 
 ## 技术环境
@@ -66,3 +76,4 @@
 - [ ] 草稿过滤逻辑未被删除
 - [ ] 豆瓣 apikey 未泄露到其他文件
 - [ ] 未引入 SSR/API 路由
+- [ ] RSS feed 包含全文内容，草稿已过滤，link 标签可自动发现

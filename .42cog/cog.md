@@ -126,6 +126,10 @@
   用户输入关键词 → Pagefind 客户端索引 → 返回匹配文章 → 弹窗展示结果
 </flow>
 
+<flow id="F5" name="RSS 订阅流程">
+  Astro 构建 → 读取 blog collection（过滤草稿） → 生成 rss.xml（全文 RSS 2.0） → 部署到 /rss.xml → RSS 阅读器定时抓取
+</flow>
+
 </information-flow>
 
 </information>

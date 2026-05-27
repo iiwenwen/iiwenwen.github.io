@@ -21,6 +21,7 @@
     "sync": "bun run douban:sync && bun run zotero:sync"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
     "astro": "^5.0.0"
   },
   "devDependencies": {
