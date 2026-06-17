@@ -1,0 +1,69 @@
+@layer theme;
+
+@layer theme {
+  :root {
+    --theme-name: "default";
+
+    --font-sans: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+    --font-serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+    --font-body: "LXGW WenKai Screen", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    --radius-xs: 3px;
+    --radius-sm: 5px;
+    --radius-md: 6px;
+    --radius-lg: 14px;
+    --radius-pill: 999px;
+
+    --content-width: 980px;
+    --article-width: 660px;
+    --post-width: 760px;
+
+    --surface-page: Canvas;
+    --surface-paper: Canvas;
+    --surface-card: Canvas;
+    --surface-overlay: Canvas;
+    --text-primary: CanvasText;
+    --text-muted: GrayText;
+    --text-soft: GrayText;
+    --text-inverse: Canvas;
+    --border-subtle: color-mix(in srgb, CanvasText 14%, transparent);
+    --accent-primary: LinkText;
+    --accent-hover: LinkText;
+    --accent-strong: LinkText;
+    --accent-wash: color-mix(in srgb, LinkText 8%, transparent);
+    --surface-translucent: color-mix(in srgb, Canvas 34%, transparent);
+    --surface-backdrop: color-mix(in srgb, CanvasText 48%, transparent);
+    --rating-color: var(--accent-primary);
+    --shadow-card: none;
+    --shadow-card-hover: none;
+    --shadow-overlay: none;
+    --ticket-perforation: color-mix(in srgb, CanvasText 6%, transparent);
+    --poetry-card-shadow: var(--shadow-card);
+    --poetry-card-overlay: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--surface-paper) 78%, transparent) 0%,
+      color-mix(in srgb, var(--surface-paper) 72%, transparent) 100%
+    );
+
+    --header-bg: color-mix(in srgb, var(--surface-page) 86%, transparent);
+    --header-border: transparent;
+    --header-shadow: none;
+    --prose-link-color: var(--accent-strong);
+    --card-bg: var(--surface-card);
+    --card-border: var(--border-subtle);
+    --card-radius: var(--radius-md);
+    --media-card-shadow: var(--shadow-card);
+  }
+}

@@ -51,9 +51,9 @@ const sortedMovies = [...moviesData].sort((a, b) => new Date(b.date).valueOf() -
       <p class="description">{isBook ? `${booksData.length} 本` : isMovie ? `${moviesData.length} 部` : `共 ${posts.length} 篇`}</p>
     </header>
     {isBook ? (
-      <BookWall items={sortedBooks} baseUrl={baseUrl} maxInitial={24} />
+      <BookWall items={sortedBooks} baseUrl={baseUrl} />
     ) : isMovie ? (
-      <MovieWall items={sortedMovies} baseUrl={baseUrl} maxInitial={24} />
+      <MovieWall items={sortedMovies} baseUrl={baseUrl} />
     ) : (
       <ul class="archive-list">
         {posts.map((post) => (

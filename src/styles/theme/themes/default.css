@@ -1,0 +1,46 @@
+@layer theme {
+  :root,
+  [data-theme="default"] {
+    --theme-name: "default";
+
+    /* Sunny, upward sky-blue palette using OKLCH */
+    --brand-primary: oklch(76% 0.11 245); /* ~#64B5F6 */
+    --brand-accent: oklch(76% 0.11 245);
+    --brand-light: oklch(86% 0.06 245);
+    --brand-strong: oklch(60% 0.12 245);
+    --brand-wash: oklch(97% 0.02 245);
+
+    /* Clean, bright layout colors for a sunny feel */
+    --surface-page: oklch(99% 0.003 90); 
+    --surface-paper: oklch(100% 0 0);
+    --surface-card: oklch(100% 0 0);
+    --surface-overlay: oklch(100% 0 0);
+    --border-subtle: oklch(93% 0.01 90);
+
+    /* Typography Hierarchy */
+    --text-primary: oklch(35% 0 0); /* ~#3e3e3e */
+    --text-muted: oklch(60% 0 0);
+    --text-soft: oklch(75% 0 0);
+    --text-inverse: oklch(100% 0 0);
+
+    /* Semantic Mappings */
+    --accent-primary: var(--brand-primary);
+    --accent-hover: var(--brand-light);
+    --accent-strong: var(--brand-strong);
+    --accent-wash: var(--brand-wash);
+
+    --surface-translucent: oklch(100% 0 0 / 72%);
+    --surface-backdrop: oklch(35% 0 0 / 42%);
+    --rating-color: var(--brand-accent);
+    --shadow-card: 0 0 0 1px var(--border-subtle);
+    --shadow-card-hover: 0 8px 24px oklch(76% 0.11 245 / 15%), 0 0 0 1px var(--brand-primary);
+    --shadow-overlay: 0 8px 32px oklch(35% 0 0 / 8%);
+    --ticket-perforation: oklch(35% 0 0 / 6%);
+    --poetry-card-shadow: 0 0 0 1px var(--border-subtle);
+    --poetry-card-overlay: linear-gradient(135deg, oklch(100% 0 0 / 84%) 0%, oklch(99% 0.003 90 / 78%) 100%);
+
+    --header-bg: oklch(100% 0 0 / 85%);
+    --header-border: oklch(93% 0.01 90 / 82%);
+    --header-shadow: 0 2px 12px oklch(35% 0 0 / 4%);
+  }
+}

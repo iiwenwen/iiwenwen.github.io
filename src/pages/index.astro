@@ -1,39 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import BookWall from "../components/BookWall.astro";
-import MovieWall from "../components/MovieWall.astro";
-import booksData from "../data/books.json";
-import moviesData from "../data/movies.json";
 import siteConfig from "../data/site.json";
 import { formatDate } from "../lib/date";
 import { getPublishedPosts, getPostsByCategory } from "../lib/posts";
 
-const categories = {
-  article: "文章",
-  daily: "日常",
-  book: "图书",
-  movie: "电影"
-} as const;
-
-const posts = await getPublishedPosts();
-
 const baseUrl = import.meta.env.BASE_URL;
 
+const posts = await getPublishedPosts();
 const dailyPosts = await getPostsByCategory("daily");
-const recentMemos = dailyPosts.slice(0, 3).map((post) => ({
-  content: post.body.trim(),
-  createTime: post.data.pubDate ?? post.data.date ?? new Date(0)
-}));
+const articles = posts.filter(p => p.data.category === "article" || p.data.category === undefined);
 
-function categoryCount(key: string) {
-  if (key === "daily") return dailyPosts.length;
-  if (key === "book") return booksData.length;
-  if (key === "movie") return moviesData.length;
-  return posts.filter((p) => p.data.category === key).length;
-}
+const timelineItems = [...articles, ...dailyPosts]
+  .sort((a, b) => {
+    const dateA = a.data.pubDate ?? a.data.date ?? new Date(0);
+    const dateB = b.data.pubDate ?? b.data.date ?? new Date(0);
+    return dateB.valueOf() - dateA.valueOf();
+  })
+  .slice(0, 20);
 ---
 
-<BaseLayout title={siteConfig.author} description="个人博客">
+<BaseLayout title={siteConfig.author} description={siteConfig.tagline}>
   <section class="hero">
     <h1 class="hero-brand">{siteConfig.author}</h1>
     <p class="hero-tagline">{siteConfig.tagline}</p>
@@ -42,122 +28,152 @@ function categoryCount(key: string) {
     )}
   </section>
 
-  <section class="category-grid" aria-label="内容分类">
-    {Object.entries(categories).map(([key, label]) => (
-      <a href={key === "daily" ? `${baseUrl}memos/` : `${baseUrl}categories/${key}/`}>
-        <span>{label}</span>
-        <strong>{categoryCount(key)}</strong>
-      </a>
-    ))}
-  </section>
+  <section class="home-timeline" aria-label="近期轨迹">
+    {timelineItems.length === 0 ? (
+      <p class="home-empty">还没动笔，纸还是空白的。</p>
+    ) : (
+      <ul class="timeline-list">
+        {timelineItems.map((post) => {
+          const isDaily = post.data.category === "daily";
+          const link = isDaily ? `${baseUrl}memos/` : `${baseUrl}blog/${post.slug}/`;
+          let title = post.data.title;
 
-  {Object.entries(categories).map(([key, label]) => {
-    const categoryPosts = posts.filter((post) => post.data.category === key);
-    const recentPosts = categoryPosts.slice(0, 3);
+          if (isDaily) {
+            const text = post.body.trim().replace(/#\S+/g, "").replace(/\n/g, " ").trim();
+            title = text.length > 60 ? text.slice(0, 60) + "…" : text;
+          }
 
-    if (key === "daily") {
-      return (
-        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-          <h2 id={`${key}-posts`}>{label}</h2>
-          {recentMemos.length === 0 ? (
-            <p>暂无内容。</p>
-          ) : (
-            <>
-              <ul class="memos-list">
-                {recentMemos.map((m) => {
-                  const text = m.content.replace(/#\S+/g, "").replace(/\n/g, " ").trim();
-                  const display = text.length > 100 ? text.slice(0, 100) + "..." : text;
-                  const time = formatDate(m.createTime);
-                  return (
-                    <li>
-                      <a href={`${baseUrl}memos/`}>
-                        <span>{display}</span>
-                        <time>{time}</time>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-              <a class="more-link" href={`${baseUrl}memos/`}>更多{label} →</a>
-            </>
-          )}
-        </section>
-      );
-    }
-
-    if (key === "book") {
-      const books = [...booksData]
-        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-        .slice(0, 4);
-      return (
-        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-          <h2 id={`${key}-posts`}>{label}</h2>
-          {books.length === 0 ? (
-            <p>还没有发布内容。</p>
-          ) : (
-            <>
-              <BookWall items={books} baseUrl={baseUrl} />
-              {booksData.length > 4 && (
-                <a class="more-link" href={`${baseUrl}categories/book/`}>
-                  更多{label} →
-                </a>
-              )}
-            </>
-          )}
-        </section>
-      );
-    }
-
-    if (key === "movie") {
-      const movies = [...moviesData]
-        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-        .slice(0, 4);
-      return (
-        <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-          <h2 id={`${key}-posts`}>{label}</h2>
-          {movies.length === 0 ? (
-            <p>还没有发布内容。</p>
-          ) : (
-            <>
-              <MovieWall items={movies} baseUrl={baseUrl} />
-              {moviesData.length > 4 && (
-                <a class="more-link" href={`${baseUrl}categories/movie/`}>
-                  更多{label} →
-                </a>
-              )}
-            </>
-          )}
-        </section>
-      );
-    }
-
-    return (
-      <section class="post-list" id={key} aria-labelledby={`${key}-posts`}>
-        <h2 id={`${key}-posts`}>{label}</h2>
-        {recentPosts.length === 0 ? (
-          <p>还没有发布内容。</p>
-        ) : (
-          <>
-            <ul>
-              {recentPosts.map((post) => (
-                <li>
-                  <a href={`${baseUrl}blog/${post.slug}/`}>
-                    <span>{post.data.title}</span>
-                    <time datetime={(post.data.pubDate ?? post.data.date)?.toISOString()}>
-                      {formatDate(post.data.pubDate ?? post.data.date)}
-                    </time>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            {categoryPosts.length > 3 && (
-              <a class="more-link" href={`${baseUrl}categories/${key}/`}>
-                更多{label} →
+          return (
+            <li class="timeline-item">
+              <a href={link}>
+                <span class="timeline-content">
+                  <span class={`timeline-tag ${isDaily ? 'tag-daily' : 'tag-article'}`}>{isDaily ? '日常' : '文章'}</span>
+                  {title}
+                </span>
+                <time datetime={(post.data.pubDate ?? post.data.date)?.toISOString()}>
+                  {formatDate(post.data.pubDate ?? post.data.date)}
+                </time>
               </a>
-            )}
-          </>
-        )}
-      </section>
-    );
-  })}
+            </li>
+          );
+        })}
+      </ul>
+    )}
+  </section>
 </BaseLayout>
+
+<style>
+  .hero {
+    padding-top: 40px;
+    padding-bottom: 28px;
+  }
+
+  .hero-brand {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+    font-family: var(--font-serif);
+  }
+
+  .hero-tagline {
+    max-width: 720px;
+    margin-top: 16px;
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+
+  .home-timeline {
+    margin-bottom: 50px;
+  }
+
+  .home-empty {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 40px;
+  }
+
+  .timeline-list {
+    display: grid;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .timeline-item {
+    border-bottom: 1px dashed var(--border-subtle);
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+  }
+
+  .timeline-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .timeline-item a:hover {
+    color: var(--text-primary);
+    transform: translateX(4px);
+  }
+
+  .timeline-content {
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 1.02rem;
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 12px;
+    font-size: 0.75rem;
+    vertical-align: text-bottom;
+    letter-spacing: 0.02em;
+  }
+
+  .tag-article {
+    background: #e4ecf5;
+    color: var(--accent-primary);
+  }
+
+  .tag-daily {
+    background: #e8e6dc;
+    color: var(--text-soft);
+  }
+
+  .timeline-item time {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      padding-top: 42px;
+    }
+
+    .timeline-item a {
+      display: grid;
+      gap: 8px;
+      padding: 16px 0;
+    }
+
+    .timeline-item time {
+      padding-left: 54px;
+    }
+  }
+</style>

@@ -2,17 +2,34 @@
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
-const isAboutPage = Astro.url.pathname.endsWith("/about/");
+const isAboutPage = Astro.url.pathname.replace(/\/$/, '').endsWith("about");
 ---
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
-  <article class:list={["post", { "letter-page": isAboutPage }]}>
+  <article class:list={["post", { "letter-style": isAboutPage }]}>
     <header class="post-header">
       <h1>{frontmatter.title}</h1>
-      {frontmatter.description && <p class="description">{frontmatter.description}</p>}
+      {frontmatter.description && !isAboutPage && <p class="description">{frontmatter.description}</p>}
     </header>
     <div class="prose">
       <slot />
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .letter-style .post-header {
+    border-bottom: none;
+    margin-bottom: 1em;
+    padding-bottom: 0;
+  }
+  .letter-style .post-header h1 {
+    font-size: 1.45rem;
+    font-family: var(--font-sans);
+    margin-bottom: 0;
+  }
+  
+  .letter-style .prose {
+    line-height: 2;
+  }
+</style>

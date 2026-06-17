@@ -16,14 +16,10 @@ interface MovieItem {
   slug?: string;
 }
 
-const { items, baseUrl, maxInitial = 24 } = Astro.props as {
+const { items, baseUrl } = Astro.props as {
   items: MovieItem[];
   baseUrl: string;
-  maxInitial?: number;
 };
-
-const visible = items.slice(0, maxInitial);
-const hidden = items.slice(maxInitial);
 ---
 
 <svg aria-hidden="true" style="display: none;">
@@ -36,7 +32,7 @@ const hidden = items.slice(maxInitial);
 </svg>
 
 <div class="ticket-layout" id="ticket-layout">
-  {visible.map((item) => {
+  {items.map((item) => {
     const rating = Math.min(5, Math.max(0, Math.round(item.rating ?? 0)));
     const dateStr = formatDate(item.date);
 
@@ -76,117 +72,4 @@ const hidden = items.slice(maxInitial);
   })}
 </div>
 
-{hidden.length > 0 && (
-  <button id="btn-load-more" class="ticket-btn-more">看更多...</button>
-)}
 
-<script is:inline type="application/json" id="ticket-data" data-base={baseUrl}>
-  {JSON.stringify(hidden)}
-</script>
-
-<script is:inline>
-  (function () {
-    const btn = document.getElementById("btn-load-more");
-    const layout = document.getElementById("ticket-layout");
-    const dataScript = document.getElementById("ticket-data");
-    if (!btn || !layout || !dataScript) return;
-
-    const baseUrl = dataScript.dataset.base || "/";
-    let remaining = JSON.parse(dataScript.textContent || "[]");
-    const BATCH = 12;
-
-    function formatDateValue(value) {
-      if (typeof value === "string") {
-        const match = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-        if (match) {
-          const [, year, month, day] = match;
-          return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-        }
-      }
-
-      const date = value ? new Date(value) : null;
-      if (!date || Number.isNaN(date.valueOf())) return "";
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
-    }
-
-    function buildCard(item) {
-      const rating = Math.min(5, Math.max(0, Math.round(item.rating ?? 0)));
-      const dateStr = formatDateValue(item.date);
-
-      const div = document.createElement("div");
-      div.className = "ticket-item";
-
-      const body = document.createElement("div");
-      body.className = "ticket-body";
-      const comment = document.createElement("div");
-      comment.className = "rc-comment";
-      comment.textContent = item.remark || (item.summary || "").slice(0, 80) || "静静欣赏，沉浸其中...";
-      body.appendChild(comment);
-
-      const stub = document.createElement("div");
-      stub.className = "ticket-stub";
-      const meta = document.createElement("div");
-      meta.className = "rc-meta";
-      const title = document.createElement("div");
-      title.className = "rc-title";
-      const titleTarget = item.url || (item.slug ? `${baseUrl}blog/${item.slug}/` : "");
-      if (titleTarget) {
-        const link = document.createElement("a");
-        link.href = titleTarget;
-        if (item.url) {
-          link.target = "_blank";
-          link.rel = "noopener";
-        }
-        link.textContent = item.title || "";
-        title.appendChild(link);
-      } else {
-        const span = document.createElement("span");
-        span.textContent = item.title || "";
-        title.appendChild(span);
-      }
-
-      const stars = document.createElement("div");
-      stars.className = "rc-stars";
-      for (let i = 0; i < 5; i += 1) {
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("class", i < rating ? "star-filled" : "star-empty");
-        const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-        use.setAttribute("href", i < rating ? "#icon-star-filled" : "#icon-star-empty");
-        svg.appendChild(use);
-        stars.appendChild(svg);
-      }
-      meta.append(title, stars);
-
-      const footer = document.createElement("div");
-      footer.className = "ticket-footer";
-      const timeWrap = document.createElement("div");
-      timeWrap.className = "rc-time";
-      const time = document.createElement("time");
-      time.textContent = dateStr;
-      timeWrap.appendChild(time);
-      footer.appendChild(timeWrap);
-      if (item.zotero_key) {
-        const barcode = document.createElement("div");
-        barcode.className = "rc-barcode";
-        barcode.textContent = `ID:${item.zotero_key}`;
-        footer.appendChild(barcode);
-      }
-
-      stub.append(meta, footer);
-      div.append(body, stub);
-      return div;
-    }
-
-    btn.addEventListener("click", () => {
-      const batch = remaining.slice(0, BATCH);
-      remaining = remaining.slice(BATCH);
-      const fragment = document.createDocumentFragment();
-      batch.forEach((item) => fragment.appendChild(buildCard(item)));
-      layout.appendChild(fragment);
-      if (remaining.length === 0) btn.remove();
-    });
-  })();
-</script>
