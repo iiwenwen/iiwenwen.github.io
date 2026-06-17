@@ -219,6 +219,7 @@ nav a:hover {
   font-size: 0.98rem;
   line-height: 1.7;
   letter-spacing: 0;
+  white-space: pre-line;
 }
 
 .hero-quote::before {
