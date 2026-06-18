@@ -23,6 +23,7 @@ const postSchema = z.object({
   date: z.coerce.date().optional(),
   pubDate: z.coerce.date().optional(),
   updatedDate: z.coerce.date().optional(),
+  image: z.string().optional(),
   column: z.string().optional(),
   category: category.default("article"),
   tags: tags.default([]),
