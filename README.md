@@ -19,8 +19,9 @@
 ```
 newblog/
 ├── src/
-│   ├── content/blog/      # 文章
-│   ├── content/drafts/    # 草稿（git 忽略）
+│   ├── content/posts/     # 文章
+│   ├── content/drafts/    # 草稿
+│   ├── content/poetry/    # 俳句/诗歌
 │   ├── pages/             # 页面路由
 │   ├── layouts/           # 布局组件
 │   ├── components/        # BookWall / MovieWall
@@ -74,7 +75,7 @@ bun run sync
 
 ## 添加文章
 
-在 `src/content/blog/` 下创建 `.md` 文件：
+在 `src/content/posts/` 下创建 `.md` 文件：
 
 ```markdown
 ---

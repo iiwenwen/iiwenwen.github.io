@@ -1,0 +1,23 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const trail = [{ label: "首页", href: baseUrl }, ...items];
+---
+
+<nav class="breadcrumb" aria-label="面包屑导航">
+  {trail.map((item, index) => (
+    <>
+      {index > 0 && <span>/</span>}
+      {item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}
+    </>
+  ))}
+</nav>

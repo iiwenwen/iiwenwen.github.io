@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate } from "../../lib/date";
-import { getPostDate, getPostsByColumn, getPublishedPosts } from "../../lib/posts";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import PostArchiveList from "../../components/PostArchiveList.astro";
+import { getPostsByColumn, getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -12,35 +13,18 @@ export async function getStaticPaths() {
   return [...columns].map((col) => ({ params: { column: col } }));
 }
 
-const { column } = Astro.params;
+const column = Astro.params.column!;
 const baseUrl = import.meta.env.BASE_URL;
 
-const columnPosts = await getPostsByColumn(column!);
+const columnPosts = await getPostsByColumn(column);
 ---
 
 <BaseLayout title={`${column}`} description={`${column} 专栏`}>
   <article class="post">
-    <nav class="breadcrumb">
-      <a href={baseUrl}>首页</a>
-      <span>/</span>
-      <a href={`${baseUrl}columns/`}>专栏</a>
-      <span>/</span>
-      <span>{column}</span>
-    </nav>
+    <Breadcrumb items={[{ label: "专栏", href: `${baseUrl}columns/` }, { label: column }]} />
     <header class="post-header">
       <h1>{column}</h1>
     </header>
-    <ul class="archive-list">
-      {columnPosts.map((post) => (
-        <li>
-          <a href={`${baseUrl}blog/${post.slug}/`}>
-            <time datetime={getPostDate(post).toISOString()}>
-              {formatDate(getPostDate(post))}
-            </time>
-            <span>{post.data.title}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <PostArchiveList posts={columnPosts} />
   </article>
 </BaseLayout>

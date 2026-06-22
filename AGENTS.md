@@ -15,9 +15,9 @@ No test framework is configured.
 
 ## Architecture
 
-Pure Astro static site — no JS framework runtime. Content is Markdown in `src/content/`, rendered at build time to static HTML. Small inline scripts are used for search, tab switching, sticky header state, and audio controls.
+Pure Astro static site — no JS framework runtime. Content is Markdown in `src/content/`, rendered at build time to static HTML. Small inline scripts are used for search, tab switching, and sticky header state.
 
-**Content layer** (`src/content.config.ts`): Collections include `blog`, `drafts`, `daily`, `poems`, and `poetryNotes`. Blog category enum: `article | daily | book | movie`. `tags` accepts string or array and is normalised via `z.preprocess`. `draft: true` hides publishable entries from production builds where helper functions filter by `import.meta.env.DEV`.
+**Content layer** (`src/content.config.ts`): Collections include `posts`, `drafts`, and `poetry`. Post category enum: `article | daily`. `poetry` entries live in `src/content/poetry/` and use `kind: "haiku" | "poem"`; `source` records where the text came from, such as Memos. `tags` accepts string or array and is normalised via `z.preprocess`. `draft: true` hides publishable entries from production builds where helper functions filter by `import.meta.env.DEV`.
 
 **Templates**: Shared layouts plus static and dynamic Astro pages.
 - `BaseLayout.astro` — HTML shell, nav, search modal, footer, global CSS
@@ -34,7 +34,7 @@ Pure Astro static site — no JS framework runtime. Content is Markdown in `src/
 
 ## Adding content
 
-Drop a `.md` file in `src/content/blog/` with required frontmatter: `title`, `pubDate`, `category`, `tags`. Optional: `description`, `column`, `draft`.
+Drop a `.md` file in `src/content/posts/` with required frontmatter: `title`, `pubDate`, `category`, `tags`. Optional: `description`, `column`, `draft`.
 
 ## 写作工作流
 
@@ -43,7 +43,7 @@ Drop a `.md` file in `src/content/blog/` with required frontmatter: `title`, `pu
 ### 1. Markdown 草稿写作
 
 - 工作草稿写在 `src/content/drafts/`。
-- 可发布的博客文章放在 `src/content/blog/`。
+- 可发布的博客文章放在 `src/content/posts/`。
 - 如果草稿后续可能发布到博客，建议保留 Markdown frontmatter。
 - 代码块必须尽量显式标注语言，即使只是普通文本也建议使用 `text`：
 

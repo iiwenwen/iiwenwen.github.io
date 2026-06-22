@@ -3,7 +3,7 @@ import path from "node:path";
 
 const MEMOS_ORIGIN = process.env.MEMOS_ORIGIN || "https://memos.syaoran.me";
 const CREATOR_ID = process.env.MEMOS_CREATOR_ID || "1";
-const OUTPUT_DIR = path.resolve("src/content/poetryNotes");
+const OUTPUT_DIR = path.resolve("src/content/poetry");
 const PAGE_SIZE = Number(process.env.MEMOS_PAGE_SIZE || 100);
 
 const targets = [
@@ -16,7 +16,10 @@ function escapeYaml(value) {
 }
 
 function formatDate(date) {
-  return date.toISOString().slice(0, 10);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function slugify(value) {
@@ -69,11 +72,10 @@ async function fetchMemos(tag) {
   let pageToken = "";
 
   do {
-    const filter = encodeURIComponent(`tag in ["${tag}"]`);
     const url = new URL("/api/v1/memos", MEMOS_ORIGIN);
     url.searchParams.set("creatorId", CREATOR_ID);
     url.searchParams.set("pageSize", String(PAGE_SIZE));
-    url.searchParams.set("filter", decodeURIComponent(filter));
+    url.searchParams.set("filter", `tag in ["${tag}"]`);
     if (pageToken) url.searchParams.set("pageToken", pageToken);
 
     const response = await fetch(url);
@@ -139,4 +141,4 @@ for (const target of targets) {
   }
 }
 
-console.log(`Synced ${written} poetry notes to ${OUTPUT_DIR}`);
+console.log(`Synced ${written} poetry entries to ${OUTPUT_DIR}`);

@@ -15,7 +15,7 @@ const only = process.argv.find((arg) => arg.startsWith("--only="))?.slice("--onl
 const region = "auto";
 const service = "s3";
 
-const BLOG_GLOB = "src/content/blog";
+const BLOG_GLOB = "src/content/posts";
 const markdownFiles = await collectMarkdownFiles(BLOG_GLOB);
 const keys = new Set();
 

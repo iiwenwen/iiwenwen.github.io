@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 
 const { frontmatter } = Astro.props;
 const isAboutPage = Astro.url.pathname.replace(/\/$/, '').endsWith("about");
@@ -7,6 +8,7 @@ const isAboutPage = Astro.url.pathname.replace(/\/$/, '').endsWith("about");
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
   <article class:list={["post", { "letter-style": isAboutPage }]}>
+    <Breadcrumb items={[{ label: frontmatter.title }]} />
     <header class="post-header">
       <h1>{frontmatter.title}</h1>
       {frontmatter.description && !isAboutPage && <p class="description">{frontmatter.description}</p>}

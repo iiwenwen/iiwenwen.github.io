@@ -1,38 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import { formatDate } from "../lib/date";
-import { getPoemDate, getPublishedPoems } from "../lib/poems";
-import { getPublishedNotes } from "../lib/notes";
+import { getPublishedPoetry } from "../lib/poetry";
 
 const baseUrl = import.meta.env.BASE_URL;
-const recordedPoems = await getPublishedPoems();
-const recordedPoemCards = await Promise.all(
-  recordedPoems.map(async (poem, index) => ({
-    poem,
-    Content: (await poem.render()).Content,
+const poetryEntries = await getPublishedPoetry();
+const allPoems = await Promise.all(
+  poetryEntries.map(async (entry, index) => ({
+    type: entry.data.kind,
+    date: entry.data.date,
+    Content: (await entry.render()).Content,
     bgImg: (index % 8) + 1
   }))
 );
-const notes = await getPublishedNotes();
-const renderedNotes = await Promise.all(
-  notes.map(async (note, index) => ({
-    note,
-    Content: (await note.render()).Content,
-    bgImg: (index % 8) + 1
-  }))
-);
-const allPoems = [
-  ...recordedPoemCards.map(item => ({ type: 'recorded', date: getPoemDate(item.poem), ...item })),
-  ...renderedNotes.map(item => ({ type: item.note.data.kind, date: item.note.data.date, ...item }))
-].sort((a, b) => {
-  const dateA = a.date.valueOf() || 0;
-  const dateB = b.date.valueOf() || 0;
-  return dateB - dateA;
-});
 ---
 
 <BaseLayout title="诗歌" description="俳句与诗歌">
   <article class="post">
+    <Breadcrumb items={[{ label: "诗歌" }]} />
     <header class="post-header">
       <h1>诗歌</h1>
       <p class="description">让我为你读首诗</p>
@@ -42,57 +28,20 @@ const allPoems = [
       {allPoems.length === 0 ? (
         <p class="poetry-loading">暂无诗歌。</p>
       ) : (
-        allPoems.map(({ type, date, Content, bgImg, poem }) => {
+        allPoems.map(({ type, date, Content, bgImg }) => {
           const hasDate = date.valueOf() > 0;
-          const isRecorded = type === 'recorded';
           
           return (
-            <article class={`poetry-card ${isRecorded ? 'voice-card' : ''}`} style={`--poetry-card-image: url('${baseUrl}poetry/${bgImg}.webp')`}>
+            <article class="poetry-card" style={`--poetry-card-image: url('${baseUrl}poetry/${bgImg}.webp')`}>
               <div class="pcard-main">
                 <div class="pcard-body">
-                  {isRecorded && poem && (
-                    <div class="pcard-audio" aria-label={`${poem.data.title}朗读音频`}>
-                      <div class="poem-player" data-audio-player>
-                        <audio
-                          controls
-                          preload="none"
-                          data-audio-src={poem.data.audioUrl}
-                          data-audio-type={poem.data.audioType}
-                          data-fallback-duration={poem.data.duration ?? ""}
-                        >
-                          你的浏览器不支持音频播放。
-                        </audio>
-                        <noscript>
-                          <audio controls preload="none">
-                            <source src={poem.data.audioUrl} type={poem.data.audioType} />
-                            你的浏览器不支持音频播放。
-                          </audio>
-                        </noscript>
-                        <div class="poem-player-controls" aria-hidden="true">
-                          <button class="poem-player-toggle" type="button" aria-label={`播放${poem.data.title}`} data-play-toggle>
-                            <span class="poem-player-icon" aria-hidden="true"></span>
-                          </button>
-                          <input class="poem-player-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="朗读进度" data-progress />
-                          <span class="poem-player-time" aria-live="off">
-                            <time data-current>0:00</time>
-                            <span aria-hidden="true">/</span>
-                            <time data-duration>{poem.data.duration ?? "--:--"}</time>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {isRecorded ? (
-                    <div class="pcard-poem"><Content /></div>
-                  ) : (
-                    <Content />
-                  )}
+                  <Content />
                 </div>
                 <div class="pcard-foot">
                   <time datetime={hasDate ? date.toISOString() : undefined}>
                     {hasDate ? formatDate(date) : "未注明日期"}
                   </time>
-                  <span style="opacity: 0.6"> · {type === 'recorded' ? '读诗' : type === 'haiku' ? '俳句' : '诗歌'}</span>
+                  <span style="opacity: 0.6"> · {type === 'haiku' ? '俳句' : '诗歌'}</span>
                 </div>
               </div>
             </article>
@@ -102,118 +51,6 @@ const allPoems = [
     </div>
   </article>
 </BaseLayout>
-
-<script is:inline>
-  (function () {
-    function formatAudioTime(seconds) {
-      if (!Number.isFinite(seconds) || seconds < 0) return "--:--";
-      const whole = Math.floor(seconds);
-      const minutes = Math.floor(whole / 60);
-      const rest = String(whole % 60).padStart(2, "0");
-      return `${minutes}:${rest}`;
-    }
-
-    document.querySelectorAll("[data-audio-player]").forEach((player) => {
-      const audio = player.querySelector("audio");
-      const controls = player.querySelector(".poem-player-controls");
-      const toggle = player.querySelector("[data-play-toggle]");
-      const progress = player.querySelector("[data-progress]");
-      const current = player.querySelector("[data-current]");
-      const duration = player.querySelector("[data-duration]");
-
-      if (!audio || !controls || !toggle || !progress || !current || !duration) return;
-
-      player.classList.add("is-enhanced");
-      controls.removeAttribute("aria-hidden");
-      audio.removeAttribute("controls");
-      progress.disabled = true;
-
-      const ensureAudioSource = () => {
-        if (audio.dataset.loaded === "true") return true;
-        if (!audio.dataset.audioSrc) return false;
-
-        const source = document.createElement("source");
-        source.src = audio.dataset.audioSrc;
-        source.type = audio.dataset.audioType || "audio/mpeg";
-        audio.append(source);
-        audio.load();
-        audio.dataset.loaded = "true";
-        return true;
-      };
-
-      const setProgressFill = () => {
-        progress.style.setProperty("--progress", `${Number(progress.value) / 10}%`);
-      };
-
-      const updateTime = () => {
-        current.textContent = formatAudioTime(audio.currentTime);
-        progress.disabled = !(Number.isFinite(audio.duration) && audio.duration > 0);
-        if (Number.isFinite(audio.duration)) {
-          duration.textContent = formatAudioTime(audio.duration);
-        } else if (audio.dataset.fallbackDuration) {
-          duration.textContent = audio.dataset.fallbackDuration;
-        }
-        progress.value = Number.isFinite(audio.duration) && audio.duration > 0
-          ? String(Math.round((audio.currentTime / audio.duration) * 1000))
-          : "0";
-        setProgressFill();
-      };
-
-      const setPlayingState = () => {
-        const isPlaying = !audio.paused && !audio.ended;
-        player.classList.toggle("is-playing", isPlaying);
-        toggle.setAttribute("aria-label", isPlaying ? "暂停朗读" : "播放朗读");
-      };
-
-      toggle.addEventListener("click", () => {
-        if (audio.paused || audio.ended) {
-          document.querySelectorAll("[data-audio-player] audio").forEach((otherAudio) => {
-            if (otherAudio !== audio) otherAudio.pause();
-          });
-          if (!ensureAudioSource()) return;
-          player.classList.add("is-loading");
-          audio.play()
-            .then(() => {
-              player.classList.remove("is-loading");
-            })
-            .catch(() => {
-              audio.setAttribute("controls", "");
-              player.classList.remove("is-enhanced");
-              player.classList.remove("is-loading");
-            });
-        } else {
-          audio.pause();
-        }
-      });
-
-      progress.addEventListener("input", () => {
-        if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
-        audio.currentTime = (Number(progress.value) / 1000) * audio.duration;
-        setProgressFill();
-      });
-
-      audio.addEventListener("loadedmetadata", updateTime);
-      audio.addEventListener("canplay", () => {
-        player.classList.remove("is-loading");
-        updateTime();
-      });
-      audio.addEventListener("error", () => {
-        player.classList.remove("is-loading");
-        setPlayingState();
-      });
-      audio.addEventListener("timeupdate", updateTime);
-      audio.addEventListener("play", setPlayingState);
-      audio.addEventListener("pause", setPlayingState);
-      audio.addEventListener("ended", () => {
-        updateTime();
-        setPlayingState();
-      });
-
-      updateTime();
-      setPlayingState();
-    });
-  })();
-</script>
 
 <style is:global>
   .poetry-list { display: flex; flex-direction: column; align-items: center; gap: 14px; }

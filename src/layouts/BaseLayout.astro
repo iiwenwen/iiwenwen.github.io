@@ -30,6 +30,7 @@ const baseUrl = import.meta.env.BASE_URL;
     <link rel="icon" type="image/png" href={`${baseUrl}favicon.png`} />
     <link rel="alternate" type="application/rss+xml" title={`${siteConfig.author}的博客 RSS`} href={`${baseUrl}rss.xml`} />
     <link rel="stylesheet" href={`${baseUrl}pagefind/pagefind-ui.css`} />
+    <script is:inline src={`${baseUrl}js/search.js`} defer></script>
     <title>{pageTitle}</title>
   </head>
   <body>

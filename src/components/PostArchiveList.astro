@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/date";
+import { getPostDate } from "../lib/posts";
+
+interface Props {
+  posts: CollectionEntry<"posts">[];
+}
+
+const { posts } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<ul class="archive-list">
+  {posts.map((post) => {
+    const date = getPostDate(post);
+    return (
+      <li>
+        <a href={`${baseUrl}blog/${post.slug}/`}>
+          <time datetime={date.toISOString()}>{formatDate(date)}</time>
+          <span>{post.data.title}</span>
+        </a>
+      </li>
+    );
+  })}
+</ul>

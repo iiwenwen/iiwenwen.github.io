@@ -10,11 +10,3 @@
     </footer>
   </div>
 </dialog>
-
-<script>
-  const baseEl = document.querySelector('meta[name="base-url"]');
-  const base = baseEl?.getAttribute("content") || "/";
-  const searchScript = document.createElement("script");
-  searchScript.src = `${base}js/search.js`;
-  document.body.appendChild(searchScript);
-</script>

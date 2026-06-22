@@ -3,14 +3,10 @@ import { formatDate } from "../lib/date";
 
 interface MovieItem {
   title: string;
-  director?: string;
-  cover?: string;
   date?: string;
-  runningTime?: string;
   rating?: number;
   summary?: string;
   remark?: string;
-  tags?: string[];
   url?: string;
   zotero_key?: string;
   slug?: string;
@@ -71,5 +67,4 @@ const { items, baseUrl } = Astro.props as {
     );
   })}
 </div>
-
 

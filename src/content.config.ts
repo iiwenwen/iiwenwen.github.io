@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const category = z.enum(["article", "daily"]);
+const category = z.literal("article");
 const tags = z.preprocess((value) => {
   if (value == null) {
     return [];
@@ -41,28 +41,25 @@ const posts = defineCollection({
 
 const drafts = defineCollection({
   type: "content",
-  schema: postSchema
+  schema: postSchema.partial()
 });
 
-const poems = defineCollection({
+const murSchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  pubDate: z.coerce.date(),
+  updatedDate: z.coerce.date().optional(),
+  image: z.string().optional(),
+  tags: tags.default([]),
+  draft: z.boolean().default(false)
+});
+
+const mur = defineCollection({
   type: "content",
-  schema: z.object({
-    title: z.string(),
-    author: z.string().optional(),
-    translator: z.string().optional(),
-    description: z.string().optional(),
-    pubDate: z.coerce.date().optional(),
-    recordedDate: z.coerce.date().optional(),
-    audioUrl: z.string().min(1),
-    audioType: z.string().default("audio/mpeg"),
-    duration: z.string().optional(),
-    source: z.string().optional(),
-    tags: tags.default([]),
-    draft: z.boolean().default(false)
-  })
+  schema: murSchema
 });
 
-const notes = defineCollection({
+const poetry = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
@@ -73,9 +70,13 @@ const notes = defineCollection({
     sourceUrl: z.string().optional(),
     createdAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date().optional(),
+    recordedDate: z.coerce.date().optional(),
+    audioUrl: z.string().min(1).optional(),
+    audioType: z.string().default("audio/mpeg"),
+    duration: z.string().optional(),
     tags: tags.default([]),
     draft: z.boolean().default(false)
   })
 });
 
-export const collections = { posts, drafts, poems, notes };
+export const collections = { posts, drafts, mur, poetry };

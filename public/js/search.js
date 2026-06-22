@@ -23,6 +23,7 @@
       callbacks.forEach(function (fn) {
         fn();
       });
+      callbacks.length = 0;
     };
     document.head.appendChild(script);
   }
@@ -54,18 +55,23 @@
 
   var searchEl = document.getElementById("search");
 
+  function openSearch() {
+    if (!modal || !searchEl) return;
+    modal.showModal();
+    if (!modalInstance) {
+      createUI(searchEl, function (instance) {
+        modalInstance = instance;
+        focusInput(modal);
+      });
+    } else {
+      focusInput(modal);
+    }
+  }
+
   if (modal && trigger && closeBtn) {
     trigger.addEventListener("click", function (e) {
       e.preventDefault();
-      modal.showModal();
-      if (!modalInstance) {
-        createUI(searchEl, function (instance) {
-          modalInstance = instance;
-          focusInput(modal);
-        });
-      } else {
-        focusInput(modal);
-      }
+      openSearch();
     });
 
     closeBtn.addEventListener("click", function () {
@@ -79,24 +85,11 @@
     document.addEventListener("keydown", function (e) {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        modal.showModal();
-        if (!modalInstance) {
-          createUI(searchEl, function (instance) {
-            modalInstance = instance;
-            focusInput(modal);
-          });
-        } else {
-          focusInput(modal);
-        }
+        openSearch();
       }
       if (e.key === "Escape" && modal.open) {
         modal.close();
       }
     });
-  }
-
-  var searchPage = document.getElementById("search-page");
-  if (searchPage) {
-    createUI(searchPage);
   }
 })();

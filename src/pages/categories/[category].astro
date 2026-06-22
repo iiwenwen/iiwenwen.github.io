@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import BookWall from "../../components/BookWall.astro";
 import MovieWall from "../../components/MovieWall.astro";
+import PostArchiveList from "../../components/PostArchiveList.astro";
 import booksData from "../../data/books.json";
 import moviesData from "../../data/movies.json";
 import { formatDate } from "../../lib/date";
-import { getPostDate, getPostsByCategory, getPublishedPosts } from "../../lib/posts";
+import { getMurDate, getMurTitle, getPublishedMurEntries } from "../../lib/mur";
+import { getPostsByCategory, getPublishedPosts } from "../../lib/posts";
 
 const categoryLabels: Record<string, string> = {
   article: "文章",
@@ -16,11 +19,14 @@ const categoryLabels: Record<string, string> = {
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
+  const murEntries = await getPublishedMurEntries();
 
   const categories = new Set<string>();
   for (const post of posts) {
     categories.add(post.data.category);
   }
+
+  if (murEntries.length > 0) categories.add("daily");
 
   // Always include book/movie from JSON data
   if (booksData.length > 0) categories.add("book");
@@ -31,42 +37,48 @@ export async function getStaticPaths() {
   }));
 }
 
-const { category } = Astro.params;
-const label = categoryLabels[category!] ?? category!;
+const category = Astro.params.category!;
+const label = categoryLabels[category] ?? category;
 const baseUrl = import.meta.env.BASE_URL;
-
-const posts = await getPostsByCategory(category!);
 
 const isBook = category === "book" && booksData.length > 0;
 const isMovie = category === "movie" && moviesData.length > 0;
+const isDaily = category === "daily";
 const isWall = isBook || isMovie;
-const sortedBooks = [...booksData].sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-const sortedMovies = [...moviesData].sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+const dailyEntries = isDaily ? await getPublishedMurEntries() : [];
+const posts = isWall || isDaily ? [] : await getPostsByCategory(category);
+const entryCount = isDaily ? dailyEntries.length : posts.length;
+const sortedBooks = isBook ? [...booksData].sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) : [];
+const sortedMovies = isMovie ? [...moviesData].sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) : [];
 ---
 
-<BaseLayout title={label} description={isWall ? `${isBook ? booksData.length : moviesData.length} 部` : `共 ${posts.length} 篇${label}`}>
+<BaseLayout title={label} description={isWall ? `${isBook ? booksData.length : moviesData.length} 部` : `共 ${entryCount} 篇${label}`}>
   <article class="post">
+    <Breadcrumb items={[{ label: label }]} />
     <header class="post-header">
       <h1>{label}</h1>
-      <p class="description">{isBook ? `${booksData.length} 本` : isMovie ? `${moviesData.length} 部` : `共 ${posts.length} 篇`}</p>
+      <p class="description">{isBook ? `${booksData.length} 本` : isMovie ? `${moviesData.length} 部` : `共 ${entryCount} 篇`}</p>
     </header>
     {isBook ? (
       <BookWall items={sortedBooks} baseUrl={baseUrl} />
     ) : isMovie ? (
       <MovieWall items={sortedMovies} baseUrl={baseUrl} />
-    ) : (
+    ) : isDaily ? (
       <ul class="archive-list">
-        {posts.map((post) => (
-          <li>
-            <a href={`${baseUrl}blog/${post.slug}/`}>
-              <time datetime={getPostDate(post).toISOString()}>
-                {formatDate(getPostDate(post))}
-              </time>
-              <span>{post.data.title}</span>
-            </a>
-          </li>
-        ))}
+        {dailyEntries.map((entry) => {
+          const date = getMurDate(entry);
+          return (
+            <li>
+              <a href={`${baseUrl}mur/${entry.slug}/`}>
+                <time datetime={date.toISOString()}>{formatDate(date)}</time>
+                <span>{getMurTitle(entry)}</span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
+    ) : (
+      <PostArchiveList posts={posts} />
     )}
   </article>
 </BaseLayout>

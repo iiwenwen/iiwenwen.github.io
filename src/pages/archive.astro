@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { formatDate } from "../lib/date";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import PostArchiveList from "../components/PostArchiveList.astro";
 import { getPostDate, getPublishedPosts } from "../lib/posts";
 
 const posts = await getPublishedPosts();
@@ -16,11 +17,11 @@ for (const post of posts) {
 
 const sortedYears = [...postsByYear.keys()].sort((a, b) => b - a);
 const totalCount = posts.length;
-const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="归档" description={`共 ${totalCount} 篇文章`}>
   <article class="post">
+    <Breadcrumb items={[{ label: "文章" }]} />
     <header class="post-header">
       <h1>归档</h1>
       <p class="description">共 {totalCount} 篇文章</p>
@@ -29,18 +30,7 @@ const baseUrl = import.meta.env.BASE_URL;
       {sortedYears.map((year) => (
         <section>
           <h2 class="archive-year">{year}</h2>
-          <ul>
-            {postsByYear.get(year)!.map((post) => (
-              <li>
-                <a href={`${baseUrl}blog/${post.slug}/`}>
-                  <time datetime={getPostDate(post).toISOString()}>
-                    {formatDate(getPostDate(post))}
-                  </time>
-                  <span>{post.data.title}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <PostArchiveList posts={postsByYear.get(year)!} />
         </section>
       ))}
     </div>

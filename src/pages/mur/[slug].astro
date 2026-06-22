@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import { formatDate } from "../../lib/date";
+import { getMurDate, getMurTitle, getPublishedMurEntries } from "../../lib/mur";
+
+export async function getStaticPaths() {
+  const entries = await getPublishedMurEntries();
+
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const entries = await getPublishedMurEntries();
+const currentIndex = entries.findIndex((item) => item.slug === entry.slug);
+const prevEntry = currentIndex < entries.length - 1 ? entries[currentIndex + 1] : null;
+const nextEntry = currentIndex > 0 ? entries[currentIndex - 1] : null;
+const { Content } = await entry.render();
+const title = getMurTitle(entry);
+const date = getMurDate(entry);
+const hasLeadingTitle = /^#\s+/.test(entry.body.trimStart());
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={title} description={entry.data.description ?? title}>
+  <article class="post">
+    <Breadcrumb items={[{ label: "日常", href: `${baseUrl}mur/` }, { label: title }]} />
+    <header class="post-header">
+      <p class="eyebrow">日常</p>
+      {!hasLeadingTitle && <h1>{title}</h1>}
+      <div class="meta">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      </div>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <nav class="post-nav" aria-label="上下篇导航">
+      {
+        prevEntry && (
+          <a class="post-nav-link prev" href={`${baseUrl}mur/${prevEntry.slug}/`}>
+            <span class="post-nav-label">上一篇</span>
+            <span class="post-nav-title">{getMurTitle(prevEntry)}</span>
+          </a>
+        )
+      }
+      {
+        nextEntry && (
+          <a class="post-nav-link next" href={`${baseUrl}mur/${nextEntry.slug}/`}>
+            <span class="post-nav-label">下一篇</span>
+            <span class="post-nav-title">{getMurTitle(nextEntry)}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</BaseLayout>
