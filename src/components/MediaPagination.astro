@@ -1,0 +1,59 @@
+---
+import { getMediaPageHref, type MediaCategory } from "../lib/media";
+
+interface Props {
+  category: MediaCategory;
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+const { category, currentPage, totalPages, baseUrl } = Astro.props;
+
+function getPageItems() {
+  if (totalPages <= 7) return Array.from({ length: totalPages }, (_, index) => index + 1);
+
+  const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+  const visible = [...pages].filter((page) => page >= 1 && page <= totalPages).sort((a, b) => a - b);
+  const result: Array<number | "ellipsis"> = [];
+
+  visible.forEach((page, index) => {
+    if (index > 0 && page - visible[index - 1] > 1) result.push("ellipsis");
+    result.push(page);
+  });
+
+  return result;
+}
+
+const pageItems = getPageItems();
+---
+
+{totalPages > 1 && (
+  <nav class="media-pagination" aria-label="分页导航">
+    {currentPage > 1 ? (
+      <a class="pagination-direction" href={getMediaPageHref(baseUrl, category, currentPage - 1)} rel="prev">上一页</a>
+    ) : (
+      <span class="pagination-direction is-disabled" aria-hidden="true">上一页</span>
+    )}
+
+    <div class="pagination-pages">
+      {pageItems.map((item, index) => item === "ellipsis" ? (
+        <span class="pagination-ellipsis" aria-hidden="true" data-index={index}>…</span>
+      ) : (
+        <a
+          href={getMediaPageHref(baseUrl, category, item)}
+          aria-label={`第 ${item} 页`}
+          aria-current={item === currentPage ? "page" : undefined}
+        >
+          {item}
+        </a>
+      ))}
+    </div>
+
+    {currentPage < totalPages ? (
+      <a class="pagination-direction" href={getMediaPageHref(baseUrl, category, currentPage + 1)} rel="next">下一页</a>
+    ) : (
+      <span class="pagination-direction is-disabled" aria-hidden="true">下一页</span>
+    )}
+  </nav>
+)}

@@ -1,32 +1,25 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
-import BookWall from "../../components/BookWall.astro";
-import MovieWall from "../../components/MovieWall.astro";
+import MediaCategoryPage from "../../components/MediaCategoryPage.astro";
 import PostArchiveList from "../../components/PostArchiveList.astro";
 import booksData from "../../data/books.json";
 import moviesData from "../../data/movies.json";
-import { formatDate } from "../../lib/date";
-import { getMurDate, getMurTitle, getPublishedMurEntries } from "../../lib/mur";
 import { getPostsByCategory, getPublishedPosts } from "../../lib/posts";
 
 const categoryLabels: Record<string, string> = {
   article: "文章",
-  daily: "日常",
   book: "图书",
   movie: "电影"
 };
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
-  const murEntries = await getPublishedMurEntries();
 
   const categories = new Set<string>();
   for (const post of posts) {
     categories.add(post.data.category);
   }
-
-  if (murEntries.length > 0) categories.add("daily");
 
   // Always include book/movie from JSON data
   if (booksData.length > 0) categories.add("book");
@@ -39,46 +32,22 @@ export async function getStaticPaths() {
 
 const category = Astro.params.category!;
 const label = categoryLabels[category] ?? category;
-const baseUrl = import.meta.env.BASE_URL;
-
-const isBook = category === "book" && booksData.length > 0;
-const isMovie = category === "movie" && moviesData.length > 0;
-const isDaily = category === "daily";
-const isWall = isBook || isMovie;
-const dailyEntries = isDaily ? await getPublishedMurEntries() : [];
-const posts = isWall || isDaily ? [] : await getPostsByCategory(category);
-const entryCount = isDaily ? dailyEntries.length : posts.length;
-const sortedBooks = isBook ? [...booksData].sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) : [];
-const sortedMovies = isMovie ? [...moviesData].sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()) : [];
+const isMedia = category === "book" || category === "movie";
+const posts = isMedia ? [] : await getPostsByCategory(category);
+const entryCount = posts.length;
 ---
 
-<BaseLayout title={label} description={isWall ? `${isBook ? booksData.length : moviesData.length} 部` : `共 ${entryCount} 篇${label}`}>
-  <article class="post">
-    <Breadcrumb items={[{ label: label }]} />
-    <header class="post-header">
-      <h1>{label}</h1>
-      <p class="description">{isBook ? `${booksData.length} 本` : isMovie ? `${moviesData.length} 部` : `共 ${entryCount} 篇`}</p>
-    </header>
-    {isBook ? (
-      <BookWall items={sortedBooks} baseUrl={baseUrl} />
-    ) : isMovie ? (
-      <MovieWall items={sortedMovies} baseUrl={baseUrl} />
-    ) : isDaily ? (
-      <ul class="archive-list">
-        {dailyEntries.map((entry) => {
-          const date = getMurDate(entry);
-          return (
-            <li>
-              <a href={`${baseUrl}mur/${entry.slug}/`}>
-                <time datetime={date.toISOString()}>{formatDate(date)}</time>
-                <span>{getMurTitle(entry)}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    ) : (
+{isMedia ? (
+  <MediaCategoryPage category={category} page={1} />
+) : (
+  <BaseLayout title={label} description={`共 ${entryCount} 篇${label}`}>
+    <article class="post">
+      <Breadcrumb items={[{ label }]} />
+      <header class="post-header">
+        <h1>{label}</h1>
+        <p class="description">共 {entryCount} 篇</p>
+      </header>
       <PostArchiveList posts={posts} />
-    )}
-  </article>
-</BaseLayout>
+    </article>
+  </BaseLayout>
+)}

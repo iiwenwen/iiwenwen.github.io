@@ -1,0 +1,232 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "./Breadcrumb.astro";
+import PoetryPagination from "./PoetryPagination.astro";
+import { formatDate } from "../lib/date";
+import {
+  getPoetryTagCounts,
+  getPoetryTagHref,
+  getPublishedPoetry,
+  hasPoetryAudio,
+  poetryHasTag,
+  POETRY_PAGE_SIZE
+} from "../lib/poetry";
+
+interface Props {
+  page?: number;
+  tag?: string;
+}
+
+const { page = 1, tag } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const allPoetryEntries = await getPublishedPoetry();
+const tagCounts = getPoetryTagCounts(allPoetryEntries);
+const poetryEntries = tag
+  ? allPoetryEntries.filter((entry) => poetryHasTag(entry, tag))
+  : allPoetryEntries;
+const totalPages = Math.max(1, Math.ceil(poetryEntries.length / POETRY_PAGE_SIZE));
+const currentPage = Math.min(Math.max(1, page), totalPages);
+const startIndex = (currentPage - 1) * POETRY_PAGE_SIZE;
+const pageEntries = poetryEntries.slice(startIndex, startIndex + POETRY_PAGE_SIZE);
+const poems = await Promise.all(
+  pageEntries.map(async (entry, index) => ({
+    slug: entry.slug,
+    title: entry.data.title,
+    type: entry.data.kind,
+    date: entry.data.date,
+    hasAudio: hasPoetryAudio(entry),
+    Content: (await entry.render()).Content,
+    bgImg: ((startIndex + index) % 8) + 1
+  }))
+);
+const pageTitleBase = tag ? `诗歌 · #${tag}` : "诗歌";
+const pageTitle = currentPage > 1 ? `${pageTitleBase} · 第 ${currentPage} 页` : pageTitleBase;
+const pageLabel = totalPages > 1 ? `共 ${poetryEntries.length} 首 · 第 ${currentPage}/${totalPages} 页` : `共 ${poetryEntries.length} 首`;
+const breadcrumbItems = tag
+  ? [
+      { label: "诗歌", href: `${baseUrl}poetry/` },
+      ...(currentPage > 1
+        ? [{ label: `#${tag}`, href: getPoetryTagHref(baseUrl, tag) }, { label: `第 ${currentPage} 页` }]
+        : [{ label: `#${tag}` }])
+    ]
+  : currentPage > 1
+    ? [{ label: "诗歌", href: `${baseUrl}poetry/` }, { label: `第 ${currentPage} 页` }]
+    : [{ label: "诗歌" }];
+---
+
+<BaseLayout title={pageTitle} description={`俳句与诗歌，${pageLabel}`}>
+  <article class="post">
+    <Breadcrumb items={breadcrumbItems} />
+    <header class="post-header">
+      <h1>诗歌</h1>
+      <p class="description">{tag ? `标签 #${tag}` : "让我为你读首诗"} · {pageLabel}</p>
+    </header>
+
+    <nav class="poetry-filters" aria-label="按诗歌标签筛选">
+      <a class:list={["poetry-filter", { active: !tag }]} href={`${baseUrl}poetry/`} aria-current={!tag ? "page" : undefined}>
+        全部 <span>{allPoetryEntries.length}</span>
+      </a>
+      {tagCounts.map(({ tag: filterTag, count }) => (
+        <a
+          class:list={["poetry-filter", { active: tag === filterTag, "is-reading": filterTag === "朗读" }]}
+          href={getPoetryTagHref(baseUrl, filterTag)}
+          aria-current={tag === filterTag ? "page" : undefined}
+        >
+          {filterTag === "朗读" && (
+            <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14">
+              <path d="M3 9V8a5 5 0 0 1 10 0v1M3 9H2.5A1.5 1.5 0 0 0 1 10.5v2A1.5 1.5 0 0 0 2.5 14H4V9H3Zm10 0h.5a1.5 1.5 0 0 1 1.5 1.5v2a1.5 1.5 0 0 1-1.5 1.5H12V9h1Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          )}
+          {filterTag} <span>{count}</span>
+        </a>
+      ))}
+    </nav>
+
+    <div class="poetry-list">
+      {poems.length === 0 ? (
+        <p class="poetry-loading">暂无诗歌。</p>
+      ) : (
+        poems.map(({ slug, title, type, date, hasAudio, Content, bgImg }) => {
+          const hasDate = date.valueOf() > 0;
+
+          return (
+            <a
+              class="poetry-card"
+              href={`${baseUrl}poems/${slug}/`}
+              aria-label={`阅读《${title}》`}
+              style={`--poetry-card-image: url('${baseUrl}poetry/${bgImg}.webp')`}
+            >
+              <div class="pcard-main">
+                <div class="pcard-body">
+                  <Content />
+                </div>
+                <div class="pcard-foot">
+                  <span class="pcard-labels">
+                    <span class="pcard-kind">{type === "haiku" ? "俳句" : "诗歌"}</span>
+                    {hasAudio && (
+                      <span class="pcard-audio-badge">
+                        <svg aria-hidden="true" viewBox="0 0 16 16" width="13" height="13">
+                          <path d="M3 9V8a5 5 0 0 1 10 0v1M3 9H2.5A1.5 1.5 0 0 0 1 10.5v2A1.5 1.5 0 0 0 2.5 14H4V9H3Zm10 0h.5a1.5 1.5 0 0 1 1.5 1.5v2a1.5 1.5 0 0 1-1.5 1.5H12V9h1Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        朗读
+                      </span>
+                    )}
+                  </span>
+                  <time datetime={hasDate ? date.toISOString() : undefined}>
+                    {hasDate ? formatDate(date) : "未注明日期"}
+                  </time>
+                </div>
+              </div>
+            </a>
+          );
+        })
+      )}
+    </div>
+
+    <PoetryPagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} tag={tag} />
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .poetry-list { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .poetry-loading { text-align: center; color: var(--text-muted); }
+  .poetry-filters {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    width: min(100%, 540px); margin: -8px auto 24px;
+  }
+  .poetry-filter {
+    display: inline-flex; align-items: center; gap: 5px;
+    min-height: 32px; padding: 5px 10px;
+    border: 1px solid var(--border-subtle); border-radius: 999px;
+    color: var(--text-muted); background: var(--surface-card);
+    font-size: 0.78rem; line-height: 1; text-decoration: none;
+  }
+  .poetry-filter span { color: var(--text-soft); font-family: var(--font-mono); font-size: 0.7rem; }
+  .poetry-filter:hover,
+  .poetry-filter:focus-visible,
+  .poetry-filter.active { border-color: var(--accent-primary); color: var(--accent-primary); }
+  .poetry-filter.active { background: color-mix(in srgb, var(--accent-primary) 8%, var(--surface-card)); }
+  .poetry-filter.is-reading svg { flex: 0 0 auto; }
+
+  .poetry-card {
+    display: flex; flex-direction: column; min-height: 100px; width: min(100%, 540px);
+    border-radius: 14px; overflow: hidden;
+    background: var(--surface-card); color: inherit; text-decoration: none;
+    box-shadow: var(--poetry-card-shadow);
+    position: relative; isolation: isolate;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .poetry-card:hover,
+  .poetry-card:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px oklch(0% 0 0 / 4%);
+  }
+  .poetry-card:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 3px;
+  }
+  .poetry-card::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: var(--poetry-card-image, none) center / cover no-repeat;
+    opacity: 0.22;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .poetry-card:hover::before,
+  .poetry-card:focus-visible::before {
+    opacity: 0.35;
+    transform: scale(1.03);
+  }
+  .poetry-card::after {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(135deg, transparent 40%, oklch(76% 0.11 245 / 8%) 100%);
+    pointer-events: none;
+  }
+  .pcard-main {
+    flex: 1; display: flex; flex-direction: column; min-width: 0; width: 100%;
+  }
+  .pcard-body {
+    flex: 1; padding: 18px 20px 0;
+    font-family: var(--font-body);
+    font-size: 1.1rem; line-height: 2; color: var(--text-primary);
+    overflow-wrap: break-word; word-break: break-word;
+  }
+  .pcard-body p { margin: 0.3em 0; }
+  .pcard-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 20px 14px;
+    font-size: 0.78rem; color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .pcard-kind { opacity: 0.6; }
+  .pcard-labels { display: inline-flex; align-items: center; gap: 8px; }
+  .pcard-foot time {
+    margin-left: auto;
+    text-align: right;
+  }
+  .pcard-audio-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 7px; border-radius: 999px;
+    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--accent-primary) 9%, transparent);
+    font-family: var(--font-sans); font-size: 0.72rem; font-weight: 500;
+  }
+  .poetry-list + .media-pagination { margin-top: 34px; }
+  @media (max-width: 640px) {
+    .poetry-card { flex-direction: column; }
+    .pcard-body { font-size: 1rem; padding: 16px 18px 0; }
+    .poetry-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+    .poetry-filters::-webkit-scrollbar { display: none; }
+    .poetry-filter { flex: 0 0 auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .poetry-card,
+    .poetry-card::before { transition: none; }
+    .poetry-card:hover,
+    .poetry-card:focus-visible,
+    .poetry-card:hover::before,
+    .poetry-card:focus-visible::before { transform: none; }
+  }
+</style>

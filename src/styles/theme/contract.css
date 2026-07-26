@@ -4,8 +4,8 @@
   :root {
     --theme-name: "default";
 
-    --font-sans: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
-    --font-serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+    --font-sans: "LXGW WenKai Screen", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+    --font-serif: "LXGW WenKai Screen", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
     --font-body: "LXGW WenKai Screen", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
     --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 

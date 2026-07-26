@@ -1,0 +1,30 @@
+---
+import PoetryPage from "../../../../../components/PoetryPage.astro";
+import {
+  getPoetryTagCounts,
+  getPublishedPoetry,
+  poetryHasTag,
+  POETRY_PAGE_SIZE
+} from "../../../../../lib/poetry";
+
+export async function getStaticPaths() {
+  const entries = await getPublishedPoetry();
+  const tagCounts = getPoetryTagCounts(entries);
+
+  return tagCounts.flatMap(({ tag }) => {
+    const count = entries.filter((entry) => poetryHasTag(entry, tag)).length;
+    const totalPages = Math.ceil(count / POETRY_PAGE_SIZE);
+    return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+      const page = index + 2;
+      return {
+        params: { tag, page: String(page) },
+        props: { tag, page }
+      };
+    });
+  });
+}
+
+const { tag, page } = Astro.props as { tag: string; page: number };
+---
+
+<PoetryPage page={page} tag={tag} />

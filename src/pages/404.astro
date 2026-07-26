@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="页面未找到"
+  description="你访问的页面不存在，可能已经移动或改名。"
+  noindex
+  searchable={false}
+>
+  <section class="not-found" aria-labelledby="not-found-title">
+    <p class="not-found-code" aria-hidden="true">404</p>
+    <h1 id="not-found-title">这一页暂时不在这里</h1>
+    <p>它也许换了地址，也许只是从书页间悄悄滑落。</p>
+    <div class="not-found-actions">
+      <a class="primary" href={baseUrl}>返回首页</a>
+      <a href={`${baseUrl}archive/`}>浏览文章</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: calc(100vh - 180px);
+    place-content: center;
+    justify-items: start;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 72px 0 96px;
+  }
+
+  .not-found-code {
+    margin: 0 0 12px;
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+    font-size: clamp(3.8rem, 14vw, 7rem);
+    font-weight: 500;
+    letter-spacing: -0.08em;
+    line-height: 0.9;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 6vw, 2.7rem);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .not-found > p:not(.not-found-code) {
+    margin: 18px 0 0;
+    color: var(--text-muted);
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .not-found-actions a {
+    padding: 8px 15px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .not-found-actions a:hover {
+    border-color: var(--accent-primary);
+  }
+
+  .not-found-actions .primary {
+    border-color: var(--text-primary);
+    background: var(--text-primary);
+    color: var(--text-inverse);
+  }
+</style>

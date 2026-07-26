@@ -21,6 +21,7 @@ newblog/
 ├── src/
 │   ├── content/posts/     # 文章
 │   ├── content/drafts/    # 草稿
+│   ├── content/mur/       # 日常
 │   ├── content/poetry/    # 俳句/诗歌
 │   ├── pages/             # 页面路由
 │   ├── layouts/           # 布局组件
@@ -43,6 +44,25 @@ bun install
 bun run dev       # 开发服务器
 bun run build     # 生产构建
 bun run preview   # 预览生产构建
+```
+
+## 创建内容
+
+项目已配置 `mdn` CLI，会按当前 Astro content schema 创建对应 Markdown 文件并自动打开编辑器：
+
+```bash
+mdn -t "草稿标题"
+mdn new blog -t "文章标题" --tags "写作,AI"
+mdn new daily
+mdn new poem -t "诗题"
+mdn new haiku -t "俳句题"
+```
+
+可用模板和当前配置：
+
+```bash
+mdn list
+mdn config --show
 ```
 
 ## 数据同步

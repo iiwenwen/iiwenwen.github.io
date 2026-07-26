@@ -11,7 +11,7 @@ export function getMurTitle(entry: MurEntry) {
 }
 
 export function getMurExcerpt(entry: MurEntry, maxLength = 80) {
-  const source = entry.data.description ?? entry.body;
+  const source = entry.data.description?.trim() || entry.body;
   const text = source
     .replace(/^#\s+.+$/m, "")
     .replace(/[#*~>`-]/g, "")

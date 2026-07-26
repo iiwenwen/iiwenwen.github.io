@@ -13,3 +13,5 @@ src/data/Zotero_movies.json
 /log
 /chats
 .codex
+.mdn/
+.mdnrc

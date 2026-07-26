@@ -8,6 +8,15 @@
   let pagefindLoading = false;
   const callbacks = [];
 
+  function loadPagefindStyle() {
+    if (document.getElementById("pagefind-ui-style")) return;
+    var link = document.createElement("link");
+    link.id = "pagefind-ui-style";
+    link.rel = "stylesheet";
+    link.href = baseUrl + "pagefind/pagefind-ui.css";
+    document.head.appendChild(link);
+  }
+
   function loadPagefind(cb) {
     if (pagefindReady) {
       cb();
@@ -16,6 +25,7 @@
     callbacks.push(cb);
     if (pagefindLoading) return;
     pagefindLoading = true;
+    loadPagefindStyle();
     var script = document.createElement("script");
     script.src = baseUrl + "pagefind/pagefind-ui.js";
     script.onload = function () {

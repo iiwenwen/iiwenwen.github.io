@@ -1,0 +1,28 @@
+---
+import MediaCategoryPage from "../../../../components/MediaCategoryPage.astro";
+import booksData from "../../../../data/books.json";
+import moviesData from "../../../../data/movies.json";
+import { MEDIA_PAGE_SIZE, type MediaCategory } from "../../../../lib/media";
+
+export function getStaticPaths() {
+  const categories: Array<{ category: MediaCategory; count: number }> = [
+    { category: "book", count: booksData.length },
+    { category: "movie", count: moviesData.length }
+  ];
+
+  return categories.flatMap(({ category, count }) => {
+    const totalPages = Math.ceil(count / MEDIA_PAGE_SIZE[category]);
+    return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+      const page = index + 2;
+      return {
+        params: { category, page: String(page) },
+        props: { category, page }
+      };
+    });
+  });
+}
+
+const { category, page } = Astro.props as { category: MediaCategory; page: number };
+---
+
+<MediaCategoryPage category={category} page={page} />

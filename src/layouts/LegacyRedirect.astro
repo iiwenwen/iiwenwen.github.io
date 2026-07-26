@@ -1,0 +1,28 @@
+---
+interface Props {
+  target: string;
+  title?: string;
+}
+
+const { target, title = "旧链接迁移" } = Astro.props;
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(target.replace(/^\//, ""), siteUrl);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{title}</title>
+  </head>
+  <body data-pagefind-ignore>
+    <p>文章地址已更新，正在前往<a href={target}>新地址</a>。</p>
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target + window.location.hash);
+    </script>
+  </body>
+</html>

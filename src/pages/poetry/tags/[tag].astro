@@ -1,0 +1,16 @@
+---
+import PoetryPage from "../../../components/PoetryPage.astro";
+import { getPoetryTagCounts, getPublishedPoetry } from "../../../lib/poetry";
+
+export async function getStaticPaths() {
+  const entries = await getPublishedPoetry();
+  return getPoetryTagCounts(entries).map(({ tag }) => ({
+    params: { tag },
+    props: { tag }
+  }));
+}
+
+const { tag } = Astro.props as { tag: string };
+---
+
+<PoetryPage page={1} tag={tag} />

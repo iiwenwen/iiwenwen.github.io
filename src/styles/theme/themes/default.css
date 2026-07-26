@@ -4,10 +4,10 @@
     --theme-name: "default";
 
     /* Sunny, upward sky-blue palette using OKLCH */
-    --brand-primary: oklch(76% 0.11 245); /* ~#64B5F6 */
-    --brand-accent: oklch(76% 0.11 245);
-    --brand-light: oklch(86% 0.06 245);
-    --brand-strong: oklch(60% 0.12 245);
+    --brand-primary: oklch(55% 0.14 245);
+    --brand-accent: oklch(55% 0.14 245);
+    --brand-light: oklch(48% 0.12 245);
+    --brand-strong: oklch(46% 0.13 245);
     --brand-wash: oklch(97% 0.02 245);
 
     /* Clean, bright layout colors for a sunny feel */
@@ -19,8 +19,8 @@
 
     /* Typography Hierarchy */
     --text-primary: oklch(35% 0 0); /* ~#3e3e3e */
-    --text-muted: oklch(60% 0 0);
-    --text-soft: oklch(75% 0 0);
+    --text-muted: oklch(53% 0 0);
+    --text-soft: oklch(50% 0 0);
     --text-inverse: oklch(100% 0 0);
 
     /* Semantic Mappings */

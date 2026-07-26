@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import siteConfig from "../data/site.json";
 import { formatDate } from "../lib/date";
-import { getPostDate, getPublishedPosts } from "../lib/posts";
+import { getPostDate, getPostFileSlug, getPublishedPosts } from "../lib/posts";
 import { getMurDate, getMurTitle, getPublishedMurEntries } from "../lib/mur";
 
 const baseUrl = import.meta.env.BASE_URL;
@@ -16,7 +16,7 @@ const timelineItems = [
       kind: "article" as const,
       title: post.data.title,
       date: getPostDate(post),
-      link: `${baseUrl}blog/${post.slug}/`
+      link: `${baseUrl}blog/${getPostFileSlug(post)}/`
     })),
   ...murEntries.map((entry) => ({
     kind: "daily" as const,

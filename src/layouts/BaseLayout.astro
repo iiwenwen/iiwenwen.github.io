@@ -9,34 +9,70 @@ import SiteHeader from "../components/site/SiteHeader.astro";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  noindex?: boolean;
+  searchable?: boolean;
+  type?: "website" | "article";
 }
 
 const {
   title = siteConfig.author,
-  description = "个人博客"
+  description = siteConfig.description || "个人博客",
+  image,
+  noindex = false,
+  searchable = true,
+  type = "website"
 } = Astro.props;
 
 const pageTitle = title === siteConfig.author ? title : `${title} | ${siteConfig.author}`;
+const pageDescription = description.trim() || siteConfig.description || "个人博客";
 const baseUrl = import.meta.env.BASE_URL;
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const socialImageUrl = image ? new URL(image.replace(/^\//, ""), siteUrl) : null;
 ---
 
 <!doctype html>
 <html lang="zh-CN" data-theme="default">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="base-url" content={baseUrl} />
-    <link rel="icon" type="image/png" href={`${baseUrl}favicon.png`} />
+    <meta name="theme-color" content="#fbfaf7" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreen.css"
+    />
     <link rel="alternate" type="application/rss+xml" title={`${siteConfig.author}的博客 RSS`} href={`${baseUrl}rss.xml`} />
-    <link rel="stylesheet" href={`${baseUrl}pagefind/pagefind-ui.css`} />
+    <link rel="sitemap" href={`${baseUrl}sitemap.xml`} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={siteConfig.author} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+    <meta name="twitter:card" content={socialImageUrl ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
     <script is:inline src={`${baseUrl}js/search.js`} defer></script>
     <title>{pageTitle}</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">跳到正文</a>
     <SiteHeader />
     <SearchDialog />
-    <main>
+    <main
+      id="main-content"
+      data-pagefind-body={searchable ? "" : undefined}
+      data-pagefind-ignore={searchable ? undefined : ""}
+    >
       <slot />
     </main>
     <SiteFooter />

@@ -2,24 +2,34 @@
 import siteConfig from "../../data/site.json";
 
 const baseUrl = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+const normalizedBase = baseUrl === "/" ? "/" : baseUrl.replace(/\/$/, "");
+const localPath = normalizedBase === "/" ? pathname : pathname.replace(normalizedBase, "") || "/";
+
+const navItems = [
+  { label: "首页", href: baseUrl, active: localPath === "/" },
+  { label: "文章", href: `${baseUrl}archive/`, active: localPath === "/archive/" || localPath.startsWith("/blog/") },
+  { label: "专栏", href: `${baseUrl}columns/`, active: localPath.startsWith("/columns/") },
+  { label: "日常", href: `${baseUrl}mur/`, active: localPath.startsWith("/mur/") },
+  { label: "诗歌", href: `${baseUrl}poetry/`, active: localPath === "/poetry/" || localPath.startsWith("/poems/") },
+  { label: "读书", href: `${baseUrl}categories/book/`, active: localPath.startsWith("/categories/book/") },
+  { label: "观影", href: `${baseUrl}categories/movie/`, active: localPath.startsWith("/categories/movie/") },
+  { label: "作品", href: `${baseUrl}works/`, active: localPath === "/works/" },
+  { label: "关于", href: `${baseUrl}about/`, active: localPath === "/about/" }
+];
 ---
 
-<header class="site-header" id="site-header">
+<header class="site-header" id="site-header" data-pagefind-ignore>
   <div class="header-inner">
     <a class="brand" href={baseUrl}>
-      <img src={`${baseUrl}logo.png`} alt="Logo" class="site-logo" />
+      <img src={`${baseUrl}logo.png`} alt="" class="site-logo" width="32" height="32" />
       <span>{siteConfig.author}</span>
     </a>
     <nav aria-label="主导航">
-      <a href={baseUrl}>首页</a>
-      <a href={`${baseUrl}archive/`}>文章</a>
-      <a href={`${baseUrl}columns/`}>专栏</a>
-      <a href={`${baseUrl}mur/`}>日常</a>
-      <a href={`${baseUrl}poetry/`}>诗歌</a>
-      <a href={`${baseUrl}categories/book/`}>读书</a>
-      <a href={`${baseUrl}categories/movie/`}>观影</a>
-      <a href={`${baseUrl}about/`}>关于</a>
-      <button class="search-trigger" title="搜索 (Cmd+K)" aria-label="打开搜索">
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={item.active ? "page" : undefined}>{item.label}</a>
+      ))}
+      <button class="search-trigger" title="搜索 (Cmd/Ctrl+K)" aria-label="打开搜索">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <span>搜索</span>
       </button>

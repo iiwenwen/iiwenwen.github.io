@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "./Breadcrumb.astro";
+import BookWall from "./BookWall.astro";
+import MediaPagination from "./MediaPagination.astro";
+import MovieWall from "./MovieWall.astro";
+import booksData from "../data/books.json";
+import moviesData from "../data/movies.json";
+import { getMediaPage, MEDIA_LABELS, MEDIA_PAGE_SIZE, sortMediaItems, type MediaCategory } from "../lib/media";
+
+interface Props {
+  category: MediaCategory;
+  page?: number;
+}
+
+const { category, page = 1 } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const config = MEDIA_LABELS[category];
+const bookPage = getMediaPage(sortMediaItems(booksData), page, MEDIA_PAGE_SIZE.book);
+const moviePage = getMediaPage(sortMediaItems(moviesData), page, MEDIA_PAGE_SIZE.movie);
+const currentPage = category === "book" ? bookPage.currentPage : moviePage.currentPage;
+const totalPages = category === "book" ? bookPage.totalPages : moviePage.totalPages;
+const totalItems = category === "book" ? booksData.length : moviesData.length;
+const pageTitle = currentPage > 1 ? `${config.title} · 第 ${currentPage} 页` : config.title;
+const countLabel = `${totalItems} ${config.unit}`;
+const pageLabel = totalPages > 1 ? ` · 第 ${currentPage}/${totalPages} 页` : "";
+const breadcrumbItems = currentPage > 1
+  ? [
+      { label: config.title, href: `${baseUrl}categories/${category}/` },
+      { label: `第 ${currentPage} 页` }
+    ]
+  : [{ label: config.title }];
+---
+
+<BaseLayout title={pageTitle} description={`${countLabel}${pageLabel}`}>
+  <article class="post media-category-page">
+    <Breadcrumb items={breadcrumbItems} />
+    <header class="post-header">
+      <h1>{config.title}</h1>
+      <p class="description">{countLabel}{pageLabel}</p>
+    </header>
+
+    {category === "book" ? (
+      <BookWall items={bookPage.items} baseUrl={baseUrl} />
+    ) : (
+      <MovieWall items={moviePage.items} baseUrl={baseUrl} />
+    )}
+
+    <MediaPagination
+      category={category}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      baseUrl={baseUrl}
+    />
+  </article>
+</BaseLayout>

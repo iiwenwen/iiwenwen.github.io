@@ -1,59 +1,133 @@
 ---
 import { formatDate } from "../lib/date";
+import { getPostFileSlug, getPublishedPosts } from "../lib/posts";
 
 interface BookItem {
   title: string;
   author?: string;
   cover?: string;
   date?: string;
+  publisher?: string;
+  isbn?: string;
+  pages?: string;
   rating?: number;
+  summary?: string;
+  remark?: string;
   url?: string;
   slug?: string;
+  douban_id?: string;
 }
 
 const { items, baseUrl } = Astro.props as {
   items: BookItem[];
   baseUrl: string;
 };
+
+const hoverCardId = "book-media-hover-card";
+const relatedPostsByBook = new Map<string, Awaited<ReturnType<typeof getPublishedPosts>>>();
+
+(await getPublishedPosts()).forEach((post) => {
+  post.data.books.forEach((bookId) => {
+    const posts = relatedPostsByBook.get(bookId) ?? [];
+    posts.push(post);
+    relatedPostsByBook.set(bookId, posts);
+  });
+});
 ---
 
-<div class="media-wall" id="media-wall">
-  {items.map((item) => (
-    <div class="media-card">
-      <div class="media-cover">
-        {item.cover ? (
-          <img src={item.cover} alt={item.title} loading="lazy" decoding="async" />
-        ) : (
-          <div class="media-cover-placeholder">
-            <span>{item.title.slice(0, 2)}</span>
+<div
+  class="media-wall-shell"
+  data-media-wall
+  data-media-details-url={`${baseUrl}book-details.json`}
+>
+  <div class="media-wall">
+    {items.map((item) => {
+      const rating = Math.min(5, Math.max(0, Math.round(item.rating ?? 0)));
+      const href = item.url ?? (item.slug ? `${baseUrl}blog/${item.slug}/` : undefined);
+      const isExternal = Boolean(item.url);
+      const publishedAt = formatDate(item.date);
+      const mediaKey = item.douban_id ?? item.isbn ?? item.url ?? item.title;
+      const relatedPosts = item.douban_id ? relatedPostsByBook.get(item.douban_id) ?? [] : [];
+
+      return (
+        <article class="media-card" data-media-card data-media-key={mediaKey}>
+          <div class="media-cover">
+            {href ? (
+              <a
+                class="media-cover-link"
+                href={href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener" : undefined}
+                aria-label={`查看《${item.title}》`}
+                aria-describedby={hoverCardId}
+              >
+                {item.cover ? (
+                  <img src={item.cover} alt="" loading="lazy" decoding="async" />
+                ) : (
+                  <div class="media-cover-placeholder" aria-hidden="true">
+                    <span>{item.title.slice(0, 2)}</span>
+                  </div>
+                )}
+              </a>
+            ) : item.cover ? (
+              <img src={item.cover} alt={item.title} loading="lazy" decoding="async" />
+            ) : (
+              <div class="media-cover-placeholder" aria-hidden="true">
+                <span>{item.title.slice(0, 2)}</span>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div class="media-info">
-        <h3>
-          {item.url ? (
-            <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
-          ) : item.slug ? (
-            <a href={`${baseUrl}blog/${item.slug}/`}>{item.title}</a>
-          ) : (
-            <span>{item.title}</span>
-          )}
-        </h3>
-        {item.author && <p class="media-meta">{item.author}</p>}
-        <div class="media-footer">
-          {item.date && !isNaN(new Date(item.date).valueOf()) && (
-            <time datetime={item.date}>
-              {formatDate(item.date)}
-            </time>
-          )}
-          {item.rating != null && item.rating > 0 && (
-            <div class="media-rating">
-              {"★".repeat(Math.round(item.rating))}{"☆".repeat(5 - Math.round(item.rating))}
+
+          <div class="media-info">
+            <h3>
+              {href ? (
+                <a
+                  href={href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener" : undefined}
+                  aria-describedby={hoverCardId}
+                >
+                  {item.title}
+                </a>
+              ) : (
+                <span>{item.title}</span>
+              )}
+            </h3>
+            {item.author && <p class="media-meta">{item.author}</p>}
+            <div class="media-footer">
+              {publishedAt && <time datetime={item.date}>{publishedAt}</time>}
+              {rating > 0 && (
+                <div class="media-rating" aria-label={`评分 ${rating} / 5`}>
+                  <span aria-hidden="true">{"★".repeat(rating)}{"☆".repeat(5 - rating)}</span>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
-    </div>
-  ))}
+            {relatedPosts.length > 0 && (
+              <div class="media-related-posts" aria-label="相关文章">
+                {relatedPosts.map((post) => (
+                  <a href={`${baseUrl}blog/${getPostFileSlug(post)}/`}>文章 · {post.data.title}</a>
+                ))}
+              </div>
+            )}
+          </div>
+
+        </article>
+      );
+    })}
+  </div>
+
+  <div
+    class="media-hover-card"
+    id={hoverCardId}
+    role="tooltip"
+    aria-hidden="true"
+    data-side="right"
+    hidden
+  ></div>
 </div>
 
+<script>
+  import { setupMediaHoverCards } from "../scripts/media-hover-cards";
+
+  setupMediaHoverCards();
+</script>

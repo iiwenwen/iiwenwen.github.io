@@ -1,0 +1,26 @@
+---
+import type { BookItem } from "../lib/book-links";
+
+interface Props {
+  books: BookItem[];
+}
+
+const { books } = Astro.props;
+---
+
+{books.length > 0 && (
+  <aside class="related-books" aria-labelledby="related-books-title">
+    <h2 id="related-books-title">文中读到的书</h2>
+    <div class="related-book-list">
+      {books.map((book) => (
+        <a href={book.url} target="_blank" rel="noopener" class="related-book">
+          <img src={book.cover} alt="" loading="lazy" decoding="async" />
+          <span>
+            <strong>{book.title}</strong>
+            <small>{book.author}</small>
+          </span>
+        </a>
+      ))}
+    </div>
+  </aside>
+)}

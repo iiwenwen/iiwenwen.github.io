@@ -27,6 +27,7 @@ const postSchema = z.object({
   column: z.string().optional(),
   category: category.default("article"),
   tags: tags.default([]),
+  books: z.array(z.string()).default([]),
   categories: z.preprocess(
     (v) => (typeof v === "string" ? [v] : v ?? []),
     z.array(z.string()).default([])

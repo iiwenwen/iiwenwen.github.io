@@ -2,8 +2,9 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "syaoran-poetry-audio",
   "main": "workers/audio-proxy.js",
-  "compatibility_date": "2026-05-21",
-  "workers_dev": true,
+  "compatibility_date": "2026-07-20",
+  "workers_dev": false,
+  "preview_urls": false,
   "routes": [
     {
       "pattern": "blog.syaoran.me/audio/*",
@@ -20,8 +21,31 @@
       "bucket_name": "syaoran-poetry-audio"
     }
   ],
+  "ratelimits": [
+    {
+      "name": "AUDIO_CLIENT_RATE_LIMITER",
+      "namespace_id": "2026071901",
+      "simple": {
+        "limit": 120,
+        "period": 60
+      }
+    },
+    {
+      "name": "AUDIO_COLO_RATE_LIMITER",
+      "namespace_id": "2026071902",
+      "simple": {
+        "limit": 600,
+        "period": 60
+      }
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1
+  },
   "vars": {
     "AUDIO_PREFIX": "poetry/",
+    "ALLOWED_HOSTS": "blog.syaoran.me,videos.syaoran.me",
     "ALLOWED_ORIGINS": "https://blog.syaoran.me,https://videos.syaoran.me,https://iiwenwen.github.io",
     "CACHE_TTL_SECONDS": "86400"
   }

@@ -1,0 +1,49 @@
+[
+  {
+    "title": "诗纸",
+    "period": "2026—",
+    "type": "写作工具",
+    "status": "持续开发",
+    "description": "一张会记住修改痕迹的数字诗纸。记录当前稿、手稿版本与字句变化，让写诗的过程也成为作品的一部分。",
+    "links": [
+      {
+        "label": "访问诗纸",
+        "href": "https://poetrydaily.cc/",
+        "external": true
+      },
+      {
+        "label": "创作记录",
+        "href": "mur/2026-07-07-26w28/",
+        "external": false
+      }
+    ]
+  },
+  {
+    "title": "Zotero Update Metadata",
+    "period": "2024—",
+    "type": "开源插件",
+    "status": "持续维护",
+    "description": "从条目的 URL 更新或保存 Zotero 元数据，减少重新打开网页与重复整理文献的步骤。",
+    "links": [
+      {
+        "label": "查看源码",
+        "href": "https://github.com/iiwenwen/zotero-update-metadata",
+        "external": true
+      }
+    ]
+  },
+  {
+    "title": "syaoran",
+    "period": "2017—",
+    "type": "个人网站",
+    "status": "持续写作",
+    "description": "持续写作、读书与记录生活的个人博客，也是文章、诗歌和阅读档案的长期容器。",
+    "links": [
+      {
+        "label": "浏览网站",
+        "href": "",
+        "external": false
+      }
+    ]
+  }
+]

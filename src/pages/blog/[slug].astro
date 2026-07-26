@@ -1,12 +1,12 @@
 ---
 import BlogPost from "../../layouts/BlogPost.astro";
-import { getPublishedPosts } from "../../lib/posts";
+import { getPostFileSlug, getPublishedPosts } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
 
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: getPostFileSlug(post) },
     props: { post }
   }));
 }
@@ -15,9 +15,9 @@ const { post } = Astro.props;
 
 const allPosts = await getPublishedPosts();
 
-const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
-const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
-const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const currentIndex = allPosts.findIndex((p) => p.id === post.id);
+const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 ---
 
 <BlogPost post={post} prevPost={prevPost} nextPost={nextPost} />

@@ -7,6 +7,8 @@ categories:
   - 读书笔记
 pubDate: 2022-03-07
 category: article
+books:
+  - "24537593"
 ---
 ## 修辞
 

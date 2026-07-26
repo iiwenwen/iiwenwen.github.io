@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import remarkBreaks from "remark-breaks";
+import rehypeImageAttributes from "./src/lib/rehype-image-attributes.mjs";
 
 const repository = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
 const isUserOrOrgPage = repository.endsWith(".github.io");
@@ -12,6 +13,7 @@ export default defineConfig({
   base,
   trailingSlash: "always",
   markdown: {
-    remarkPlugins: [remarkBreaks]
+    remarkPlugins: [remarkBreaks],
+    rehypePlugins: [rehypeImageAttributes]
   }
 });

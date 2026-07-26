@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import works from "../data/works.json";
+
+const baseUrl = import.meta.env.BASE_URL;
+const resolveHref = (href: string, external: boolean) => external ? href : `${baseUrl}${href}`;
+---
+
+<BaseLayout title="作品" description="个人作品与长期项目">
+  <article class="post works-page">
+    <Breadcrumb items={[{ label: "作品" }]} />
+    <header class="post-header">
+      <h1>作品</h1>
+      <p class="description">一些已经完成，也会继续生长的东西。</p>
+    </header>
+
+    <div class="works-grid">
+      {works.map((work) => (
+        <article class="work-card">
+          <div class="work-meta">
+            <span>{work.type}</span>
+            <time>{work.period}</time>
+          </div>
+          <h2>{work.title}</h2>
+          <p>{work.description}</p>
+          <div class="work-card-footer">
+            <span class="work-status">{work.status}</span>
+            <div class="work-links">
+              {work.links.map((link) => (
+                <a
+                  href={resolveHref(link.href, link.external)}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer" : undefined}
+                >
+                  {link.label}
+                  <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14">
+                    <path d="M3 8h9M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 800px;
+    margin: 52px auto 0;
+  }
+
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 284px;
+    padding: 26px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    background: var(--surface-primary);
+    transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .work-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--text-primary) 5%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .work-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-soft);
+    font-size: 0.76rem;
+  }
+
+  .work-meta time {
+    font-family: var(--font-mono);
+  }
+
+  .work-card h2 {
+    margin: 22px 0 0;
+    color: var(--text-primary);
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .work-card > p {
+    margin: 14px 0 28px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  .work-card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+  }
+
+  .work-status {
+    flex: 0 0 auto;
+    color: var(--text-soft);
+    font-size: 0.74rem;
+  }
+
+  .work-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px 14px;
+  }
+
+  .work-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent-primary);
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+
+  .work-links a:hover,
+  .work-links a:focus-visible {
+    color: var(--accent-hover);
+  }
+
+  @media (max-width: 640px) {
+    .works-grid {
+      grid-template-columns: 1fr;
+      margin-top: 40px;
+    }
+
+    .work-card {
+      min-height: 0;
+      padding: 22px;
+    }
+
+    .work-card-footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .work-links {
+      justify-content: flex-start;
+    }
+  }
+</style>
