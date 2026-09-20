@@ -1,0 +1,1423 @@
+nodes:
+  007ec59e-7816-4acb-9175-e42acfc68ca8:
+    path: posts/2018-10-17-SymphonicEtiquette.md
+    kind: file
+    sha256: ac8b2153170b3476f421c3fd4f1e25e7eba86a16861eb8b2aabdb0c3815b49b8
+    bytes: 3570
+    mtime: 1779857810364616251
+    chars: 1859
+  025c0efc-4d75-463c-be2d-62767202675b:
+    path: mur/2026-07-26-draft01.md
+    kind: file
+    sha256: 358a29e567237f2c5fa3a1af1405299ef3fbc32b25b577d42213b0a107f7a265
+    bytes: 1209
+    mtime: 1785549225690762189
+    chars: 477
+  02d083ac-ac8c-4083-b662-665eea195244:
+    path: posts/2022-05-06-Memo.md
+    kind: file
+    sha256: 5d1dbc08409d3928890704a17a33b5ddf905c06d4cdbf1c1969c002c0ab7c4a9
+    bytes: 819
+    mtime: 1779093154000000000
+    chars: 331
+  03a209fe-ae20-4828-9210-bd189410ce6a:
+    path: posts/2022-07-25-FW06Note.md
+    kind: file
+    sha256: e98ceb9202c2537e582c9659d4a3b7f431bf8495079e6dbdc100c6cd25849328
+    bytes: 2701
+    mtime: 1779084105000000000
+    chars: 966
+  03b08e97-9cba-45f2-9ccb-e5fc97beba3e:
+    path: posts/2020-12-24-2021Birthday.md
+    kind: file
+    sha256: b6cf16b5bc53014d7d82877f8347b928dee5c5969cb862e37c5b09a8540366e3
+    bytes: 4180
+    mtime: 1784346613880792162
+    chars: 1488
+  0474d0f4-1a16-406c-b36c-cfd0a16e0f9c:
+    path: poetry/2021-08-08-myz4cumciuznmmhr6r8lbv.md
+    kind: file
+    sha256: 539a0c4fb94b258a3ee6809af369b7ac07070aaa8e24aa2a9db86810a3002f0e
+    bytes: 349
+    mtime: 1782138606236834703
+    chars: 267
+  073e7676-7fbd-4d4f-ac04-febceee3d371:
+    path: posts/2025-09-10-OpenMind.md
+    kind: file
+    sha256: 5574f34a1be838f9badcd035cc357debe8339ac26503c414b171f70998202582
+    bytes: 8406
+    mtime: 1784346613971835072
+    chars: 2879
+  08c9a822-e2cb-4ad2-8c0c-9b08e8309ce1:
+    path: poetry/2022-06-21-jfwsausxoslcbf5vftrljp.md
+    kind: file
+    sha256: a727ba4f57c378a0dd1612620ecb750744179736381c502d2ab2e7ec45e54785
+    bytes: 372
+    mtime: 1782138606240422470
+    chars: 274
+  0d6249bc-1dee-4aa6-b8d3-595c43e026ff:
+    path: drafts/2026-07-31-JulSummary.wechat-source.md
+    kind: file
+    sha256: 40da7d41ec8fb7d7a2b341e418465f47de2ab0b9db53d6a70bc16a983ee1a8fb
+    bytes: 3480
+    mtime: 1785549465270037553
+    chars: 1246
+  10f05284-ffde-4ba7-bf12-8a38ddb4450f:
+    path: poetry/2023-03-19-poem-1.md
+    kind: file
+    sha256: c3af65c318cae984aabd3175f75e7eb7966a9660199376bdb22b138125426eee
+    bytes: 1335
+    mtime: 1784379098827456216
+    chars: 659
+  1324a9e0-9898-4126-892f-d534cd099f05:
+    path: posts/2017-07-16-YourLieinApril.md
+    kind: file
+    sha256: 40f9d3abb1a85a2a1f68b93dcf409e70ffd310b473a218dcca5242c4b05456d3
+    bytes: 5107
+    mtime: 1779857810363686291
+    chars: 1803
+  13a4ce49-2cbb-4bca-8c1a-0799324c35ee:
+    path: posts/2019-01-20-Weekly3.md
+    kind: file
+    sha256: 8a45783030289c92442706c1b0458302d7f14dc55c29fda4bbcd18eefdecfdab
+    bytes: 2048
+    mtime: 1779880690600418201
+    chars: 957
+  142a5f95-ae80-444c-845e-22ce1879267d:
+    path: poetry/2021-08-05-eh6epr2akwhahdvwkqy25u.md
+    kind: file
+    sha256: e5ab25349f9089eaef34604acb6afcf0bc41476710c6ff5f0defcd23c5458251
+    bytes: 349
+    mtime: 1782138606236216242
+    chars: 267
+  15c526a7-9742-4074-8fe5-df7879de6e45:
+    path: poetry/2022-03-24-tcvbvkgdjvrkymhamy9usx.md
+    kind: file
+    sha256: 49d3d2b5c1ccf3498d6fdb13a4a5c33e80c88f1f58ed79722f5b613e1d040f0c
+    bytes: 345
+    mtime: 1782138606239310798
+    chars: 265
+  16646456-cc0a-4b9b-8191-e322ffadd9e9:
+    path: posts/2018-09-15-JoeHisaishi.md
+    kind: file
+    sha256: 7bda74555a352ed58c8c6668ef04b34d9886bea9d404078879b8afa90089aee1
+    bytes: 3078
+    mtime: 1779084105000000000
+    chars: 1145
+  192694c4-2ce3-4ce6-845f-d52270898837:
+    path: posts/2018-05-09-LearnWriting06.md
+    kind: file
+    sha256: 576a8ef7a964d4cd2fc3752dba3c30c619e756d6ed4256d23c228eb7918b6090
+    bytes: 857
+    mtime: 1779084105000000000
+    chars: 352
+  1a297e49-823e-4c59-abfe-ed6d2e9c12ab:
+    path: drafts/五月小结.md
+    kind: file
+    sha256: 53a6951b1c63506dc4eb2b0c3776282e2c0bd7ffd31bc23a95013fc6b34b7e9e
+    bytes: 4123
+    mtime: 1784370229382054452
+    chars: 2367
+  1a48feb4-37f0-4b97-8b82-3b688584788d:
+    path: drafts/evening-blue.poem.before.md
+    kind: file
+    sha256: dcb19880eec115b9afc61b840ce68de4cce00418eecd7d97663e13d18b30b69a
+    bytes: 314
+    mtime: 1785486300116720003
+    chars: 132
+  1f9c6c26-5874-41d5-87ce-a63f4ca7d773:
+    path: posts/2022-05-15-ForBreathTarry.md
+    kind: file
+    sha256: 8f2f3409698a5761479a88304563aec7828a4985a6c3828f20a7d09e815c5521
+    bytes: 3023
+    mtime: 1779084105000000000
+    chars: 1074
+  20bd2dc9-2bf7-42fb-a7f7-8be22a02f6ac:
+    path: posts/2022-03-07-RhetoricSense.md
+    kind: file
+    sha256: 6e1faaa942d1ece0042686c0b50cc4717d530d3d7a89a979dd9b04674220c048
+    bytes: 8330
+    mtime: 1784346760513325818
+    chars: 2860
+  21bf44b9-852d-45d9-8eae-0c0e24165f02:
+    path: poetry/2021-08-08-jxvj8xdcukpuufvbdcw3vw.md
+    kind: file
+    sha256: 66f4a10f9c62155cc5d7a9fdb7a896a338a5123208afb21c775e076f69455551
+    bytes: 349
+    mtime: 1782138606236714453
+    chars: 267
+  21f4507b-781d-4be8-8dab-2086472ff25a:
+    path: poetry/2021-08-22-7gsjiguvserreqigxcsbxk.md
+    kind: file
+    sha256: fba77adbd41db1d827d8b6cd3807c2de6f96a11c76ed070302f7e07691ccfce7
+    bytes: 349
+    mtime: 1782138606238397877
+    chars: 267
+  21f8ff13-349c-4da8-8e87-526393df9c05:
+    path: posts/2017-05-16-IJustMetYou.md
+    kind: file
+    sha256: e6339d2bd7e1d07331f2b96d442c93977885d8f5d6baccfe82b7a2452ca88ad7
+    bytes: 1340
+    mtime: 1779857810363512291
+    chars: 539
+  224febde-9c95-449e-9f6d-59e8617fdd1a:
+    path: posts/2017-08-19-StudySimon01.md
+    kind: file
+    sha256: 0d0120f56f7a5e333b86cc0d80c1edbecf987799f5cc908a0dca48ae7ed7f4d8
+    bytes: 904
+    mtime: 1779084105000000000
+    chars: 381
+  23521a50-036b-4f68-aacd-85cfca62f495:
+    path: posts/2020-05-16-LoveLetter.md
+    kind: file
+    sha256: f7e1be26c0028e884ff1c88ae6c0f04b698d271a90c69d2c78864913e9eec995
+    bytes: 4655
+    mtime: 1784349115381345303
+    chars: 1641
+  25b469ea-aafd-4a36-9fff-7318550f396b:
+    path: poetry/2021-08-13-eh6jeqyz7yw6gclxw5slst.md
+    kind: file
+    sha256: ac8f467be13a34aa120c8d1565707b4b9ad7d3ae56137287a9d3579b2d473d00
+    bytes: 349
+    mtime: 1782138606237305122
+    chars: 267
+  27a7f5c9-79a0-4f21-ac26-c36afa7683d6:
+    path: posts/2022-06-07-Imagery.md
+    kind: file
+    sha256: c265bd53d34c55ec376543b455f2bc4b502756d99724322779ced5acd75f3323
+    bytes: 5010
+    mtime: 1784449543677174627
+    chars: 1865
+  27e54f7b-7a70-4fc8-bd75-db8931c4bde3:
+    path: posts/2022-06-25-FW.md
+    kind: file
+    sha256: e0de1a18848dafb00055904fc8dbd47485512a951b9032bccbc37f8d451908bd
+    bytes: 3457
+    mtime: 1779084105000000000
+    chars: 1241
+  283fb427-1be3-4bf8-80b4-c2ba2a9d5146:
+    path: posts/2026-05-02-TwoRoads.md
+    kind: file
+    sha256: dac5d22189a489b100fcf200bc70fd09a787c26f4c53cdb18da545a221e74d79
+    bytes: 5195
+    mtime: 1785076011483324010
+    chars: 1797
+  2986a890-d848-4148-b4b4-0d71a1e02a8a:
+    path: poetry/2022-09-14-poem-1.md
+    kind: file
+    sha256: 7664359dad5a12cef1fec2488d985fb509fdb1b00963983ff393edd1e4a0aaea
+    bytes: 929
+    mtime: 1784378989014498857
+    chars: 448
+  2a845017-5ed4-4191-8c61-e9e236fc4af9:
+    path: poetry/2022-09-19-poem-1.md
+    kind: file
+    sha256: 18795da953f31390fb0a8038662d726abae158ada836d53c360767a0a3f1cf7a
+    bytes: 1007
+    mtime: 1784378921498291238
+    chars: 467
+  2b85c3eb-02e3-488b-a9b3-28e7e73b0691:
+    path: posts/2020-05-06-Positivity.md
+    kind: file
+    sha256: a14fdb438ffcd6286b3a52aadc06f83cb49983fc6c11fc405ad4cb58a65b8887
+    bytes: 5940
+    mtime: 1779084105000000000
+    chars: 2122
+  2b990870-aa42-465f-b1c7-4031356ccfcc:
+    path: posts/2021-11-07-Writing.md
+    kind: file
+    sha256: 1fd13d5b1c246c083904229d0e00d2b36acce0e8d475a3ab4252391ad663ec90
+    bytes: 4876
+    mtime: 1779084105000000000
+    chars: 1777
+  2c1836b4-8713-431d-823e-beb5acbafd94:
+    path: posts/2024-12-28-Blog15Ask.md
+    kind: file
+    sha256: d798e3bf19f237eac9d9c96db3388425d992407a7227be079382056749b8bb2e
+    bytes: 3158
+    mtime: 1779084105000000000
+    chars: 1193
+  2c4476ca-77dd-4682-bcb2-51ea096f6e9a:
+    path: posts/2023-08-20-Beancount.md
+    kind: file
+    sha256: 99c3f90678cbc4c5acb722e81d8914ace7e32fcbb18fdb853a8e797f14d5dd43
+    bytes: 4422
+    mtime: 1779084105000000000
+    chars: 1947
+  2ddfd6a6-b074-4e6b-887b-1e40c4bd86da:
+    path: poetry/2022-09-28-poem-1.md
+    kind: file
+    sha256: eb7e9d859a666d27ed3cd29448a910102f1af6340b8ca59a7e24bdc3c706336e
+    bytes: 675
+    mtime: 1784378979484934603
+    chars: 363
+  2e6b06e4-56ed-4e18-a26a-e9a6e4c4f86c:
+    path: poetry/2022-07-03-eqhgkjybqauncxvvdj462w.md
+    kind: file
+    sha256: f349b0dbe30388cb9402a91e033e31159920831ceb4424c1bb5e2f8af8f14ae8
+    bytes: 430
+    mtime: 1782138606240600388
+    chars: 293
+  2fb053d7-9fd5-45f7-b805-7ae98299a0cc:
+    path: poetry/2021-08-19-y2wnblcq7mx5tmcykjwnan.md
+    kind: file
+    sha256: b06d0c9d691ce0bb01fb7017d0d24098a4cae83d0b10c0714e037e2565a20892
+    bytes: 349
+    mtime: 1782138606238061709
+    chars: 267
+  2fe3ea27-2a6c-4252-bc47-83fe5ac0d0ad:
+    path: poetry/2021-08-25-8lkcvqyypbnkxneqabm78x.md
+    kind: file
+    sha256: 11d01d10e817169dc3dc1bd559720d9bf7a97b80788eac66a86d59b0b4b0271a
+    bytes: 349
+    mtime: 1782138606238564670
+    chars: 267
+  3039f2b3-b23f-4b93-a5b6-2d8b55f41a3b:
+    path: poetry/2021-08-25-j3pkcttq4smowgicyy6hh5.md
+    kind: file
+    sha256: 594c516b04027ec764de42d58c9777fdbafa4c445011776edf6d68c8be790411
+    bytes: 349
+    mtime: 1782138606238666045
+    chars: 267
+  372dd2a4-41cc-410a-8b6e-da15944a3f84:
+    path: mur/2026-06-28-26W26.md
+    kind: file
+    sha256: 40e0b5f570872b176388f71e784ed47e71da5133d52e0880bea14688fa6f6f47
+    bytes: 1532
+    mtime: 1783507948205383546
+    chars: 599
+  384866ad-40ce-4df9-9b1d-eea6282ef693:
+    path: posts/2019-12-21-Waka.md
+    kind: file
+    sha256: cf30956673037f75d547f2aa88c5009c9847ca1f3cb7f5775bc12c6f07077aee
+    bytes: 1921
+    mtime: 1779857810365317335
+    chars: 854
+  3b8f4b64-251c-4760-b290-0ca222e23bc6:
+    path: posts/2022-05-09-0rangeCats.md
+    kind: file
+    sha256: 58254b1739c249fb1caf28f4c1c083f8249cb70fafa6e070376ed05926d34225
+    bytes: 2644
+    mtime: 1779084105000000000
+    chars: 950
+  3ca06989-8dc6-455a-8051-ecce35db5e48:
+    path: poetry/2021-08-23-np2yjaxhmm5c2wzrrqmnbx.md
+    kind: file
+    sha256: e2171920764600715ab829471ba0093a21dec77a6c72d9e7d0698c4461975172
+    bytes: 349
+    mtime: 1782138606238480295
+    chars: 267
+  3db0cd09-4f1f-44b7-bbd9-e4863646fcb9:
+    path: poetry/2022-07-30-poem-1.md
+    kind: file
+    sha256: 89043bbbf92b7b2e43ebcb17c047597da07bd09d34e2025d730231406a8cadb4
+    bytes: 1405
+    mtime: 1784378935774324744
+    chars: 597
+  3db4a5e6-532a-4b85-b53a-7295ba0203db:
+    path: posts/2018-08-20-Reason.md
+    kind: file
+    sha256: 3ee49a829a90ca3b769b6fc405883980372e5046ea088796ad711fc163405f48
+    bytes: 5018
+    mtime: 1779857810364321959
+    chars: 1898
+  3e66348e-70d6-475a-a98b-01ce438891bb:
+    path: posts/2020-03-15-Diary.md
+    kind: file
+    sha256: d93d5f7d5f004d1d9de870e66db696c16e7bd6763c4f80132f0ec04d3d20aa98
+    bytes: 9619
+    mtime: 1779084105000000000
+    chars: 3316
+  42a283a2-282e-4f49-b944-ab9c5b758ca2:
+    path: posts/2026-07-31-JulSummary.md
+    kind: file
+    sha256: 9862b9b26d418cc9266c0cc434d69536eb35af657ab90f26cc15bc5377523445
+    bytes: 3452
+    mtime: 1785550043656650349
+    chars: 1201
+  434f2f60-a792-4d3e-be2c-dd249474d97f:
+    path: posts/2017-07-27-MasterSimon.md
+    kind: file
+    sha256: af327f4058501fc4f76af0f6c4ed57f19860fd04adda537f8018041dc7e7f4fa
+    bytes: 1519
+    mtime: 1779084105000000000
+    chars: 581
+  440743cb-a750-4bc3-9635-78439bba10f4:
+    path: posts/2018-10-15-TravelForXiamen.md
+    kind: file
+    sha256: d46329f2949e1ca8932d3865a9e9a86efc7d2fdfdf87e5bd3500de524ef8d37f
+    bytes: 4994
+    mtime: 1779084105000000000
+    chars: 1744
+  44996262-5e05-4110-ab76-73a5e0f582df:
+    path: posts/2020-06-16-Emotions.md
+    kind: file
+    sha256: d81dd236c572eadc761776368042d34132d45f6a2df7844fb73a66852e674ed2
+    bytes: 5382
+    mtime: 1779857810365455668
+    chars: 1982
+  48e6bcd0-dcc7-4198-b02d-40142f569c14:
+    path: poetry/2021-08-29-kxxmvypmorqaowcrcqbnzm.md
+    kind: file
+    sha256: 5f7395e2f875b08e8e50245b5d5da9a9b95930669c6c64ffbe52539492e9ec76
+    bytes: 349
+    mtime: 1782138606239011172
+    chars: 267
+  4a32ab25-7cb3-4f07-8dd6-7834cf4bc332:
+    path: posts/2018-08-21-StoryOfTime.md
+    kind: file
+    sha256: 71a2385d4117117a4b9049bcb03e45d46b23bed6bc57d0dfe56472c978149ae0
+    bytes: 1681
+    mtime: 1779084105000000000
+    chars: 759
+  4a5b2d20-bcb0-4f03-9ad7-48e74ab354a0:
+    path: posts/未命名卡片.md
+    kind: file
+    sha256: eccf62d3aeda1bc6cf5d5287bd9983809640467985945cc83373d52d644aae76
+    bytes: 3452
+    mtime: 1789396242418941505
+    chars: 1201
+  4a6cd958-6bb3-46bd-9d37-c1b4c3cf6327:
+    path: posts/2018-07-21-TakeOnMe.md
+    kind: file
+    sha256: bbbe1e552901d919063c7c61c72b20bb4a834d07a04a80380ad20955ac8066ef
+    bytes: 1360
+    mtime: 1779084105000000000
+    chars: 532
+  4b077aee-ae01-41a8-a65b-ccfeefeaf682:
+    path: posts/2021-01-23-Södergran.md
+    kind: file
+    sha256: de016cbbb27508bab3cce2518fc7e115ca2efb18b1219f783d74d98b15a59b6e
+    bytes: 2625
+    mtime: 1779084105000000000
+    chars: 1004
+  4c4a441c-2a85-4ba2-9065-c8f46230edf6:
+    path: poetry/2026-05-24-a-cup-of-coffee.md
+    kind: file
+    sha256: a9b7f3593ce127f2874a9e31aa2c43aeea3b55f0809a01d31f64bddd50216f16
+    bytes: 367
+    mtime: 1784370354858566866
+    chars: 160
+  4c6d524d-c135-4aa6-83ed-b42ef3327ef0:
+    path: poetry
+    kind: folder
+  4e5ce829-7e9d-4282-98d7-0a3af3133daa:
+    path: poetry/2021-08-11-fcabk6q2na8wwxoigk7tl4.md
+    kind: file
+    sha256: 6e5c153606a4259dfb209fd552a0b4ac64ef9251e59bfd79b52646926eca95cc
+    bytes: 349
+    mtime: 1782138606237165830
+    chars: 267
+  4f0e6c06-cc01-4702-8f1c-9e565b7378c9:
+    path: drafts/我的捐发日记.md
+    kind: file
+    sha256: 5ec9d63ef8a38560b18b87837a01c016d325e0d40f3ca48cc420721193cedea3
+    bytes: 122
+    mtime: 1789863317886310215
+    chars: 42
+  537cdd38-87bf-4be8-8b6a-a84306dc8baf:
+    path: poetry/2022-06-06-7ar9daekkyh9tbgqackbsj.md
+    kind: file
+    sha256: 1a1894af66e8a80097234f26a53f65914415b60596c6547590eef8f93669dec7
+    bytes: 336
+    mtime: 1782138606240025094
+    chars: 262
+  549a9fcf-767d-44f6-85f0-92c33e6d9ef0:
+    path: posts/2018-06-15-DonQuixote.md
+    kind: file
+    sha256: ca992980aa91e56de226879c8a08bd51b7b793dedabdfb7823802ecdb893e4e0
+    bytes: 1448
+    mtime: 1779084105000000000
+    chars: 553
+  55032af2-a444-4fab-94be-20c8bbeb1338:
+    path: poetry/2021-08-29-l7zuwqvym6hfxeorfrb6zv.md
+    kind: file
+    sha256: 9d21cc8f44304aaa8012fbbf84fdfac8a02d5d74a244fc5fc64e28980a4486b7
+    bytes: 349
+    mtime: 1782138606239086214
+    chars: 267
+  569903d9-849d-4ace-bb2a-3799b5cd9699:
+    path: posts/2018-06-10-CardAadMe.md
+    kind: file
+    sha256: 576cdd4532afbf35b92b9a2bbb4ef3a0e0760901c7a9a0a3891b88b93f95750a
+    bytes: 3740
+    mtime: 1779857810364139334
+    chars: 1461
+  57e4aed8-7360-4e68-b7b1-841f06225912:
+    path: poetry/2022-06-16-tbyx8ktlmjwwy2ri7krshl.md
+    kind: file
+    sha256: 6f539bee9aed0ab41c542b446076420ceb1880120fd1445c539e85ba6ec0723d
+    bytes: 345
+    mtime: 1782138606240331887
+    chars: 265
+  5fca455e-7ccb-4b89-9893-09d3e5673cb4:
+    path: posts/2020-08-31-Markdown.md
+    kind: file
+    sha256: 58a1835b94edb6395a7cd5d93aad1776db19f43c65a9612cb46aec123b27e8af
+    bytes: 3841
+    mtime: 1779084105000000000
+    chars: 1781
+  60de4017-2af8-4a60-9879-8e6431587767:
+    path: posts/2023-09-10-OneBlog.md
+    kind: file
+    sha256: 48e754dd669c84bbd0f43a8566ac980be0ec237c6f832f63e590fab4de766f53
+    bytes: 5460
+    mtime: 1779084105000000000
+    chars: 2206
+  6216f97e-3e8c-43f9-a814-0c926492f2ae:
+    path: poetry/2026-05-17-sea-trash.md
+    kind: file
+    sha256: 816d658eecd0445e05447ae728f79c8035f0dd967671f8f2381ed1e82dfe6fe6
+    bytes: 757
+    mtime: 1784370354676083178
+    chars: 286
+  634d0a4c-b5b7-4e04-8b69-327744dee78e:
+    path: posts/2018-06-24-ChooseMotivationAndGoal.md
+    kind: file
+    sha256: 4c18c2f8ded70b169d739a7d0c2f86c30bcf7ce81062655daf0ddcc518f5c8dc
+    bytes: 4693
+    mtime: 1779084105000000000
+    chars: 1942
+  6509a37f-41bd-40b1-80af-2fc78e34fda8:
+    path: poetry/2022-02-28-6whp8xtfo96bdpdwhb4id2.md
+    kind: file
+    sha256: cac8d527eef194998e8812342d2d93fdedf07a91f1a1b1f7093bb69d8e4ba2ea
+    bytes: 349
+    mtime: 1782138606239238631
+    chars: 267
+  66141aa1-430a-455b-aa39-012b34b87163:
+    path: posts/2018-05-26-ALetterToAFutureGirlfriend.md
+    kind: file
+    sha256: 561f7b195962b6246d2190cb93e3ba6acae0bd462541432ec4569d1b3ecce2f0
+    bytes: 3319
+    mtime: 1779084105000000000
+    chars: 1189
+  69d86a17-3f4b-4d2a-914f-a49dd77d2ec7:
+    path: posts/2019-10-20-BasisStyle.md
+    kind: file
+    sha256: 6968019e1277d765e3006124b4ce537e07a6da01d4a3e49c5be16483b40b53e3
+    bytes: 4208
+    mtime: 1779857810365092751
+    chars: 1536
+  6b2b0c72-8665-46ae-b396-db40e2fb5689:
+    path: posts/2021-05-10-Seabed.md
+    kind: file
+    sha256: 64973732ce3bbc30f4c49df8269a2a5acbc00ae2ff3e85d2c5dc8aa1e6fad003
+    bytes: 7488
+    mtime: 1784346613792156509
+    chars: 2597
+  6cddaa8d-0d55-43f9-91c8-35fb8adace49:
+    path: posts/2021-10-04-TheLogicOfFailure.md
+    kind: file
+    sha256: e63aeb5437cce790b0ec625445fc4b189be00739bb4ea41c5a8566af51d8d23c
+    bytes: 4131
+    mtime: 1779857810366040335
+    chars: 1501
+  6e33bf76-5015-4537-8d29-9735025c7085:
+    path: posts/2026-05-31-MaySummary.md
+    kind: file
+    sha256: 814709baa9f05c64be46ed08d67d9eac3cdf6c006db720f8491d291b7d955941
+    bytes: 2722
+    mtime: 1784370601967564750
+    chars: 979
+  6f457bba-bb7a-4e32-bae0-db2e2611bc58:
+    path: poetry/2021-08-21-weocm4gemdkqh8kj4hnx4z.md
+    kind: file
+    sha256: e63c1756d67c141b168672f905873aab878745070f902d3b702b94b9b097da21
+    bytes: 349
+    mtime: 1782138606238271418
+    chars: 267
+  701b6f34-f0ef-4f0f-ac95-a350586d195f:
+    path: posts/2018-02-23-ToMyselfLetter.md
+    kind: file
+    sha256: 08618acc6ab80723e51147df7438bc813a2f4156a93cbed204c0672332ad1f64
+    bytes: 5084
+    mtime: 1779084105000000000
+    chars: 1788
+  7238d72c-04cb-4d92-97cd-e75cb18eb095:
+    path: poetry/2021-08-16-yzuh9yqekqquvjetnhhzh6.md
+    kind: file
+    sha256: a0c23948c0cb866e667c6f01932755d6a83e3f30e4fdffeabe913c537bfe08b9
+    bytes: 349
+    mtime: 1782138606237575957
+    chars: 267
+  7409e0b8-2f5b-45a9-b6b9-a3d63019c791:
+    path: posts/2018-03-17-TeachMyselfWrite.md
+    kind: file
+    sha256: 45de091f3006d6d900e72ef39024d3a37898ae4325d310e37919c9fc2da7465c
+    bytes: 4807
+    mtime: 1784349115570391342
+    chars: 1849
+  74e106c3-bd70-4187-bffd-23f863cff985:
+    path: posts/2021-09-06-AugustNotes.md
+    kind: file
+    sha256: 81e20d9cc8b3a1037f1e4d4c420bdce3d0c21d3716761d97d32ec819efe5f9b9
+    bytes: 5664
+    mtime: 1779084105000000000
+    chars: 2450
+  75a8ef72-ea36-4d1d-83f9-41fa6b35ae2a:
+    path: posts/2021-03-20-ToYou.md
+    kind: file
+    sha256: a61702a7a409024690e070c79e0b350644d9e900543163dccf369d805a3fa624
+    bytes: 2831
+    mtime: 1779084105000000000
+    chars: 1009
+  75b33488-6768-45f8-80a9-ed3e180ebb87:
+    path: posts/2018-09-04-Kindle.md
+    kind: file
+    sha256: c41f30670b35ec708ad858bd2a3a675849df41631bc6ea51ce15f6042ef187ed
+    bytes: 7803
+    mtime: 1779857810364470334
+    chars: 4198
+  774a584c-b789-4f33-b96d-48b6ec5f59ab:
+    path: posts/2017-12-31-TwentythreeYearsOld.md
+    kind: file
+    sha256: dd2c2f92d6315227d7c2230717ddb334fcacf4b45708cbc57dd4645161e5844d
+    bytes: 2493
+    mtime: 1779084105000000000
+    chars: 913
+  791e1c80-f702-42a1-a206-8099a764eac3:
+    path: poetry/2021-08-03-ncbbxpujqve8nnyxdbsbby.md
+    kind: file
+    sha256: e39f349909e8f008b86039ef15d91b38ff6e6bb389df517df379a7f985868c73
+    bytes: 349
+    mtime: 1782138606235956949
+    chars: 267
+  7b496628-cc7e-4bf7-8e3c-2a997a0cee6a:
+    path: posts/2017-02-11-blog3.md
+    kind: file
+    sha256: 8808ce96e7a9524e24b523c675481fdb64ebc4cd63462215904052d915ca3457
+    bytes: 2731
+    mtime: 1784346613698426092
+    chars: 1413
+  7ebafdfa-4da6-40e9-98ac-a913bbde8087:
+    path: posts/2017-04-09-openmind.md
+    kind: file
+    sha256: f22e7bf6fddc39c3dea68dfa55565d16b9a0a4e7a44e70f31a803967c4681c49
+    bytes: 3087
+    mtime: 1779084105000000000
+    chars: 1079
+  7fddda2f-4d89-4dde-ad88-218228d14c6f:
+    path: posts/2018-01-31-TenYears.md
+    kind: file
+    sha256: 784552f4c4c8a24f16ca3799c0fb3508a51c56144fcfd420609726d8b72a0fee
+    bytes: 6621
+    mtime: 1779084105000000000
+    chars: 2338
+  80036076-1439-4949-9294-521a2048de24:
+    path: posts/2021-10-14-UnconditionalParenting.md
+    kind: file
+    sha256: c4cf9e88894e7579ae9aeb72abb8e3d1f2301b38b846676a986e19fd634f11e3
+    bytes: 6212
+    mtime: 1779084105000000000
+    chars: 2150
+  805e7d53-7a89-4120-b4b1-628c0bf02a2b:
+    path: posts/2018-08-22-ReasonList.md
+    kind: file
+    sha256: f611701198f9759bf0dc3f99d3dcbabf825139f4288787191c8ea3eca9e75773
+    bytes: 2949
+    mtime: 1779084105000000000
+    chars: 1135
+  80da93e5-4aa0-4dff-8276-e422f7d251fb:
+    path: posts/2017-02-10-blog2.md
+    kind: file
+    sha256: 1d9f54e3544d9dbe7541449648f6ad1621c15484ab3ce1fb5f4148b82c7d446e
+    bytes: 2920
+    mtime: 1779084105000000000
+    chars: 1313
+  80e4a9da-ffe2-4656-970c-e6126d2b244d:
+    path: poetry/2026-05-22-heartbeat-and-clock.md
+    kind: file
+    sha256: 9c630d59be9a3984fafb4899cbb9f153c8f3327b1589ef226b89c1c69205ffad
+    bytes: 357
+    mtime: 1784370354767461541
+    chars: 158
+  8598bfb0-caff-42e5-9252-a9e9873f2360:
+    path: posts/2025-06-23-GameLife.md
+    kind: file
+    sha256: 1c22cc14d864e59a569b655a77cd5ef4ac07c6e08e0c3f50742e29ad7cf9c7ce
+    bytes: 8280
+    mtime: 1784377459061604461
+    chars: 2813
+  87c7342c-3aaf-4063-b358-97afc5541bc6:
+    path: posts/2024-03-09-DcNRNote.md
+    kind: file
+    sha256: fb9c0b29f4e7aebaea451ef210d9c495db3b6dde346d89cd381f66d775713473
+    bytes: 9289
+    mtime: 1779084105000000000
+    chars: 3226
+  87d99db4-f9bd-408e-b25e-98cce87cade9:
+    path: mur
+    kind: folder
+  88336a85-061f-4cca-9b5b-4de7b8964fc8:
+    path: posts/2023-04-08-Syaoran.md
+    kind: file
+    sha256: a2f84d362a07fae4e1387d4e0bd6d45c4f0d9d9c12f1874968fbf8130002248b
+    bytes: 7384
+    mtime: 1779084105000000000
+    chars: 2536
+  8a01847b-2474-4aac-87ff-1038b55b3f58:
+    path: posts/2025-01-05-2024Summary.md
+    kind: file
+    sha256: 53dffe527fdbc72efd1b212a24564c13a3ed57f77a0cd21a525817960276e58a
+    bytes: 5214
+    mtime: 1784377512436267874
+    chars: 1833
+  8b3e5e71-bf60-4392-842f-71bb021b873d:
+    path: posts/2019-01-05-SurprisesIn2018.md
+    kind: file
+    sha256: 4f4668d44fcea7b46a21826e83333cd3249493c2b6339493a4624353611c4ac1
+    bytes: 6088
+    mtime: 1784349145223537046
+    chars: 2403
+  8efe972d-261e-458b-b5ca-9684d5757d95:
+    path: posts/2018-04-11-ListWriting10Reason.md
+    kind: file
+    sha256: 7d804213d51fd8becb6ddba8740662e95a8a652506c00b02ee52aa35e3846106
+    bytes: 1947
+    mtime: 1779084105000000000
+    chars: 733
+  91a6fd9a-dea1-49bc-9e16-0baf0549e32f:
+    path: posts/2020-01-28-Nursing.md
+    kind: file
+    sha256: f1e02519596525044024b6c38cd775576a1023d035909b419d450c10b23bced3
+    bytes: 4495
+    mtime: 1779084105000000000
+    chars: 2633
+  92050f7b-2ed3-47bf-ad34-cc39558dd99a:
+    path: posts/2018-07-04-ButterFly.md
+    kind: file
+    sha256: 4daa73e4af9454d639c98e93ce69c65524fa26f45cc5d78905878a1ef1aeae0a
+    bytes: 5257
+    mtime: 1779084105000000000
+    chars: 1948
+  9315208b-16fe-4110-a4f0-831ec15dd2fb:
+    path: poetry/2021-08-10-4uhqy23wwcgztz3ch7lbmw.md
+    kind: file
+    sha256: 64e6688cddbe380ec50c2d8108ea364a712e0b7e506ea30fd7a45774472f5957
+    bytes: 349
+    mtime: 1782138606237080788
+    chars: 267
+  937c39bd-27db-4734-82b9-a5df1b5153f1:
+    path: poetry/2021-08-05-m7mpejprywkqkcpxb3x35k.md
+    kind: file
+    sha256: 07608520ffab9cf88f45389f89d5b0081169027e1f8c400ca9795b3d3ad1415b
+    bytes: 349
+    mtime: 1782138606236388035
+    chars: 267
+  9578d575-f15f-40bf-916b-e1399154aafe:
+    path: posts/2019-08-17-Mac.md
+    kind: file
+    sha256: 3c61acffcd2018f28db8efb66b5a151e15936be9eb036127f2ffa38053dc530c
+    bytes: 5605
+    mtime: 1779084105000000000
+    chars: 2373
+  973f4ebd-cc84-41e1-b461-04a1780b463c:
+    path: posts
+    kind: folder
+  97bad68a-5bcb-4a97-9f84-68e51e5fbac0:
+    path: drafts/6月小结_improved-writing_master.md
+    kind: file
+    sha256: fbb06bc27db900fe6c528ae734575c69b27d6de3d371cb77f6d8e821515338c9
+    bytes: 6517
+    mtime: 1783518586427853862
+    chars: 2255
+  99ee8ceb-db02-4cd9-b909-0398a6923cf8:
+    path: poetry/2021-08-01-pyrnmsx3xnixavdthftejl.md
+    kind: file
+    sha256: 50d77b910989dbbe27dc87c417a384610fdf71ec1eb474a926caace7fca89e2f
+    bytes: 349
+    mtime: 1782138606235851782
+    chars: 267
+  9c9ec4aa-bffc-477f-bd67-37f1c26d9fa9:
+    path: poetry/2022-02-14-jpuv5xgsnarfzrvssiqnda.md
+    kind: file
+    sha256: ddc75103d1ea127e609f7fc5babc88ebf857c009f64754320d55b3932c9b9fa4
+    bytes: 349
+    mtime: 1782138606239165173
+    chars: 267
+  9d9fdbd2-42fe-4a22-a932-7986d2fe35ce:
+    path: drafts/六月小结.md
+    kind: file
+    sha256: 0a7cb5001da58e07023d1ef9f124207cee8b2bdbf09887e88ec1055bb8d2e637
+    bytes: 2725
+    mtime: 1784370237309348241
+    chars: 918
+  9df3425d-99d6-447e-8c09-3c68c66e36b5:
+    path: posts/2020-02-01-Remember.md
+    kind: file
+    sha256: 40384d3429669e8e5f4435149973981fa990899fde47051b34bc8faf3d693551
+    bytes: 1885
+    mtime: 1779084105000000000
+    chars: 700
+  9e489c4e-0679-4fed-8176-efb7121e7dd4:
+    path: posts/2023-02-04-2022Note.md
+    kind: file
+    sha256: 4eff269c158d9fcea07ebe3c56e8e34749e8b224a43e5e82112e655d438f25f3
+    bytes: 7197
+    mtime: 1779880690609930884
+    chars: 2510
+  9ede69c1-6ca3-458a-a4d6-fa0466a11d88:
+    path: posts/2018-05-20-Mastery.md
+    kind: file
+    sha256: 676a10d53ba5b612655d5c054bb528421c32131327f577abb9cd2c0a92b0fbab
+    bytes: 5552
+    mtime: 1779084105000000000
+    chars: 1946
+  a05b2b63-f7b9-4923-a8d3-f91e62afcd14:
+    path: drafts/2025-09-13-BeiJing.md
+    kind: file
+    sha256: 975f152ed32120a7c930cc471b6747f59e22f5f6a28e0f67a068020b9741cb99
+    bytes: 3803
+    mtime: 1782135103573430932
+    chars: 1309
+  a224ddd8-1f56-4cc2-a856-072069d3d18c:
+    path: posts/2022-06-27-JuneMemo.md
+    kind: file
+    sha256: 2b85943ca5150103984b83581baa7cf766e45cbc7b12b4688aeb4432c1b081d7
+    bytes: 1469
+    mtime: 1779093155000000000
+    chars: 598
+  a22595a0-32be-444b-b7b9-e84f6ac489a1:
+    path: posts/2021-04-11-Psychology.md
+    kind: file
+    sha256: 955ea1b06065f24b464ad77ead97f70e9873ad14831e5885273d68799edb5939
+    bytes: 3972
+    mtime: 1779084105000000000
+    chars: 1421
+  a2d2fefb-fde5-44a7-9948-af4fe44e602b:
+    path: poetry/2021-08-29-alikty37nvmt7vblvhtmzp.md
+    kind: file
+    sha256: 9e3144b5d1c23dedaa81cb92976a84cfdf42e19db4885cfb3f266e960f1e8453
+    bytes: 349
+    mtime: 1782138606238743796
+    chars: 267
+  a3517477-281a-4374-864c-f03a6c2f03d6:
+    path: poetry/2022-08-07-poem-1.md
+    kind: file
+    sha256: 614100bb05ab171f6df0654d431e017b4dc02145f9c857bc048b03b4d1cd12e4
+    bytes: 700
+    mtime: 1784378971199120937
+    chars: 370
+  a3ada75b-200c-4b2b-aa7a-d16a69cd58d2:
+    path: posts/2020-02-28-Communicate.md
+    kind: file
+    sha256: ce59dffc83c36cf93cb419de5243500ee169e20ee148260eeb189979b8795466
+    bytes: 2512
+    mtime: 1779084105000000000
+    chars: 923
+  a58f38b8-7598-47b1-a3b1-ee68d93bde99:
+    path: posts/2017-02-09-blog1.md
+    kind: file
+    sha256: 592432258587f0e77168dc1912a8990e15d770764a1fde6db219454fdf0be118
+    bytes: 1570
+    mtime: 1779084105000000000
+    chars: 633
+  a690857a-7417-46f1-b363-363dd11a866f:
+    path: drafts/JuneSummary.poem-context.original.md
+    kind: file
+    sha256: 157e8004d7ae4b2aaeea87c90884e5ec17c775a238efe8a9c114995539515821
+    bytes: 1463
+    mtime: 1785488403324551095
+    chars: 526
+  a6f43614-abea-40af-ac47-a9596bb19818:
+    path: poetry/2026-06-21-sweet-and-salty-zongzi.md
+    kind: file
+    sha256: ca03894e8b643e75e12015381d4635e20335a24393bd04a430c13242bc25f5be
+    bytes: 397
+    mtime: 1784370355135755716
+    chars: 171
+  a7588d00-13ff-4c00-8797-d62ee7a8301b:
+    path: posts/2023-10-02-TheDescentofMan.md
+    kind: file
+    sha256: 02c76be91029bd9ba0665ff7c096de9b93adb4a4e7d3ba401f3b3f7968dc8773
+    bytes: 8119
+    mtime: 1779084105000000000
+    chars: 2844
+  a7a76f59-85c9-4721-a0cc-3e9a45d5d156:
+    path: poetry/2026-06-01-evening-blue.md
+    kind: file
+    sha256: 0835a181b6a00274416aff5c2b7c574147b9c3c20b2616ba843e06b7a4a0537a
+    bytes: 323
+    mtime: 1784370354951086842
+    chars: 147
+  aa337ae2-2b29-4d3b-a991-f87b0e3c991f:
+    path: posts/2018-04-02-OneYearAfterWork.md
+    kind: file
+    sha256: c7f1c8d26d80879be767a05335dbd656b63be9406a5575dd4c654bca361f864a
+    bytes: 5224
+    mtime: 1779084105000000000
+    chars: 1824
+  ab25d952-be24-41dc-a5b6-a056e34e510a:
+    path: poetry/2022-03-30-ramakbnypz8g52sgpqqvan.md
+    kind: file
+    sha256: 9cd4a31f490a13dd95228f041724bd85ba5d571cbbd35cfa2ed9adc4a7eff69e
+    bytes: 423
+    mtime: 1782138606239578258
+    chars: 292
+  abbaae6c-a548-422c-8db9-19b0f1cd3289:
+    path: poetry/2023-07-18-euyhgdsxknid8tgbxdygzx.md
+    kind: file
+    sha256: fd55eb66cdc00c0f0f4d2f1f1d1a579795bde649e13a7d2ea98fb4340d8493b9
+    bytes: 376
+    mtime: 1782138606240686430
+    chars: 275
+  ad472e92-2d22-45f3-a339-61c3472060e0:
+    path: posts/2018-07-01-SamllCardBigWord.md
+    kind: file
+    sha256: a944694d63b5a01506bd7101553ed4d7f2f13bd86fc618679a4ea8368c6232ba
+    bytes: 2682
+    mtime: 1779084105000000000
+    chars: 989
+  ae6056d7-fb9c-4607-8423-deb223976d90:
+    path: mur/2026-06-21-26W25.md
+    kind: file
+    sha256: af3aacac335eff0ac4aa8cb1402b6f0bc979b563d82c60d3cfbec424964f6317
+    bytes: 1450
+    mtime: 1782657602506647003
+    chars: 579
+  af594697-e387-480a-9080-2a23ce0ae897:
+    path: posts/2022-04-04-ClassicStyle.md
+    kind: file
+    sha256: a36acc72888d2af4d68961d2a79b3d7e247eca741230ae168a5b886b550a15f6
+    bytes: 6205
+    mtime: 1784346760423781746
+    chars: 2193
+  b0ee0ed3-e972-4340-a214-2e2e81fee1ef:
+    path: posts/2018-01-22-LearnWriting01.md
+    kind: file
+    sha256: 7cfb63e2da86f518ee8df70fd1dc41bfee8512d56e3ed54edf2132cde1724d77
+    bytes: 936
+    mtime: 1779857810363824125
+    chars: 417
+  b4e951fc-fcff-4410-bf8b-316a4dcb0f88:
+    path: poetry/2022-03-30-duvda5ybacksnsjnqwq4fa.md
+    kind: file
+    sha256: c8fdbd1ed72119ceedbf1f5e88491f349ff4685eb2271c653a6b562e6eeef2fb
+    bytes: 345
+    mtime: 1782138606239489924
+    chars: 265
+  b54f58d3-1b1c-4fca-9867-dca797cb2c70:
+    path: posts/2018-01-29-Community15Ask.md
+    kind: file
+    sha256: e3717b5b53a92ea841f94b60eaeeddd437328419af6cd073c3ff9cf8f2d2c097
+    bytes: 4064
+    mtime: 1779857810363964084
+    chars: 1556
+  b9c36b56-c666-451e-b012-c1720750b06d:
+    path: posts/2017-05-24-TakeAI.md
+    kind: file
+    sha256: d2dc80aa137c82bbc3a56f747499a53ed90fefa2d758962d3da40b3735183e7b
+    bytes: 2349
+    mtime: 1779084105000000000
+    chars: 870
+  bad88bef-a2dc-4c44-ad34-688da9db48dd:
+    path: drafts
+    kind: folder
+  bbbc482e-5425-4ebf-8a19-3c9cd590aa61:
+    path: poetry/2022-06-05-6w72pfapxtqbejefyhaow6.md
+    kind: file
+    sha256: d25d37cebcc3c659144ed2fe018195003a5af01dae56f3b5ce0efd187647bb1e
+    bytes: 342
+    mtime: 1782138606239933510
+    chars: 264
+  bbcb4613-8b39-464d-b41a-881db1f2283a:
+    path: posts/2023-12-31-2023Life.md
+    kind: file
+    sha256: e843ea524a871a49b137886144735f97f1f95f9df7b029f4863ac375bcc81d4f
+    bytes: 5346
+    mtime: 1779880690613552926
+    chars: 1904
+  bd433a1f-8264-46db-b6ae-e0ec13452de8:
+    path: drafts/写作计划.md
+    kind: file
+    sha256: 028faa2b7ea6172340780554f1651d7be5945d73c21493cea0130290d50beeb2
+    bytes: 36
+    mtime: 1789786441220352468
+    chars: 13
+  bebb29ef-cae4-40b7-a7ed-57bf77626d26:
+    path: posts/2020-11-07-WOOP.md
+    kind: file
+    sha256: 0d813cb7fe228d23b2061ea441b7730c0782cb06dc205679d47926660b056a31
+    bytes: 3820
+    mtime: 1779084105000000000
+    chars: 1402
+  bebf5b4b-74d9-472a-99d5-5ec1c72f1311:
+    path: posts/2017-05-02-TheSelfishGene.md
+    kind: file
+    sha256: cfd6cb9e46f42746bf6a757c4741e9dbfbba5c5e96250d6cf7f6797136fc3b44
+    bytes: 2623
+    mtime: 1779857810363382666
+    chars: 997
+  bf8f6b9e-0c37-4d0e-b9ff-17298298dc07:
+    path: poetry/2021-08-29-c5m9tshra9ieh6ucuwsidv.md
+    kind: file
+    sha256: 3cff36eaede389e1089ecb8aae94b8946fe708f3b7e1019940057fe0a076210f
+    bytes: 349
+    mtime: 1782138606238819629
+    chars: 267
+  c093118b-e048-4710-9948-290518309f97:
+    path: poetry/2022-05-06-9nbgccixtfvjzpfx9zom68.md
+    kind: file
+    sha256: e84ffd14a23a10e52d7bc55ebc8b27f2f69f314ee9c22c4b80f8426e4582ff77
+    bytes: 597
+    mtime: 1782138606239662550
+    chars: 345
+  c2e11ad6-96bf-438a-bc00-86bcd43e74c5:
+    path: poetry/2022-05-06-9o2njbasvpu6m3j7bnge7f.md
+    kind: file
+    sha256: b5ab19d20403367e6fdcac7bc224891c59d67fedbb714fa4dd0f27c80b3c5dba
+    bytes: 614
+    mtime: 1782138606239744925
+    chars: 347
+  c332d7df-4f3e-423c-a7a1-caa8ac563526:
+    path: posts/2018-06-18-writingFun.md
+    kind: file
+    sha256: 8b7341109387f5b635f4efea396b3cd0ba4305ce9ad6cda777dee43c2b68c86b
+    bytes: 3859
+    mtime: 1784349115759805246
+    chars: 1628
+  c36cd299-c7fd-49c6-b2f7-c4feb2f76b86:
+    path: posts/2023-10-14-VsCode.md
+    kind: file
+    sha256: 407ff573b1b78e613b3454569fca59a3cf75ebb3d6d6ae7d537890996eb51f13
+    bytes: 5114
+    mtime: 1779084105000000000
+    chars: 2228
+  c58797d4-93d2-49c7-84fb-1ef6d6a724c7:
+    path: mur/2026-07-07-26W28.md
+    kind: file
+    sha256: 8742f29c4b35d1bd21d49fcfe306cbfe1e3e801443deca594323fafa710f5655
+    bytes: 1284
+    mtime: 1783437606433289775
+    chars: 478
+  c7989306-42b9-49ab-95ec-35b28384909a:
+    path: posts/2022-06-01-WhyWrting.md
+    kind: file
+    sha256: af13082dba1c42f0d3bde891ee9bcca837d46bf4b6d8b0de1cf98784cd834faf
+    bytes: 4016
+    mtime: 1779084105000000000
+    chars: 1447
+  c8d69e35-5c30-4989-81d1-3e90aa49c68b:
+    path: poetry/2022-03-29-3kzsdgztzdrqa3m3pgzshj.md
+    kind: file
+    sha256: 2087d23e9d67b2b4e98cfab71d111919d4bd01890673e9920333a13f6560a224
+    bytes: 345
+    mtime: 1782138606239402424
+    chars: 265
+  c9ba439d-765b-4400-8c49-e809b334edc0:
+    path: drafts/2025-07-14-OpenMind.md
+    kind: file
+    sha256: 9f9846f3c8c79643ecfe432024fb6a4e6e9ee57df3726f791ae08bc928561bbc
+    bytes: 2045
+    mtime: 1778903059000000000
+    chars: 749
+  ca176f75-05fb-4557-b0d3-2062d55b99b7:
+    path: posts/2022-01-02-2021ReadingNote.md
+    kind: file
+    sha256: bd2c5da2aa17ea84f707c1aa79a86a6e2c8c28b51ac24a0cff32854c8ad99366
+    bytes: 3342
+    mtime: 1779880690606262237
+    chars: 1200
+  cbfc577c-2afe-4739-99b8-e1b2e3366c01:
+    path: poetry/2022-06-27-hthbu7gt5yckqbyj4hfuat.md
+    kind: file
+    sha256: b898970c120c87b018eaa3fcca9caf253386feb906cfdd094fe8761fc643a1c6
+    bytes: 323
+    mtime: 1782138606240511804
+    chars: 258
+  cd1b2312-995c-49ca-be0f-96545e38f400:
+    path: poetry/2022-06-02-gqxqnworn2fw2hgmytes47.md
+    kind: file
+    sha256: f0e63e5fcb48926fa427c2a36cea2819e150880d2e2e32abdfd5a2f8b0f9d5da
+    bytes: 420
+    mtime: 1782138606239837093
+    chars: 288
+  cf579bab-1d13-43b7-869d-404c33153f38:
+    path: poetry/2022-06-13-9bs4u2seazqrjqcuhzgntg.md
+    kind: file
+    sha256: 61dd90f4dfd58bf058296bebc5ad8a6fa0df52ef0bca587ddbd1cc4754f6bf05
+    bytes: 395
+    mtime: 1782138606240256345
+    chars: 281
+  d50ae3eb-b3ab-4e67-8a38-3b8e174a8169:
+    path: poetry/2021-08-19-65hofjfbggxlcprhybgjv9.md
+    kind: file
+    sha256: eb960fcde1a0f305399c7deebd6c497dfd0083413e04483a9756ef3a52882ebe
+    bytes: 349
+    mtime: 1782138606237858750
+    chars: 267
+  d55cce99-fc25-487b-8fe9-4702dd33175c:
+    path: posts/2018-06-03-CreateYourCreation.md
+    kind: file
+    sha256: 1904a926763e554e01bd3e55af1725e763aa96a94dc33964a2d19a9c7c41bad3
+    bytes: 3228
+    mtime: 1779084105000000000
+    chars: 1161
+  d6db0dd6-e5aa-4c83-a1b2-88429732b46d:
+    path: posts/2026-06-30-JuneSummary.md
+    kind: file
+    sha256: f5d484351ca4d42221b39ff68022acbb2e5d42fd4e2b0e5ad85c7b68457efd94
+    bytes: 2922
+    mtime: 1784370602056478513
+    chars: 1051
+  da2ce626-b9d2-410a-a67b-78ae96827563:
+    path: posts/2018-08-18-ThunderAndCicada.md
+    kind: file
+    sha256: db46cb33efc75f80b631131047967df5787ea91bdeef61cb91bb77fea4d4a3f1
+    bytes: 2526
+    mtime: 1779084105000000000
+    chars: 924
+  da8ace4c-a9d3-438b-940b-b860e8253405:
+    path: drafts/JuneSummary.poem-context.revised.md
+    kind: file
+    sha256: ab62cedd52ebcf2bdcaf79a193d2897c53d5d142197b574aab1603f3ae07e25a
+    bytes: 1487
+    mtime: 1785488403324939846
+    chars: 546
+  dad07ccd-5130-45f6-bacb-9c2b2ebe88df:
+    path: poetry/2026-05-04-poem-1.md
+    kind: file
+    sha256: b3e51c73a3345465ff02bd784ac7c41a790bc28e0e13e2dd8c5fa52600fc9ded
+    bytes: 1066
+    mtime: 1784378905579352334
+    chars: 491
+  df6027f8-fbb2-475f-b2cb-4a10f132963b:
+    path: poetry/2026-06-14-code-and-poetry.md
+    kind: file
+    sha256: 22fc83ba202654fe5d16b647edaa1267dce7e1585e45ee435db93df6992b3b36
+    bytes: 299
+    mtime: 1784370355043639652
+    chars: 146
+  dfa1459e-1c8c-4f76-8ddb-1771decda266:
+    path: poetry/2021-08-06-9gv6xzur5j3ngred8lpvjk.md
+    kind: file
+    sha256: 922bb7447ae06ca43f85d1b890e4f7176a999bf28d104198ff1200e233eb5e61
+    bytes: 349
+    mtime: 1782138606236548119
+    chars: 267
+  dfacf84e-a74f-4ca2-8e35-1e46ea9192ba:
+    path: posts/2021-01-22-PythonNote01.md
+    kind: file
+    sha256: a4bb772a686794df554878798ab7c11c86dc188e683109d97c322b3dd9435ba7
+    bytes: 4854
+    mtime: 1779857810365794002
+    chars: 2950
+  e4892edb-ad34-4b4e-ae2b-2f04de0ba740:
+    path: posts/2019-06-10-PicGo.md
+    kind: file
+    sha256: 19a33b8649ce4d8e1fcb4a2f0eaa5d30f69794edd1d19400d28d53722836b0c4
+    bytes: 3780
+    mtime: 1779857810364923543
+    chars: 1895
+  e5b4fed1-756b-47dd-8bb0-ecfdd9d0548b:
+    path: drafts/loveltte.md
+    kind: file
+    sha256: 546a8da2b5c10092dcbf1a1171f57acbb97e55063783e313f149ec80c722db6a
+    bytes: 711
+    mtime: 1782054182368945958
+    chars: 246
+  e5bef7f7-9087-4657-94e1-3a351be27e6d:
+    path: poetry/2021-08-16-z67axskkssvb5esbohtq8u.md
+    kind: file
+    sha256: b6e8c3e5367fc4592a273183808228c633bac6d7baff6c6b2d9a86d4db9c4a6c
+    bytes: 349
+    mtime: 1782138606237720957
+    chars: 267
+  e6d08c47-c198-4b1e-a218-87ba6c141703:
+    path: poetry/2022-06-07-9pfnzzbp5jus3cwvhxoc7h.md
+    kind: file
+    sha256: 99816e922ce48065f13ea3cba5a6703f296363b134aab3404640dd9b281a1711
+    bytes: 345
+    mtime: 1782138606240182803
+    chars: 265
+  e7c78f35-313c-49aa-bf10-3ed5e4f55b57:
+    path: poetry/2024-03-01-s9zb3brx45qveceiccvbsz.md
+    kind: file
+    sha256: 1a4973976bcce41705897097d287ff64576b3c02a1410fe77260253d39113667
+    bytes: 340
+    mtime: 1784370143573429042
+    chars: 264
+  e890f2e5-c69a-408d-9c7b-c13667ba7b68:
+    path: posts/2020-11-16-Program.md
+    kind: file
+    sha256: a204d8aaf8c2b2c96571edc358d1471a01fcd9a1f997a1df294ff7eab76a506e
+    bytes: 5049
+    mtime: 1784349115665034546
+    chars: 2037
+  eacd9348-8597-4e35-b6c5-40c7070f3243:
+    path: posts/2020-02-11-Emergency.md
+    kind: file
+    sha256: c9bd839e428d6e13b42b7f46cb7b62472b8d24df745276f99509ee258bc34816
+    bytes: 5043
+    mtime: 1784349115476673032
+    chars: 2122
+  eaf06d39-db44-424b-8952-fbb33d47924b:
+    path: posts/2024-05-02-Hackathon.md
+    kind: file
+    sha256: 2534879c558094172e9ddd722f81f52bd37a7ec654abb35e358441dd8d0f2898
+    bytes: 4766
+    mtime: 1779084105000000000
+    chars: 1752
+  eceb1afc-b113-4356-a882-695c74a90768:
+    path: poetry/2021-08-29-h8ttr6m4e5lkbodk8ly4tb.md
+    kind: file
+    sha256: fd9fb4e6ae974c6e02e250966a47b988dd6e7653d51cbe87b310019457971083
+    bytes: 349
+    mtime: 1782138606238918463
+    chars: 267
+  efaa27e4-ab9d-4789-9459-212c072712c6:
+    path: posts/2021-03-08-Book.md
+    kind: file
+    sha256: 76fdc467eb09dc57049c0b24c9156103e05eb5664cb62e9b49f28d035e9a0df5
+    bytes: 4810
+    mtime: 1779084105000000000
+    chars: 1685
+  f18ee59d-e294-4c6e-89e2-67b282e16e76:
+    path: posts/2017-09-08-ProductionKnowledge.md
+    kind: file
+    sha256: ac9f8d27968c6dc070a0ee4a7022c6b742543650a551fc813507c1c22d1a5b17
+    bytes: 4319
+    mtime: 1779084105000000000
+    chars: 1525
+  f214241e-e127-4cb7-b357-36863dedc06b:
+    path: poetry/2021-08-09-8yoaq8enrxmxojwqknp5uv.md
+    kind: file
+    sha256: f3e22cf45c9f30f55995162d00c1b7fb08315455aaff54d62b5f2bbf70758eae
+    bytes: 349
+    mtime: 1782138606236985371
+    chars: 267
+  f5063395-e3c6-41fb-87be-eec9b2a1b359:
+    path: poetry/2022-06-06-csa7crrk9hdxomrunwerri.md
+    kind: file
+    sha256: a56112d5fef62aad33129a9fd6e06bcc5d0700c9de56ded9578d2768ac29f58f
+    bytes: 325
+    mtime: 1782138606240102219
+    chars: 259
+  f659fc7e-15d7-4fd6-a882-5628d2ed5129:
+    path: poetry/2021-08-14-cv4njbqij56vaeneksogx5.md
+    kind: file
+    sha256: 24741bbbc6ae22255716b1fd5ecfa72b54eec7bd1a472127cec3e4fe4ad1d643
+    bytes: 349
+    mtime: 1782138606237477665
+    chars: 267
+  f811d91b-47ba-404b-9437-32cf69c81287:
+    path: poetry/2021-08-13-yq7fvajreqztkdrrksukfj.md
+    kind: file
+    sha256: 304e2104578467c10a8dc62b16e42d7824161f85ee1b82c2cada567cb79e6b85
+    bytes: 349
+    mtime: 1782138606237397873
+    chars: 267
+  f8995013-ed7c-4215-9062-180a93864f4e:
+    path: drafts/2026-07-18-draft01.md
+    kind: file
+    sha256: 9b218fcee4bba59fdfe0206c6b5ac9e300c22afb12d90d8d0cd61c0477c1bd6c
+    bytes: 5919
+    mtime: 1784816008955830033
+    chars: 2035
+  fdc9399c-cb54-49ba-b03b-4669c98cb8de:
+    path: poetry/2021-08-19-79s9rrafwsy3ar99ezydqk.md
+    kind: file
+    sha256: 2717f803b0152fd339d7b0add1bd8cfc209e22a994467dcdc810ef86de0b561e
+    bytes: 349
+    mtime: 1782138606237977125
+    chars: 267
+  fe4556c5-b4e2-4bb6-8bbc-eceec4f26cbf:
+    path: poetry/2023-07-20-cgdbnwjxzccuaag8q9zt72.md
+    kind: file
+    sha256: a3ba7213d28d08721319811a7e2ea15fe07be077092d6e5ca9fe5a4f7cdb4661
+    bytes: 339
+    mtime: 1782138606240765180
+    chars: 263
+  fe71269d-9f44-4f52-b359-f60def65a28c:
+    path: poetry/2021-08-20-dbbfwb9fhvc8stiw5k4c7u.md
+    kind: file
+    sha256: c89a6fd90bab8ea3c919069e67899a25b8811554fe83fb9837f893fd6c4b695f
+    bytes: 349
+    mtime: 1782138606238165751
+    chars: 267
+order:
+  4c6d524d-c135-4aa6-83ed-b42ef3327ef0:
+  - 99ee8ceb-db02-4cd9-b909-0398a6923cf8
+  - 791e1c80-f702-42a1-a206-8099a764eac3
+  - 142a5f95-ae80-444c-845e-22ce1879267d
+  - 937c39bd-27db-4734-82b9-a5df1b5153f1
+  - dfa1459e-1c8c-4f76-8ddb-1771decda266
+  - 21bf44b9-852d-45d9-8eae-0c0e24165f02
+  - 0474d0f4-1a16-406c-b36c-cfd0a16e0f9c
+  - f214241e-e127-4cb7-b357-36863dedc06b
+  - 9315208b-16fe-4110-a4f0-831ec15dd2fb
+  - 4e5ce829-7e9d-4282-98d7-0a3af3133daa
+  - 25b469ea-aafd-4a36-9fff-7318550f396b
+  - f811d91b-47ba-404b-9437-32cf69c81287
+  - f659fc7e-15d7-4fd6-a882-5628d2ed5129
+  - 7238d72c-04cb-4d92-97cd-e75cb18eb095
+  - e5bef7f7-9087-4657-94e1-3a351be27e6d
+  - d50ae3eb-b3ab-4e67-8a38-3b8e174a8169
+  - fdc9399c-cb54-49ba-b03b-4669c98cb8de
+  - 2fb053d7-9fd5-45f7-b805-7ae98299a0cc
+  - fe71269d-9f44-4f52-b359-f60def65a28c
+  - 6f457bba-bb7a-4e32-bae0-db2e2611bc58
+  - 21f4507b-781d-4be8-8dab-2086472ff25a
+  - 3ca06989-8dc6-455a-8051-ecce35db5e48
+  - 2fe3ea27-2a6c-4252-bc47-83fe5ac0d0ad
+  - 3039f2b3-b23f-4b93-a5b6-2d8b55f41a3b
+  - a2d2fefb-fde5-44a7-9948-af4fe44e602b
+  - bf8f6b9e-0c37-4d0e-b9ff-17298298dc07
+  - eceb1afc-b113-4356-a882-695c74a90768
+  - 48e6bcd0-dcc7-4198-b02d-40142f569c14
+  - 55032af2-a444-4fab-94be-20c8bbeb1338
+  - 9c9ec4aa-bffc-477f-bd67-37f1c26d9fa9
+  - 6509a37f-41bd-40b1-80af-2fc78e34fda8
+  - 15c526a7-9742-4074-8fe5-df7879de6e45
+  - c8d69e35-5c30-4989-81d1-3e90aa49c68b
+  - b4e951fc-fcff-4410-bf8b-316a4dcb0f88
+  - ab25d952-be24-41dc-a5b6-a056e34e510a
+  - c093118b-e048-4710-9948-290518309f97
+  - c2e11ad6-96bf-438a-bc00-86bcd43e74c5
+  - cd1b2312-995c-49ca-be0f-96545e38f400
+  - bbbc482e-5425-4ebf-8a19-3c9cd590aa61
+  - 537cdd38-87bf-4be8-8b6a-a84306dc8baf
+  - f5063395-e3c6-41fb-87be-eec9b2a1b359
+  - e6d08c47-c198-4b1e-a218-87ba6c141703
+  - cf579bab-1d13-43b7-869d-404c33153f38
+  - 57e4aed8-7360-4e68-b7b1-841f06225912
+  - 08c9a822-e2cb-4ad2-8c0c-9b08e8309ce1
+  - cbfc577c-2afe-4739-99b8-e1b2e3366c01
+  - 2e6b06e4-56ed-4e18-a26a-e9a6e4c4f86c
+  - 3db0cd09-4f1f-44b7-bbd9-e4863646fcb9
+  - a3517477-281a-4374-864c-f03a6c2f03d6
+  - 2986a890-d848-4148-b4b4-0d71a1e02a8a
+  - 2a845017-5ed4-4191-8c61-e9e236fc4af9
+  - 2ddfd6a6-b074-4e6b-887b-1e40c4bd86da
+  - 10f05284-ffde-4ba7-bf12-8a38ddb4450f
+  - abbaae6c-a548-422c-8db9-19b0f1cd3289
+  - fe4556c5-b4e2-4bb6-8bbc-eceec4f26cbf
+  - e7c78f35-313c-49aa-bf10-3ed5e4f55b57
+  - dad07ccd-5130-45f6-bacb-9c2b2ebe88df
+  - 6216f97e-3e8c-43f9-a814-0c926492f2ae
+  - 80e4a9da-ffe2-4656-970c-e6126d2b244d
+  - 4c4a441c-2a85-4ba2-9065-c8f46230edf6
+  - a7a76f59-85c9-4721-a0cc-3e9a45d5d156
+  - df6027f8-fbb2-475f-b2cb-4a10f132963b
+  - a6f43614-abea-40af-ac47-a9596bb19818
+  87d99db4-f9bd-408e-b25e-98cce87cade9:
+  - ae6056d7-fb9c-4607-8423-deb223976d90
+  - 372dd2a4-41cc-410a-8b6e-da15944a3f84
+  - c58797d4-93d2-49c7-84fb-1ef6d6a724c7
+  - 025c0efc-4d75-463c-be2d-62767202675b
+  973f4ebd-cc84-41e1-b461-04a1780b463c:
+  - a58f38b8-7598-47b1-a3b1-ee68d93bde99
+  - 80da93e5-4aa0-4dff-8276-e422f7d251fb
+  - 7b496628-cc7e-4bf7-8e3c-2a997a0cee6a
+  - 7ebafdfa-4da6-40e9-98ac-a913bbde8087
+  - bebf5b4b-74d9-472a-99d5-5ec1c72f1311
+  - 21f8ff13-349c-4da8-8e87-526393df9c05
+  - b9c36b56-c666-451e-b012-c1720750b06d
+  - 1324a9e0-9898-4126-892f-d534cd099f05
+  - 434f2f60-a792-4d3e-be2c-dd249474d97f
+  - 224febde-9c95-449e-9f6d-59e8617fdd1a
+  - f18ee59d-e294-4c6e-89e2-67b282e16e76
+  - 774a584c-b789-4f33-b96d-48b6ec5f59ab
+  - b0ee0ed3-e972-4340-a214-2e2e81fee1ef
+  - b54f58d3-1b1c-4fca-9867-dca797cb2c70
+  - 7fddda2f-4d89-4dde-ad88-218228d14c6f
+  - 701b6f34-f0ef-4f0f-ac95-a350586d195f
+  - 7409e0b8-2f5b-45a9-b6b9-a3d63019c791
+  - aa337ae2-2b29-4d3b-a991-f87b0e3c991f
+  - 8efe972d-261e-458b-b5ca-9684d5757d95
+  - 192694c4-2ce3-4ce6-845f-d52270898837
+  - 9ede69c1-6ca3-458a-a4d6-fa0466a11d88
+  - 66141aa1-430a-455b-aa39-012b34b87163
+  - d55cce99-fc25-487b-8fe9-4702dd33175c
+  - 569903d9-849d-4ace-bb2a-3799b5cd9699
+  - 549a9fcf-767d-44f6-85f0-92c33e6d9ef0
+  - c332d7df-4f3e-423c-a7a1-caa8ac563526
+  - 634d0a4c-b5b7-4e04-8b69-327744dee78e
+  - ad472e92-2d22-45f3-a339-61c3472060e0
+  - 92050f7b-2ed3-47bf-ad34-cc39558dd99a
+  - 4a6cd958-6bb3-46bd-9d37-c1b4c3cf6327
+  - da2ce626-b9d2-410a-a67b-78ae96827563
+  - 3db4a5e6-532a-4b85-b53a-7295ba0203db
+  - 4a32ab25-7cb3-4f07-8dd6-7834cf4bc332
+  - 805e7d53-7a89-4120-b4b1-628c0bf02a2b
+  - 75b33488-6768-45f8-80a9-ed3e180ebb87
+  - 16646456-cc0a-4b9b-8191-e322ffadd9e9
+  - 440743cb-a750-4bc3-9635-78439bba10f4
+  - 007ec59e-7816-4acb-9175-e42acfc68ca8
+  - 8b3e5e71-bf60-4392-842f-71bb021b873d
+  - 13a4ce49-2cbb-4bca-8c1a-0799324c35ee
+  - e4892edb-ad34-4b4e-ae2b-2f04de0ba740
+  - 9578d575-f15f-40bf-916b-e1399154aafe
+  - 69d86a17-3f4b-4d2a-914f-a49dd77d2ec7
+  - 384866ad-40ce-4df9-9b1d-eea6282ef693
+  - 91a6fd9a-dea1-49bc-9e16-0baf0549e32f
+  - 9df3425d-99d6-447e-8c09-3c68c66e36b5
+  - eacd9348-8597-4e35-b6c5-40c7070f3243
+  - a3ada75b-200c-4b2b-aa7a-d16a69cd58d2
+  - 3e66348e-70d6-475a-a98b-01ce438891bb
+  - 2b85c3eb-02e3-488b-a9b3-28e7e73b0691
+  - 23521a50-036b-4f68-aacd-85cfca62f495
+  - 44996262-5e05-4110-ab76-73a5e0f582df
+  - 5fca455e-7ccb-4b89-9893-09d3e5673cb4
+  - bebb29ef-cae4-40b7-a7ed-57bf77626d26
+  - e890f2e5-c69a-408d-9c7b-c13667ba7b68
+  - 03b08e97-9cba-45f2-9ccb-e5fc97beba3e
+  - dfacf84e-a74f-4ca2-8e35-1e46ea9192ba
+  - 4b077aee-ae01-41a8-a65b-ccfeefeaf682
+  - efaa27e4-ab9d-4789-9459-212c072712c6
+  - 75a8ef72-ea36-4d1d-83f9-41fa6b35ae2a
+  - a22595a0-32be-444b-b7b9-e84f6ac489a1
+  - 6b2b0c72-8665-46ae-b396-db40e2fb5689
+  - 74e106c3-bd70-4187-bffd-23f863cff985
+  - 6cddaa8d-0d55-43f9-91c8-35fb8adace49
+  - 80036076-1439-4949-9294-521a2048de24
+  - 2b990870-aa42-465f-b1c7-4031356ccfcc
+  - ca176f75-05fb-4557-b0d3-2062d55b99b7
+  - 20bd2dc9-2bf7-42fb-a7f7-8be22a02f6ac
+  - af594697-e387-480a-9080-2a23ce0ae897
+  - 02d083ac-ac8c-4083-b662-665eea195244
+  - 3b8f4b64-251c-4760-b290-0ca222e23bc6
+  - 1f9c6c26-5874-41d5-87ce-a63f4ca7d773
+  - c7989306-42b9-49ab-95ec-35b28384909a
+  - 27a7f5c9-79a0-4f21-ac26-c36afa7683d6
+  - 27e54f7b-7a70-4fc8-bd75-db8931c4bde3
+  - a224ddd8-1f56-4cc2-a856-072069d3d18c
+  - 03a209fe-ae20-4828-9210-bd189410ce6a
+  - 9e489c4e-0679-4fed-8176-efb7121e7dd4
+  - 88336a85-061f-4cca-9b5b-4de7b8964fc8
+  - 2c4476ca-77dd-4682-bcb2-51ea096f6e9a
+  - 60de4017-2af8-4a60-9879-8e6431587767
+  - a7588d00-13ff-4c00-8797-d62ee7a8301b
+  - c36cd299-c7fd-49c6-b2f7-c4feb2f76b86
+  - bbcb4613-8b39-464d-b41a-881db1f2283a
+  - 87c7342c-3aaf-4063-b358-97afc5541bc6
+  - eaf06d39-db44-424b-8952-fbb33d47924b
+  - 2c1836b4-8713-431d-823e-beb5acbafd94
+  - 8a01847b-2474-4aac-87ff-1038b55b3f58
+  - 8598bfb0-caff-42e5-9252-a9e9873f2360
+  - 073e7676-7fbd-4d4f-ac04-febceee3d371
+  - 283fb427-1be3-4bf8-80b4-c2ba2a9d5146
+  - 6e33bf76-5015-4537-8d29-9735025c7085
+  - d6db0dd6-e5aa-4c83-a1b2-88429732b46d
+  - 42a283a2-282e-4f49-b944-ab9c5b758ca2
+  - 4a5b2d20-bcb0-4f03-9ad7-48e74ab354a0
+  _root:
+  - bad88bef-a2dc-4c44-ad34-688da9db48dd
+  - 87d99db4-f9bd-408e-b25e-98cce87cade9
+  - 4c6d524d-c135-4aa6-83ed-b42ef3327ef0
+  - 973f4ebd-cc84-41e1-b461-04a1780b463c
+  bad88bef-a2dc-4c44-ad34-688da9db48dd:
+  - c9ba439d-765b-4400-8c49-e809b334edc0
+  - a05b2b63-f7b9-4923-a8d3-f91e62afcd14
+  - f8995013-ed7c-4215-9062-180a93864f4e
+  - 0d6249bc-1dee-4aa6-b8d3-595c43e026ff
+  - 97bad68a-5bcb-4a97-9f84-68e51e5fbac0
+  - a690857a-7417-46f1-b363-363dd11a866f
+  - da8ace4c-a9d3-438b-940b-b860e8253405
+  - 1a48feb4-37f0-4b97-8b82-3b688584788d
+  - e5b4fed1-756b-47dd-8bb0-ecfdd9d0548b
+  - 1a297e49-823e-4c59-abfe-ed6d2e9c12ab
+  - 9d9fdbd2-42fe-4a22-a932-7986d2fe35ce
+  - bd433a1f-8264-46db-b6ae-e0ec13452de8
+  - 4f0e6c06-cc01-4702-8f1c-9e565b7378c9
