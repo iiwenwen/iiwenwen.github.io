@@ -413,7 +413,7 @@ nodes:
     kind: file
     sha256: 5ec9d63ef8a38560b18b87837a01c016d325e0d40f3ca48cc420721193cedea3
     bytes: 122
-    mtime: 1789863317886310215
+    mtime: 1789863325311358990
     chars: 42
   537cdd38-87bf-4be8-8b6a-a84306dc8baf:
     path: poetry/2022-06-06-7ar9daekkyh9tbgqackbsj.md
