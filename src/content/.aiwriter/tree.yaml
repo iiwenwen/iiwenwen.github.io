@@ -960,6 +960,13 @@ nodes:
     bytes: 5018
     mtime: 1779857810364321959
     chars: 1898
+  baf32919-4453-475a-9a51-abddb2ee93b7:
+    path: posts/我与写匠.md
+    kind: file
+    sha256: 20b757a47f9fc7c6a5d77f967470d1f922e17bcf30ce6959b98be4bd048b4696
+    bytes: 7019
+    mtime: 1790415728986941337
+    chars: 2399
   bb4366a2-10fd-4ace-8bf2-7abea833efd2:
     path: posts/2017-02-11-blog3.md
     kind: file
@@ -1453,6 +1460,7 @@ order:
   - 02cd35d5-eb30-4c59-952b-f064c7245670
   - 79b17c97-ab6c-4dcb-8274-7789de6ee688
   - 39d1f9b3-c198-43fa-845c-06acb796d401
+  - baf32919-4453-475a-9a51-abddb2ee93b7
 让出:
   drafts/2026-07-31-JulSummary.wechat-source.md:
   - 谁: node:b63e766b-2bb3-48e1-9c61-9640349854d5
