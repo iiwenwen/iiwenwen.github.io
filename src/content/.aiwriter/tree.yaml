@@ -123,7 +123,7 @@ nodes:
     kind: file
     sha256: 546a8da2b5c10092dcbf1a1171f57acbb97e55063783e313f149ec80c722db6a
     bytes: 711
-    mtime: 1782054182368945958
+    mtime: 1790390018463467708
     chars: 246
   1de23132-0ca9-4c5b-b18f-d94a48ceb6ea:
     path: drafts/JuneSummary.poem-context.revised.md
@@ -132,6 +132,7 @@ nodes:
     bytes: 1487
     mtime: 1785488403324939846
     chars: 546
+    lost: true
   1e8634ee-a13c-43eb-98cb-064ea96cbcc5:
     path: posts/2021-01-22-PythonNote01.md
     kind: file
@@ -302,6 +303,13 @@ nodes:
   35b50b38-e1b6-4b79-8d81-a2e1ba426aa7:
     path: mur
     kind: folder
+  3641ebce-d73f-40a4-adf9-13b9aa68552a:
+    path: drafts/2021-12-25-MyShortBiography.md
+    kind: file
+    sha256: 405a421fa36cd4b80cea441d44aeb79e098a470122c8da4cf6d37f35f71bc6c2
+    bytes: 5645
+    mtime: 1680857063000000000
+    chars: 1987
   36cc4fca-1f5d-4dba-86f1-d77ff0455ca3:
     path: posts/2020-11-16-Program.md
     kind: file
@@ -421,6 +429,7 @@ nodes:
     bytes: 1463
     mtime: 1785488403324551095
     chars: 526
+    lost: true
   51ab8a86-0ae8-4e28-af39-120500f383b0:
     path: posts/2018-10-15-TravelForXiamen.md
     kind: file
@@ -491,6 +500,7 @@ nodes:
     bytes: 6517
     mtime: 1783518586427853862
     chars: 2255
+    lost: true
   5d40f68a-f389-4458-a174-82914f779b14:
     path: drafts/写作计划.md
     kind: file
@@ -771,13 +781,6 @@ nodes:
     bytes: 1360
     mtime: 1779084105000000000
     chars: 532
-  95ccf313-943a-4cf5-ada3-07f4c0707fc2:
-    path: drafts/六月小结.md
-    kind: file
-    sha256: 0a7cb5001da58e07023d1ef9f124207cee8b2bdbf09887e88ec1055bb8d2e637
-    bytes: 2725
-    mtime: 1784370237309348241
-    chars: 918
   960b08aa-7ff0-4b0e-a0d0-a5fa1e5f8bc0:
     path: posts/2019-08-17-Mac.md
     kind: file
@@ -799,6 +802,13 @@ nodes:
     bytes: 2526
     mtime: 1779084105000000000
     chars: 924
+  97ebff8e-2a9a-4761-a9c8-a8f35759ede3:
+    path: drafts/2023-03-31.md
+    kind: file
+    sha256: fccd01f8abfb7ad8f1b645f80d8d619d5d6b5f62cf5421b7a973476392074592
+    bytes: 2813
+    mtime: 1680356077000000000
+    chars: 1171
   993cb4f8-8e9d-4b7f-8c17-b942cfc7c2ff:
     path: poetry/2021-08-11-fcabk6q2na8wwxoigk7tl4.md
     kind: file
@@ -813,6 +823,13 @@ nodes:
     bytes: 357
     mtime: 1784370354767461541
     chars: 158
+  a0b94196-3f88-4b3c-a083-095379fdd217:
+    path: drafts/20180409TheNiceGirlER.md
+    kind: file
+    sha256: e54f23e5672692287693a5be7689ccb6247d3899abbe151eeeddd92fbf325755
+    bytes: 3112
+    mtime: 1605366403000000000
+    chars: 1088
   a0cfc045-60a7-4b4d-a291-969aa9da1ee2:
     path: poetry/2022-09-19-poem-1.md
     kind: file
@@ -841,6 +858,13 @@ nodes:
     bytes: 3820
     mtime: 1779084105000000000
     chars: 1402
+  a6968aff-f2b3-4005-9dcb-fffd58ed0f61:
+    path: drafts/index.md
+    kind: file
+    sha256: 13413c4c39c9fbc172054aa84bbbc6ca49163792a1d61e4d961becfd49e46ce1
+    bytes: 924
+    mtime: 1523281024000000000
+    chars: 446
   a6d7b2d3-6371-4f3a-9401-650e3954c123:
     path: posts/2018-06-03-CreateYourCreation.md
     kind: file
@@ -911,6 +935,7 @@ nodes:
     bytes: 3480
     mtime: 1785549465270037553
     chars: 1246
+    lost: true
   b707dcb5-2e9a-4b20-8b55-bbfd1b910e58:
     path: mur/2026-07-26-draft01.md
     kind: file
@@ -1061,6 +1086,13 @@ nodes:
     bytes: 7197
     mtime: 1779880690609930884
     chars: 2510
+  d5b6e3bc-a2b3-4a02-89f9-fa5daed4b56c:
+    path: drafts/2020-03-03-理性.md
+    kind: file
+    sha256: 570b320fe0cea967e863c8afd19900a74e793cfd7abae78725e1f6547ddab924
+    bytes: 2893
+    mtime: 1605536063000000000
+    chars: 1003
   d7e85767-98ed-483b-ac11-dd261fcae80b:
     path: posts/2021-05-10-Seabed.md
     kind: file
@@ -1110,6 +1142,7 @@ nodes:
     bytes: 314
     mtime: 1785486300116720003
     chars: 132
+    lost: true
   e18ec62f-4016-4120-9d84-134c3baefb9b:
     path: poetry/2022-06-05-6w72pfapxtqbejefyhaow6.md
     kind: file
@@ -1131,13 +1164,6 @@ nodes:
     bytes: 367
     mtime: 1784370354858566866
     chars: 160
-  e2dc0600-db1c-49f1-be89-594f74b2398f:
-    path: drafts/五月小结.md
-    kind: file
-    sha256: 53a6951b1c63506dc4eb2b0c3776282e2c0bd7ffd31bc23a95013fc6b34b7e9e
-    bytes: 4123
-    mtime: 1784370229382054452
-    chars: 2367
   e421fac7-dcd2-481a-b53c-2b4e7e08042d:
     path: poetry/2022-07-30-poem-1.md
     kind: file
@@ -1166,6 +1192,13 @@ nodes:
     bytes: 819
     mtime: 1779093154000000000
     chars: 331
+  e79a1743-795f-4060-8c16-a78a86f979f6:
+    path: drafts/20180917WriteChange.md
+    kind: file
+    sha256: f680d3aed1fe270bf8c8bbf285307d22323364c17dc29608934f36ff4e4d4a02
+    bytes: 234
+    mtime: 1605366403000000000
+    chars: 70
   e9e472fe-b8f1-4bf5-96c0-27b378d3f159:
     path: drafts/2025-09-13-BeiJing.md
     kind: file
@@ -1305,16 +1338,15 @@ order:
   - 6833863b-4818-431c-85bc-c30e381e26b6
   - e9e472fe-b8f1-4bf5-96c0-27b378d3f159
   - ac0e8dd7-7fc6-4cbd-b024-d4896900466b
-  - b63e766b-2bb3-48e1-9c61-9640349854d5
-  - 5d3013a6-36a4-4034-98ae-216999201970
-  - 50aacfb8-7a2e-4d97-ad9d-bb6686d1e707
-  - 1de23132-0ca9-4c5b-b18f-d94a48ceb6ea
-  - e128cc8d-04e9-4717-8ef1-b52662695967
   - 1b9cbaf4-84ad-4643-91f5-3a3fe3afb81f
-  - e2dc0600-db1c-49f1-be89-594f74b2398f
-  - 95ccf313-943a-4cf5-ada3-07f4c0707fc2
   - 5d40f68a-f389-4458-a174-82914f779b14
   - 1369ccf7-8a46-41ed-a4b4-34222334f14f
+  - a0b94196-3f88-4b3c-a083-095379fdd217
+  - e79a1743-795f-4060-8c16-a78a86f979f6
+  - d5b6e3bc-a2b3-4a02-89f9-fa5daed4b56c
+  - 3641ebce-d73f-40a4-adf9-13b9aa68552a
+  - 97ebff8e-2a9a-4761-a9c8-a8f35759ede3
+  - a6968aff-f2b3-4005-9dcb-fffd58ed0f61
   35b50b38-e1b6-4b79-8d81-a2e1ba426aa7:
   - 2cf81bee-0fcc-4153-804a-1b243c47f7a8
   - 30411d06-d1aa-4a89-a86a-2cff5e2745ea
@@ -1421,3 +1453,25 @@ order:
   - 02cd35d5-eb30-4c59-952b-f064c7245670
   - 79b17c97-ab6c-4dcb-8274-7789de6ee688
   - 39d1f9b3-c198-43fa-845c-06acb796d401
+让出:
+  drafts/2026-07-31-JulSummary.wechat-source.md:
+  - 谁: node:b63e766b-2bb3-48e1-9c61-9640349854d5
+    until: 1790389976
+  drafts/6月小结_improved-writing_master.md:
+  - 谁: node:5d3013a6-36a4-4034-98ae-216999201970
+    until: 1790389976
+  drafts/JuneSummary.poem-context.original.md:
+  - 谁: node:50aacfb8-7a2e-4d97-ad9d-bb6686d1e707
+    until: 1790389976
+  drafts/JuneSummary.poem-context.revised.md:
+  - 谁: node:1de23132-0ca9-4c5b-b18f-d94a48ceb6ea
+    until: 1790389976
+  drafts/evening-blue.poem.before.md:
+  - 谁: node:e128cc8d-04e9-4717-8ef1-b52662695967
+    until: 1790389976
+  drafts/五月小结.md:
+  - 谁: trash:1790390011575-五月小结.md
+    until: 1790390011
+  drafts/六月小结.md:
+  - 谁: trash:1790390014524-六月小结.md
+    until: 1790390014
