@@ -861,9 +861,9 @@ nodes:
   a6968aff-f2b3-4005-9dcb-fffd58ed0f61:
     path: drafts/index.md
     kind: file
-    sha256: 13413c4c39c9fbc172054aa84bbbc6ca49163792a1d61e4d961becfd49e46ce1
-    bytes: 924
-    mtime: 1523281024000000000
+    sha256: 68254d5f4833aef6d9ad1ca6fa914b7300885a36e466e294e7fb38994c147dcf
+    bytes: 925
+    mtime: 1790390031145200458
     chars: 446
   a6d7b2d3-6371-4f3a-9401-650e3954c123:
     path: posts/2018-06-03-CreateYourCreation.md
