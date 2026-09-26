@@ -963,9 +963,9 @@ nodes:
   baf32919-4453-475a-9a51-abddb2ee93b7:
     path: posts/2026-09-26-AiWrite.md
     kind: file
-    sha256: 20b757a47f9fc7c6a5d77f967470d1f922e17bcf30ce6959b98be4bd048b4696
+    sha256: bedb9e17a8e3f89ae799693e7ad54ad252301803366f36be103d26ee5f8e14a0
     bytes: 7019
-    mtime: 1790415756518577105
+    mtime: 1790426180107640370
     chars: 2399
     曾用路径:
     - path: posts/我与写匠.md
