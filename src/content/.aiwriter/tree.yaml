@@ -961,12 +961,15 @@ nodes:
     mtime: 1779857810364321959
     chars: 1898
   baf32919-4453-475a-9a51-abddb2ee93b7:
-    path: posts/我与写匠.md
+    path: posts/2026-09-26-AiWrite.md
     kind: file
     sha256: 20b757a47f9fc7c6a5d77f967470d1f922e17bcf30ce6959b98be4bd048b4696
     bytes: 7019
-    mtime: 1790415729302396013
+    mtime: 1790415756518577105
     chars: 2399
+    曾用路径:
+    - path: posts/我与写匠.md
+      until: 1790415752
   bb4366a2-10fd-4ace-8bf2-7abea833efd2:
     path: posts/2017-02-11-blog3.md
     kind: file
