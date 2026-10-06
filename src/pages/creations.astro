@@ -1,21 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
-import works from "../data/works.json";
+import works from "../data/creations.json";
 
 const baseUrl = import.meta.env.BASE_URL;
 const resolveHref = (href: string, external: boolean) => external ? href : `${baseUrl}${href}`;
 ---
 
 <BaseLayout title="作品" description="个人作品与长期项目">
-  <article class="post works-page">
+  <article class="post creations-page">
     <Breadcrumb items={[{ label: "作品" }]} />
     <header class="post-header">
       <h1>作品</h1>
       <p class="description">一些已经完成，也会继续生长的东西。</p>
     </header>
 
-    <div class="works-grid">
+    <div class="creations-grid">
       {works.map((work) => (
         <article class="work-card">
           <div class="work-meta">
@@ -26,6 +26,7 @@ const resolveHref = (href: string, external: boolean) => external ? href : `${ba
           <p>{work.description}</p>
           <div class="work-card-footer">
             <span class="work-status">{work.status}</span>
+            {work.links && work.links.length > 0 && (
             <div class="work-links">
               {work.links.map((link) => (
                 <a
@@ -40,6 +41,7 @@ const resolveHref = (href: string, external: boolean) => external ? href : `${ba
                 </a>
               ))}
             </div>
+            )}
           </div>
         </article>
       ))}
@@ -48,7 +50,7 @@ const resolveHref = (href: string, external: boolean) => external ? href : `${ba
 </BaseLayout>
 
 <style>
-  .works-grid {
+  .creations-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
@@ -137,7 +139,7 @@ const resolveHref = (href: string, external: boolean) => external ? href : `${ba
   }
 
   @media (max-width: 640px) {
-    .works-grid {
+    .creations-grid {
       grid-template-columns: 1fr;
       margin-top: 40px;
     }
