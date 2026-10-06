@@ -27,7 +27,7 @@ const baseUrl = import.meta.env.BASE_URL;
     <ul class="tag-cloud">
       {sortedTags.map(([tag, count]) => (
         <li>
-          <a href={`${baseUrl}tags/${tag}/`}>
+          <a href={`${baseUrl}tags/${encodeURIComponent(tag)}/`}>
             <span>#{tag}</span>
             <span>{count}</span>
           </a>

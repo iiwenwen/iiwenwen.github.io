@@ -40,7 +40,7 @@ export const GET: APIRoute = async ({ site }) => {
     "/categories/book/",
     "/categories/movie/",
     "/tags/",
-    "/works/",
+    "/creations/",
     "/about/"
   ].forEach((path) => add(path));
 

@@ -14,25 +14,24 @@ from pathlib import Path
 
 
 REPO_DIR = Path(__file__).resolve().parent.parent
-POSTS_DIR = REPO_DIR / "src" / "content" / "posts"
+MUR_DIR = REPO_DIR / "src" / "content" / "mur"
 
 
 def create_daily(text: str) -> Path:
     now = datetime.now()
     ts = now.strftime('%Y-%m-%dT%H-%M-%S')
     filename = f"{ts}.md"
-    filepath = POSTS_DIR / filename
+    filepath = MUR_DIR / filename
 
     title = text.split("\n")[0][:30].strip() or "随记"
     frontmatter = f"""---
 title: "{title}"
-date: {now.strftime('%Y-%m-%d %H:%M')}
-category: daily
+pubDate: {now.strftime('%Y-%m-%d')}
 ---
 
 {text.strip()}
 """
-    POSTS_DIR.mkdir(parents=True, exist_ok=True)
+    MUR_DIR.mkdir(parents=True, exist_ok=True)
     filepath.write_text(frontmatter, encoding="utf-8")
     return filepath
 
@@ -63,7 +62,7 @@ def main():
     # 自动 git 操作
     os.chdir(REPO_DIR)
     os.system(f"git add {filepath}")
-    os.system(f'git commit -m "daily: {text[:40]}" 2>/dev/null')
+    os.system(f'git commit -m "日常: {text[:40]}" 2>/dev/null')
     os.system("git push origin main 2>/dev/null")
     print("✓ 已推送")
 
